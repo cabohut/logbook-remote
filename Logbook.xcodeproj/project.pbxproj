@@ -7,18 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92DABEFA28E6B02F00F07715 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABEF928E6B02F00F07715 /* LogbookApp.swift */; };
-		92DABEFC28E6B02F00F07715 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABEFB28E6B02F00F07715 /* ContentView.swift */; };
-		92DABEFE28E6B03000F07715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DABEFD28E6B03000F07715 /* Assets.xcassets */; };
 		92DABF0128E6B03000F07715 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DABF0028E6B03000F07715 /* Preview Assets.xcassets */; };
+		92DABF2528E6B10C00F07715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DABF0728E6B10B00F07715 /* Assets.xcassets */; };
+		92DABF2628E6B10C00F07715 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0928E6B10B00F07715 /* LogbookApp.swift */; };
+		92DABF2728E6B10C00F07715 /* IntroScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0A28E6B10B00F07715 /* IntroScreenHelpers.swift */; };
+		92DABF2828E6B10C00F07715 /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0B28E6B10B00F07715 /* AppNavigation.swift */; };
+		92DABF2928E6B10C00F07715 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0C28E6B10B00F07715 /* IntroScreen.swift */; };
+		92DABF2A28E6B10C00F07715 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0D28E6B10B00F07715 /* ErrorView.swift */; };
+		92DABF2B28E6B10C00F07715 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0F28E6B10C00F07715 /* CarModel.swift */; };
+		92DABF2C28E6B10C00F07715 /* AppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1028E6B10C00F07715 /* AppHelpers.swift */; };
+		92DABF2D28E6B10C00F07715 /* MaintStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1128E6B10C00F07715 /* MaintStatusModel.swift */; };
+		92DABF2E28E6B10C00F07715 /* MaintSchedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1228E6B10C00F07715 /* MaintSchedModel.swift */; };
+		92DABF2F28E6B10C00F07715 /* LogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1328E6B10C00F07715 /* LogModel.swift */; };
+		92DABF3028E6B10C00F07715 /* LogbookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1428E6B10C00F07715 /* LogbookModel.swift */; };
+		92DABF3128E6B10C00F07715 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1728E6B10C00F07715 /* Test.swift */; };
+		92DABF3228E6B10C00F07715 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1828E6B10C00F07715 /* Help.swift */; };
+		92DABF3328E6B10C00F07715 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1928E6B10C00F07715 /* Settings.swift */; };
+		92DABF3428E6B10C00F07715 /* CarsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1B28E6B10C00F07715 /* CarsList.swift */; };
+		92DABF3528E6B10C00F07715 /* CarForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1C28E6B10C00F07715 /* CarForm.swift */; };
+		92DABF3628E6B10C00F07715 /* CarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1D28E6B10C00F07715 /* CarRow.swift */; };
+		92DABF3728E6B10C00F07715 /* LogForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1F28E6B10C00F07715 /* LogForm.swift */; };
+		92DABF3828E6B10C00F07715 /* LogRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2028E6B10C00F07715 /* LogRow.swift */; };
+		92DABF3928E6B10C00F07715 /* LogbookHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2128E6B10C00F07715 /* LogbookHistory.swift */; };
+		92DABF3A28E6B10C00F07715 /* Minder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2328E6B10C00F07715 /* Minder.swift */; };
+		92DABF3B28E6B10C00F07715 /* ShowMaintStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2428E6B10C00F07715 /* ShowMaintStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		92DABEF628E6B02F00F07715 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		92DABEF928E6B02F00F07715 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
-		92DABEFB28E6B02F00F07715 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		92DABEFD28E6B03000F07715 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92DABF0028E6B03000F07715 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		92DABF0728E6B10B00F07715 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../CarLogbook/CarLogbook/Assets.xcassets; sourceTree = "<group>"; };
+		92DABF0928E6B10B00F07715 /* LogbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
+		92DABF0A28E6B10B00F07715 /* IntroScreenHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroScreenHelpers.swift; sourceTree = "<group>"; };
+		92DABF0B28E6B10B00F07715 /* AppNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
+		92DABF0C28E6B10B00F07715 /* IntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroScreen.swift; sourceTree = "<group>"; };
+		92DABF0D28E6B10B00F07715 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		92DABF0F28E6B10C00F07715 /* CarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
+		92DABF1028E6B10C00F07715 /* AppHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelpers.swift; sourceTree = "<group>"; };
+		92DABF1128E6B10C00F07715 /* MaintStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintStatusModel.swift; sourceTree = "<group>"; };
+		92DABF1228E6B10C00F07715 /* MaintSchedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaintSchedModel.swift; sourceTree = "<group>"; };
+		92DABF1328E6B10C00F07715 /* LogModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogModel.swift; sourceTree = "<group>"; };
+		92DABF1428E6B10C00F07715 /* LogbookModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogbookModel.swift; sourceTree = "<group>"; };
+		92DABF1728E6B10C00F07715 /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		92DABF1828E6B10C00F07715 /* Help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
+		92DABF1928E6B10C00F07715 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		92DABF1B28E6B10C00F07715 /* CarsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsList.swift; sourceTree = "<group>"; };
+		92DABF1C28E6B10C00F07715 /* CarForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarForm.swift; sourceTree = "<group>"; };
+		92DABF1D28E6B10C00F07715 /* CarRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarRow.swift; sourceTree = "<group>"; };
+		92DABF1F28E6B10C00F07715 /* LogForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogForm.swift; sourceTree = "<group>"; };
+		92DABF2028E6B10C00F07715 /* LogRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRow.swift; sourceTree = "<group>"; };
+		92DABF2128E6B10C00F07715 /* LogbookHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogbookHistory.swift; sourceTree = "<group>"; };
+		92DABF2328E6B10C00F07715 /* Minder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Minder.swift; sourceTree = "<group>"; };
+		92DABF2428E6B10C00F07715 /* ShowMaintStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMaintStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +91,10 @@
 		92DABEF828E6B02F00F07715 /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
-				92DABEF928E6B02F00F07715 /* LogbookApp.swift */,
-				92DABEFB28E6B02F00F07715 /* ContentView.swift */,
-				92DABEFD28E6B03000F07715 /* Assets.xcassets */,
+				92DABF0728E6B10B00F07715 /* Assets.xcassets */,
+				92DABF0828E6B10B00F07715 /* App */,
+				92DABF0E28E6B10C00F07715 /* Model */,
+				92DABF1528E6B10C00F07715 /* Views */,
 				92DABEFF28E6B03000F07715 /* Preview Content */,
 			);
 			path = Logbook;
@@ -65,6 +106,81 @@
 				92DABF0028E6B03000F07715 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		92DABF0828E6B10B00F07715 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				92DABF0928E6B10B00F07715 /* LogbookApp.swift */,
+				92DABF0A28E6B10B00F07715 /* IntroScreenHelpers.swift */,
+				92DABF0B28E6B10B00F07715 /* AppNavigation.swift */,
+				92DABF0C28E6B10B00F07715 /* IntroScreen.swift */,
+				92DABF0D28E6B10B00F07715 /* ErrorView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		92DABF0E28E6B10C00F07715 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92DABF0F28E6B10C00F07715 /* CarModel.swift */,
+				92DABF1028E6B10C00F07715 /* AppHelpers.swift */,
+				92DABF1128E6B10C00F07715 /* MaintStatusModel.swift */,
+				92DABF1228E6B10C00F07715 /* MaintSchedModel.swift */,
+				92DABF1328E6B10C00F07715 /* LogModel.swift */,
+				92DABF1428E6B10C00F07715 /* LogbookModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		92DABF1528E6B10C00F07715 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92DABF1628E6B10C00F07715 /* Settings */,
+				92DABF1A28E6B10C00F07715 /* Cars */,
+				92DABF1E28E6B10C00F07715 /* Log */,
+				92DABF2228E6B10C00F07715 /* Minder */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		92DABF1628E6B10C00F07715 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				92DABF1728E6B10C00F07715 /* Test.swift */,
+				92DABF1828E6B10C00F07715 /* Help.swift */,
+				92DABF1928E6B10C00F07715 /* Settings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		92DABF1A28E6B10C00F07715 /* Cars */ = {
+			isa = PBXGroup;
+			children = (
+				92DABF1B28E6B10C00F07715 /* CarsList.swift */,
+				92DABF1C28E6B10C00F07715 /* CarForm.swift */,
+				92DABF1D28E6B10C00F07715 /* CarRow.swift */,
+			);
+			path = Cars;
+			sourceTree = "<group>";
+		};
+		92DABF1E28E6B10C00F07715 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				92DABF1F28E6B10C00F07715 /* LogForm.swift */,
+				92DABF2028E6B10C00F07715 /* LogRow.swift */,
+				92DABF2128E6B10C00F07715 /* LogbookHistory.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		92DABF2228E6B10C00F07715 /* Minder */ = {
+			isa = PBXGroup;
+			children = (
+				92DABF2328E6B10C00F07715 /* Minder.swift */,
+				92DABF2428E6B10C00F07715 /* ShowMaintStatus.swift */,
+			);
+			path = Minder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92DABF0128E6B03000F07715 /* Preview Assets.xcassets in Resources */,
-				92DABEFE28E6B03000F07715 /* Assets.xcassets in Resources */,
+				92DABF2528E6B10C00F07715 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +253,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92DABEFC28E6B02F00F07715 /* ContentView.swift in Sources */,
-				92DABEFA28E6B02F00F07715 /* LogbookApp.swift in Sources */,
+				92DABF3928E6B10C00F07715 /* LogbookHistory.swift in Sources */,
+				92DABF2B28E6B10C00F07715 /* CarModel.swift in Sources */,
+				92DABF3A28E6B10C00F07715 /* Minder.swift in Sources */,
+				92DABF2E28E6B10C00F07715 /* MaintSchedModel.swift in Sources */,
+				92DABF3828E6B10C00F07715 /* LogRow.swift in Sources */,
+				92DABF3128E6B10C00F07715 /* Test.swift in Sources */,
+				92DABF3428E6B10C00F07715 /* CarsList.swift in Sources */,
+				92DABF3228E6B10C00F07715 /* Help.swift in Sources */,
+				92DABF3628E6B10C00F07715 /* CarRow.swift in Sources */,
+				92DABF2F28E6B10C00F07715 /* LogModel.swift in Sources */,
+				92DABF2D28E6B10C00F07715 /* MaintStatusModel.swift in Sources */,
+				92DABF2828E6B10C00F07715 /* AppNavigation.swift in Sources */,
+				92DABF2728E6B10C00F07715 /* IntroScreenHelpers.swift in Sources */,
+				92DABF3328E6B10C00F07715 /* Settings.swift in Sources */,
+				92DABF2A28E6B10C00F07715 /* ErrorView.swift in Sources */,
+				92DABF2928E6B10C00F07715 /* IntroScreen.swift in Sources */,
+				92DABF3528E6B10C00F07715 /* CarForm.swift in Sources */,
+				92DABF3028E6B10C00F07715 /* LogbookModel.swift in Sources */,
+				92DABF2C28E6B10C00F07715 /* AppHelpers.swift in Sources */,
+				92DABF3728E6B10C00F07715 /* LogForm.swift in Sources */,
+				92DABF3B28E6B10C00F07715 /* ShowMaintStatus.swift in Sources */,
+				92DABF2628E6B10C00F07715 /* LogbookApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -280,7 +416,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cabohut.Logbook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cabohut.Logbook4cars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -309,7 +445,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cabohut.Logbook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cabohut.Logbook4cars;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
