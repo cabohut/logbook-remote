@@ -21,17 +21,17 @@ struct Minder: View {
             VStack {
                 List {
                     Section (header: Text("Overdue (\(_state.overdueCount))").bold()) {
-                        ForEach (_state.maintStatus) { m in
-                            if (m.dateStatus == .isDue || m.milesStatus == .isDue) {
-                                ShowMaintStatus(showOverdue: true, car: appData.cars[m.carIdx], m: m)
+                        ForEach (_state.maintStatus) { ms in
+                            if (ms.dateStatus == .isDue || ms.milesStatus == .isDue) {
+                                ShowMaintStatus(showOverdue: true, car: appData.cars[ms.carIdx], mStatus: ms)
                             }
                         }
                     }
                     
                     Section (header: Text("Upcoming(\(_state.upcomingCount))").bold()) {
-                        ForEach (_state.maintStatus) { m in
-                            if (m.dateStatus == .isUpcoming && m.milesStatus == .isUpcoming) {
-                                ShowMaintStatus(showOverdue: false, car: appData.cars[m.carIdx], m: m)
+                        ForEach (_state.maintStatus) { ms in
+                            if (ms.dateStatus == .isUpcoming && ms.milesStatus == .isUpcoming) {
+                                ShowMaintStatus(showOverdue: false, car: appData.cars[ms.carIdx], mStatus: ms)
                             }
                         }
                     }

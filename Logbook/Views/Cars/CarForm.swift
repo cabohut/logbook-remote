@@ -7,6 +7,24 @@
 
 import SwiftUI
 
+struct CheckboxStyle: ToggleStyle {
+    // https://www.appcoda.com/swiftui-toggle-style/
+    func makeBody(configuration: Self.Configuration) -> some View {
+ 
+        return HStack {
+            Image(systemName: "clock")
+                .resizable()
+                .frame(width: 24, height: 24)
+                .foregroundColor(configuration.isOn ? .orange : .gray)
+                .onTapGesture {
+                    configuration.isOn.toggle()
+                }
+
+            configuration.label
+        }
+    }
+}
+
 struct CarForm: View {
     @Binding var rec: Car
     
@@ -15,6 +33,7 @@ struct CarForm: View {
     @EnvironmentObject var _state : AppState
     
     @State private var maintenanceMode = 0
+    @State var maintMode = true
     
     var body: some View {
         List {
@@ -30,11 +49,10 @@ struct CarForm: View {
             }
 
             Section (header: Text("Maintenance Schedule Cadence").bold()) {
-                Text("Enter the recommended maintenance schedule. Leave the cadence value blank to turn off reminders for that category.")
+                Text("Enter the recommended maintenance schedule. Use the maitenance reminder icon to enable (orang) or disable (gray) reminders for that category.")
                     .foregroundColor(.gray)
                     .font(.subheadline)
                 
-
                 HStack {
                     Text("Service")
                         .bold()
@@ -52,11 +70,11 @@ struct CarForm: View {
                 ForEach ($rec.maint) { $m in
                     if (m.maintType != .odometer && m.maintType != .gas) {
                         HStack {
-                            Text(m.maintType.rawValue.capitalized)
-                                .frame(width: 100, alignment: .leading)
+                            Toggle(isOn: $m.maintEnabled, label: {Text(m.maintType.rawValue.capitalized)})
+                                .toggleStyle(CheckboxStyle())
                             Spacer()
                             
-                            TextField("", value: $m.maintMonths, formatter: numFormatter)
+                            TextField("", value: $m.maintMonths, formatter: NumberFormatter())
                                 .padding(.horizontal, 5)
                                 .modifier(_TextFieldModifier())
                                 .frame(width: 60)

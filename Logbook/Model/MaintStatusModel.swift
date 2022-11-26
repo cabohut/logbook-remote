@@ -70,7 +70,7 @@ struct MaintStatus: Identifiable, Comparable {
         let carLastLog = car.logs.max { $0.odometer < $1.odometer }
         let lastMilages = carLastLog?.odometer ?? 0
         
-        if maintRec.maintMonths > 0 {
+        if maintRec.maintMonths > 0 && maintRec.maintEnabled {
             let dateSchedInSeconds = maintRec.maintMonths * Int(60 * 60 * 24 * 30.4369)
             mStatus.dateDue = lastLog!.date.timeIntervalSince1970 + TimeInterval(dateSchedInSeconds)
             
@@ -83,7 +83,7 @@ struct MaintStatus: Identifiable, Comparable {
             mStatus.dateStatus = (mStatus.dateStatus == .isDue || mStatus.milesStatus == .isDue) ? .isDue : mStatus.dateStatus
         }
         
-        if maintRec.maintMiles > 0 {
+        if maintRec.maintMiles > 0  && maintRec.maintEnabled {
             mStatus.milesDue = lastLog!.odometer + maintRec.maintMiles * 1000
             mStatus.milesUntilDue = mStatus.milesDue - lastMilages
             if mStatus.milesUntilDue < 0 && mStatus.milesDue > 0 {

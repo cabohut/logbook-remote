@@ -10,12 +10,12 @@ import SwiftUI
 struct ShowMaintStatus: View {
     let showOverdue: Bool
     var car: Car
-    var m: MaintStatus
+    var mStatus: MaintStatus
     
     var body: some View {
         
         HStack{
-            m.serviceType.img()
+            mStatus.serviceType.img()
                 .foregroundColor(.orange)
                 .frame(width: 30, alignment: .center)
                 .font(Font.system(size: 22, weight: .regular))
@@ -24,7 +24,7 @@ struct ShowMaintStatus: View {
                 Text(car.make)
                     .frame(width: 80, alignment: .leading)
                     .font(.headline)
-                Text(m.serviceType.rawValue)
+                Text(mStatus.serviceType.rawValue)
                     .frame(width: 80, alignment: .leading)
                     .foregroundColor(.gray)
                     .font(.caption)
@@ -34,14 +34,14 @@ struct ShowMaintStatus: View {
             
             VStack (alignment: .trailing) {
                 HStack {
-                    if m.dateStatus != .notScheduled {
+                    if mStatus.dateStatus != .notScheduled {
                         if showOverdue {
-                            Text("\(abs(m.daysUntilDue)) days")
-                                .foregroundColor((m.dateStatus == .isDue) ? .red : .orange)
-                            Image(systemName: (m.dateStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
-                                .foregroundColor((m.dateStatus == .isDue) ? .red : .orange)
+                            Text("\(abs(mStatus.daysUntilDue)) days")
+                                .foregroundColor((mStatus.dateStatus == .isDue) ? .red : .orange)
+                            Image(systemName: (mStatus.dateStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
+                                .foregroundColor((mStatus.dateStatus == .isDue) ? .red : .orange)
                         } else {
-                            Text(Date(timeIntervalSince1970: m.dateDue).formatted(date: .abbreviated, time: .omitted))
+                            Text(Date(timeIntervalSince1970: mStatus.dateDue).formatted(date: .abbreviated, time: .omitted))
                         }
                     } else {
                         Text ("date: n/a")
@@ -53,14 +53,14 @@ struct ShowMaintStatus: View {
                 }
                 
                 HStack {
-                    if m.milesStatus != .notScheduled {
+                    if mStatus.milesStatus != .notScheduled {
                         if showOverdue {
-                            Text("\(abs(m.milesUntilDue)) miles")
-                                .foregroundColor((m.milesStatus == .isDue) ? .red : .orange)
-                            Image(systemName: (m.milesStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
-                                .foregroundColor((m.milesStatus == .isDue) ? .red : .orange)
+                            Text("\(abs(mStatus.milesUntilDue)) miles")
+                                .foregroundColor((mStatus.milesStatus == .isDue) ? .red : .orange)
+                            Image(systemName: (mStatus.milesStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
+                                .foregroundColor((mStatus.milesStatus == .isDue) ? .red : .orange)
                         } else {
-                            Text("\(m.milesDue)")
+                            Text("\(mStatus.milesDue)")
                         }
                     } else {
                         Text ("milage: n/a")

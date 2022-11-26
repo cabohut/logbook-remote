@@ -10,43 +10,36 @@ import SwiftUI
 struct Settings: View {
     @EnvironmentObject var appData : LogbookModel
     @EnvironmentObject var _state : AppState
-
+    
     @State private var showingHelp = false
     
     @State private var nontificationEnabled = false
     @State private var number = 0.0
     @State private var number2 = 0.0
-
+    
     var body: some View {
         Form {
             Section(header: Text("About Logbook")) {
                 Button("Getting Started") {
                     showingHelp.toggle()
                 }
-                TextField("", value: $number, format: .number)
-                    .onChange(of: number, perform: {newValue in
-                        print("value is \(newValue)")
-                    })
-                TextField("", value: $number2, format: .currency(code: "USD"))
-                    //.modifier(_TextFieldModifier())
-                    //.keyboardType(.numberPad)
             } .sheet(isPresented: $showingHelp) {
                 Help()
             }
-
+            
             Section (header: Text("Sample Data")){
-                    Button ("Load Sample Data") {
-                        DispatchQueue.main.async {
-                            appData.cars = Car.loadSampleData()
-                            MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
-                        }
+                Button ("Load Sample Data") {
+                    DispatchQueue.main.async {
+                        appData.cars = Car.loadSampleData()
+                        MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
                     }
-                    Button ("Clear All Data") {
-                        DispatchQueue.main.async {
-                            appData.cars = []
-                            AppState.resetState(state: _state)
-                        }
+                }
+                Button ("Clear All Data") {
+                    DispatchQueue.main.async {
+                        appData.cars = []
+                        AppState.resetState(state: _state)
                     }
+                }
             }
         } .navigationTitle("Settings")
     }

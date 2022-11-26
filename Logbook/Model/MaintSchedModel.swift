@@ -14,6 +14,7 @@ struct MaintSched: Identifiable, Codable, Comparable {
     
     var id: UUID = UUID()
     var maintType: LogType
+    var maintEnabled: Bool
     var maintMonths: Int
     var maintMiles: Int
     
@@ -32,11 +33,12 @@ struct MaintSched: Identifiable, Codable, Comparable {
 
 extension MaintSched {
     var data: MaintSched {
-        MaintSched(maintType: maintType, maintMonths: maintMonths, maintMiles: maintMiles)
+        MaintSched(maintType: maintType, maintEnabled: maintEnabled, maintMonths: maintMonths, maintMiles: maintMiles)
     }
     
     mutating func update(from data: MaintSched) {
         maintType = data.maintType
+        maintEnabled = data.maintEnabled
         maintMonths = data.maintMonths
         maintMiles = data.maintMiles
     }

@@ -108,6 +108,34 @@ enum LogType: String, Identifiable, CaseIterable, Codable {
         }
     }
     
+    // MARK: - maintEnabledDefault returns the default maintenance tracking status (true or false)
+    func maintEnabledDefault() -> Bool {
+        switch self {
+        case .gas:
+            return false
+        case .odometer:
+            return false
+        case .oil:
+            return true
+        case .tires:
+            return true
+        case .rotate:
+            return true
+        case .battery:
+            return true
+        case .tuneup:
+            return true
+        case .brakes:
+            return true
+        case .smog:
+            return false
+        case .alignment:
+            return false
+        case .other:
+            return false
+        }
+    }
+    
     // MARK: - maintDateDefault returns the default number of months for each service (0 = n/a)
     func maintDateDefault() -> Int {
         switch self {

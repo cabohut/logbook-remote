@@ -32,7 +32,7 @@ struct Car: Identifiable, Codable, Comparable {
     
     private static func setupMaintRec (car: inout Car) {
         for t in LogType.allCases {
-            let m = MaintSched(maintType: t, maintMonths: LogType.maintDateDefault(t)(), maintMiles: LogType.maintMilesDefault(t)())
+            let m = MaintSched(maintType: t, maintEnabled: LogType.maintEnabledDefault(t)(), maintMonths: LogType.maintDateDefault(t)(), maintMiles: LogType.maintMilesDefault(t)())
             car.maint.append(m)
         }
     }
@@ -82,7 +82,7 @@ extension Car {
         maint = data.maint
         logs = data.logs
         for t in LogType.allCases {
-            let m = MaintSched(maintType: t, maintMonths: LogType.maintDateDefault(t)(), maintMiles: LogType.maintMilesDefault(t)())
+            let m = MaintSched(maintType: t, maintEnabled: LogType.maintEnabledDefault(t)(), maintMonths: LogType.maintDateDefault(t)(), maintMiles: LogType.maintMilesDefault(t)())
             maint.append(m)
         }
     }
@@ -93,6 +93,7 @@ extension Car {
     static let sampleCars: [Car] = [
         Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus",
             logs: [
+                Log(date: convertDate(date: "2022-10-30"), type: LogType.odometer, odometer: 107545, details: "", vendor: "", cost: 0),
                 Log(date: convertDate(date: "2022-03-31"), type: LogType.brakes, odometer: 105185, details: "", vendor: "Roo", cost: 600.00),
                 Log(date: convertDate(date: "2022-03-30"), type: LogType.oil, odometer: 105150, details: "", vendor: "Evans", cost: 78.00),
                 Log(date: convertDate(date: "2021-07-21"), type: LogType.tires, odometer: 97965, details: "", vendor: "Costco", cost: 671.27),
