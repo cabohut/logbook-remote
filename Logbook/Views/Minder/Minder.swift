@@ -21,17 +21,17 @@ struct Minder: View {
             VStack {
                 List {
                     Section (header: Text("Overdue (\(_state.overdueCount))").bold()) {
-                        ForEach (_state.maintStatus) { ms in
-                            if (ms.dateStatus == .isDue || ms.milesStatus == .isDue) {
-                                ShowMaintStatus(showOverdue: true, car: appData.cars[ms.carIdx], mStatus: ms)
+                        ForEach (_state.reminders) { r in
+                            if (r.dateStatus == .isDue || r.milesStatus == .isDue) {
+                                ShowMaintStatus(showOverdue: true, car: appData.cars[r.carIdx], reminder: r)
                             }
                         }
                     }
                     
                     Section (header: Text("Upcoming(\(_state.upcomingCount))").bold()) {
-                        ForEach (_state.maintStatus) { ms in
-                            if (ms.dateStatus == .isUpcoming && ms.milesStatus == .isUpcoming) {
-                                ShowMaintStatus(showOverdue: false, car: appData.cars[ms.carIdx], mStatus: ms)
+                        ForEach (_state.reminders) { r in
+                            if (r.dateStatus == .isUpcoming && r.milesStatus == .isUpcoming) {
+                                ShowMaintStatus(showOverdue: false, car: appData.cars[r.carIdx], reminder: r)
                             }
                         }
                     }

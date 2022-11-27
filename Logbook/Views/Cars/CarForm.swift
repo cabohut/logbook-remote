@@ -49,7 +49,7 @@ struct CarForm: View {
             }
 
             Section (header: Text("Maintenance Schedule Cadence").bold()) {
-                Text("Enter the recommended maintenance schedule. Use the maitenance reminder icon to enable (orang) or disable (gray) reminders for that category.")
+                Text("Enter the recommended maintenance schedule for each service. Use the reminder icon to enable (orang) or disable (gray) reminders for each service.")
                     .foregroundColor(.gray)
                     .font(.subheadline)
                 
@@ -67,19 +67,19 @@ struct CarForm: View {
                 } .foregroundColor(.orange)
                     .font(.subheadline)
                 
-                ForEach ($rec.maint) { $m in
-                    if (m.maintType != .odometer && m.maintType != .gas) {
+                ForEach ($rec.services) { $s in
+                    if (s.serviceType != .odometer && s.serviceType != .gas) {
                         HStack {
-                            Toggle(isOn: $m.maintEnabled, label: {Text(m.maintType.rawValue.capitalized)})
+                            Toggle(isOn: $s.maintEnabled, label: {Text(s.serviceType.rawValue.capitalized)})
                                 .toggleStyle(CheckboxStyle())
                             Spacer()
                             
-                            TextField("", value: $m.maintMonths, formatter: NumberFormatter())
+                            TextField("", value: $s.maintMonths, formatter: NumberFormatter())
                                 .padding(.horizontal, 5)
                                 .modifier(_TextFieldModifier())
                                 .frame(width: 60)
                                 .keyboardType(.numberPad)
-                            TextField("", value: $m.maintMiles, formatter: numFormatter)
+                            TextField("", value: $s.maintMiles, formatter: numFormatter)
                                 .padding(.horizontal, 5)
                                 .modifier(_TextFieldModifier())
                                 .frame(width: 60)
@@ -92,7 +92,8 @@ struct CarForm: View {
         } .navigationBarTitleDisplayMode(.inline)
         .onChange(of: isPresented) { newValue in
             if !newValue {
-                MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                Reminder.updateRemindersArray(cars: appData.cars, state: _state)
+                print("value changed")
             }
         }
     }

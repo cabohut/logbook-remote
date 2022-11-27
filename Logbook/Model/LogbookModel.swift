@@ -16,13 +16,13 @@ class AppState : ObservableObject {
     var c_car_idx = 0
     @Published var overdueCount = 0
     @Published var upcomingCount = 0
-    var maintStatus : [MaintStatus] = []
+    var reminders : [Reminder] = []
     
     static func resetState(state: AppState) {
         state.c_car_idx = 0
         state.overdueCount = 0
         state.upcomingCount = 0
-        state.maintStatus = []
+        state.reminders = []
     }
 }
 

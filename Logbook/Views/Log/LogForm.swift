@@ -34,8 +34,8 @@ struct LogForm: View {
                     DatePicker("", selection: $rec.date,displayedComponents: [.date])
                 } 
 
-                Picker("Log Type", selection: $rec.type) {
-                    ForEach(LogType.allCases) { t in
+                Picker("Service Type", selection: $rec.type) {
+                    ForEach(ServiceType.allCases) { t in
                         Text(t.rawValue.capitalized).tag(t)
                     }
                 }
@@ -53,7 +53,7 @@ struct LogForm: View {
             }
         } .onChange(of: isPresented) { newValue in
             if !newValue {
-                MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                Reminder.updateRemindersArray(cars: appData.cars, state: _state)
             }
         }
     }

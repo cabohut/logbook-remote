@@ -24,7 +24,7 @@ struct LogbookApp: App {
                     if fileDataLoaded == false {
                         do {
                             appData.cars = try await LogbookModel.load()
-                            MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                            Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                             fileDataLoaded = true
                         } catch {
                             appData.cars = []
@@ -33,7 +33,7 @@ struct LogbookApp: App {
                 }
                 .sheet(item: $err, onDismiss: { // encountered an error (err != nil), load the sample data
                     appData.cars = Car.loadSampleData()
-                    MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                    Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                 }) { wrapper in
                     ErrorView(errorWrapper: wrapper)
                 }

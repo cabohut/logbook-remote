@@ -32,7 +32,7 @@ struct CarsList: View {
                         }
                     } .onDelete { indices in
                         Car.remove(cars: &appData.cars, carIndex: indices)
-                        MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                        Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                     }
                 }
             }
@@ -57,7 +57,7 @@ struct CarsList: View {
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Add") {
                                     Car.add(cars: &appData.cars, newCar: newCarRecord)
-                                    MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                                    Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                                     isPresentingCarForm = false
                                 } .disabled(newCarRecord.make.isEmpty && newCarRecord.model.isEmpty)
                             }
@@ -66,7 +66,7 @@ struct CarsList: View {
             } // .sheet
             .onChange(of: scenePhase) { phase in
                 if phase == .inactive { saveAction() }
-                MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                Reminder.updateRemindersArray(cars: appData.cars, state: _state)
             }
     }
 }

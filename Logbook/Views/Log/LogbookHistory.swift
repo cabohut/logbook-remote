@@ -60,7 +60,7 @@ struct LogbookHistory: View {
                                     }
                                 } .onDelete { indices in
                                     Log.remove(logs: &c.logs, logIndex: indices)
-                                    MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                                    Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                                 }
                             } else {
                                 Text("No logs recorded.")
@@ -88,7 +88,7 @@ struct LogbookHistory: View {
                                     ToolbarItem(placement: .confirmationAction) {
                                         Button("Add") {
                                             Log.add(logs: &appData.cars[_state.c_car_idx].logs, newLog: newLogRecord)
-                                            MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                                            Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                                             isPresentingHistoryForm = false
                                         }
                                     }
@@ -96,7 +96,7 @@ struct LogbookHistory: View {
                         }
                     } .onChange(of: scenePhase) { phase in
                         if phase == .inactive { saveAction() }
-                        MaintStatus.updateMaintStatusArray(cars: appData.cars, state: _state)
+                        Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                     }
             }
         }
