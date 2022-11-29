@@ -1,4 +1,13 @@
 //
+//  ShowReminder.swift
+//  Logbook
+//
+//  Created by bugs on 11/27/22.
+//
+
+import Foundation
+
+//
 //  ShowMaintReminder.swift
 //  Logbook
 //
@@ -7,9 +16,8 @@
 
 import SwiftUI
 
-struct ShowMaintStatus: View {
+struct ShowReminder: View {
     let showOverdue: Bool
-    var car: Car
     var reminder: Reminder
     
     var body: some View {
@@ -21,9 +29,6 @@ struct ShowMaintStatus: View {
                 .font(Font.system(size: 22, weight: .regular))
 
             VStack {
-                Text(car.make)
-                    .frame(width: 80, alignment: .leading)
-                    .font(.headline)
                 Text(reminder.serviceType.rawValue)
                     .frame(width: 80, alignment: .leading)
                     .foregroundColor(.gray)
@@ -76,7 +81,7 @@ struct ShowMaintStatus: View {
     }
 }
 
-struct ShowMaintStatus_Previews: PreviewProvider {
+struct ShowReminder_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             EmptyView()

@@ -11,7 +11,6 @@ struct CarsList: View {
     let saveAction: ()->Void
     
     @EnvironmentObject var appData : LogbookModel
-    @EnvironmentObject var _state : AppState
 
     @Environment(\.scenePhase) private var scenePhase
     
@@ -27,12 +26,11 @@ struct CarsList: View {
             } else {
                 List {
                     ForEach($appData.cars) { $rec in
-                        NavigationLink(destination:CarForm(rec: $rec)) {
+                        NavigationLink(destination:CarForm(car: $rec)) {
                             CarRow(rec: rec)
                         }
                     } .onDelete { indices in
                         Car.remove(cars: &appData.cars, carIndex: indices)
-                        Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                     }
                 }
             }
@@ -46,7 +44,7 @@ struct CarsList: View {
                 }
             } .sheet(isPresented: $isPresentingCarForm) {
                 NavigationView {
-                    CarForm(rec: $newCarRecord)
+                    CarForm(car: $newCarRecord)
                         .navigationTitle("Car Details")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
@@ -57,7 +55,6 @@ struct CarsList: View {
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Add") {
                                     Car.add(cars: &appData.cars, newCar: newCarRecord)
-                                    Reminder.updateRemindersArray(cars: appData.cars, state: _state)
                                     isPresentingCarForm = false
                                 } .disabled(newCarRecord.make.isEmpty && newCarRecord.model.isEmpty)
                             }
@@ -66,7 +63,6 @@ struct CarsList: View {
             } // .sheet
             .onChange(of: scenePhase) { phase in
                 if phase == .inactive { saveAction() }
-                Reminder.updateRemindersArray(cars: appData.cars, state: _state)
             }
     }
 }

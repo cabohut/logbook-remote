@@ -31,7 +31,9 @@ struct Settings: View {
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
                         appData.cars = Car.loadSampleData()
-                        Reminder.updateRemindersArray(cars: appData.cars, state: _state)
+                        for i in 0..<appData.cars.count {
+                            Reminder.updateReminders(car: &appData.cars[i], state: _state)
+                        }
                     }
                 }
                 Button ("Clear All Data") {

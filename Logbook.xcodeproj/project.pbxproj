@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9247A77929336437008D0490 /* ReminderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9247A77829336437008D0490 /* ReminderModel.swift */; };
+		92D2061C29348CA400A333A5 /* ShowReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2061B29348CA400A333A5 /* ShowReminder.swift */; };
 		92DABF0128E6B03000F07715 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DABF0028E6B03000F07715 /* Preview Assets.xcassets */; };
 		92DABF2528E6B10C00F07715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DABF0728E6B10B00F07715 /* Assets.xcassets */; };
 		92DABF2628E6B10C00F07715 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0928E6B10B00F07715 /* LogbookApp.swift */; };
@@ -16,7 +18,6 @@
 		92DABF2A28E6B10C00F07715 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0D28E6B10B00F07715 /* ErrorView.swift */; };
 		92DABF2B28E6B10C00F07715 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF0F28E6B10C00F07715 /* CarModel.swift */; };
 		92DABF2C28E6B10C00F07715 /* AppHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1028E6B10C00F07715 /* AppHelpers.swift */; };
-		92DABF2D28E6B10C00F07715 /* ReminderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1128E6B10C00F07715 /* ReminderModel.swift */; };
 		92DABF2E28E6B10C00F07715 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1228E6B10C00F07715 /* ServiceModel.swift */; };
 		92DABF2F28E6B10C00F07715 /* LogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1328E6B10C00F07715 /* LogModel.swift */; };
 		92DABF3028E6B10C00F07715 /* LogbookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF1428E6B10C00F07715 /* LogbookModel.swift */; };
@@ -30,10 +31,11 @@
 		92DABF3828E6B10C00F07715 /* LogRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2028E6B10C00F07715 /* LogRow.swift */; };
 		92DABF3928E6B10C00F07715 /* LogbookHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2128E6B10C00F07715 /* LogbookHistory.swift */; };
 		92DABF3A28E6B10C00F07715 /* Minder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2328E6B10C00F07715 /* Minder.swift */; };
-		92DABF3B28E6B10C00F07715 /* ShowMaintStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2428E6B10C00F07715 /* ShowMaintStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9247A77829336437008D0490 /* ReminderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderModel.swift; sourceTree = "<group>"; };
+		92D2061B29348CA400A333A5 /* ShowReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowReminder.swift; sourceTree = "<group>"; };
 		92DABEF628E6B02F00F07715 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DABF0028E6B03000F07715 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		92DABF0728E6B10B00F07715 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../CarLogbook/CarLogbook/Assets.xcassets; sourceTree = "<group>"; };
@@ -44,7 +46,6 @@
 		92DABF0D28E6B10B00F07715 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		92DABF0F28E6B10C00F07715 /* CarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
 		92DABF1028E6B10C00F07715 /* AppHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelpers.swift; sourceTree = "<group>"; };
-		92DABF1128E6B10C00F07715 /* ReminderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderModel.swift; sourceTree = "<group>"; };
 		92DABF1228E6B10C00F07715 /* ServiceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
 		92DABF1328E6B10C00F07715 /* LogModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogModel.swift; sourceTree = "<group>"; };
 		92DABF1428E6B10C00F07715 /* LogbookModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogbookModel.swift; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		92DABF2028E6B10C00F07715 /* LogRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRow.swift; sourceTree = "<group>"; };
 		92DABF2128E6B10C00F07715 /* LogbookHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogbookHistory.swift; sourceTree = "<group>"; };
 		92DABF2328E6B10C00F07715 /* Minder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Minder.swift; sourceTree = "<group>"; };
-		92DABF2428E6B10C00F07715 /* ShowMaintStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMaintStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,9 +126,9 @@
 			children = (
 				92DABF1428E6B10C00F07715 /* LogbookModel.swift */,
 				92DABF0F28E6B10C00F07715 /* CarModel.swift */,
-				92DABF1128E6B10C00F07715 /* ReminderModel.swift */,
 				92DABF1228E6B10C00F07715 /* ServiceModel.swift */,
 				92DABF1328E6B10C00F07715 /* LogModel.swift */,
+				9247A77829336437008D0490 /* ReminderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				92DABF2328E6B10C00F07715 /* Minder.swift */,
-				92DABF2428E6B10C00F07715 /* ShowMaintStatus.swift */,
+				92D2061B29348CA400A333A5 /* ShowReminder.swift */,
 			);
 			path = Minder;
 			sourceTree = "<group>";
@@ -263,17 +263,17 @@
 				92DABF3228E6B10C00F07715 /* Help.swift in Sources */,
 				92DABF3628E6B10C00F07715 /* CarRow.swift in Sources */,
 				92DABF2F28E6B10C00F07715 /* LogModel.swift in Sources */,
-				92DABF2D28E6B10C00F07715 /* ReminderModel.swift in Sources */,
 				92DABF2828E6B10C00F07715 /* AppNavigation.swift in Sources */,
+				92D2061C29348CA400A333A5 /* ShowReminder.swift in Sources */,
 				92DABF2728E6B10C00F07715 /* IntroScreenHelpers.swift in Sources */,
 				92DABF3328E6B10C00F07715 /* Settings.swift in Sources */,
 				92DABF2A28E6B10C00F07715 /* ErrorView.swift in Sources */,
 				92DABF2928E6B10C00F07715 /* IntroScreen.swift in Sources */,
 				92DABF3528E6B10C00F07715 /* CarForm.swift in Sources */,
+				9247A77929336437008D0490 /* ReminderModel.swift in Sources */,
 				92DABF3028E6B10C00F07715 /* LogbookModel.swift in Sources */,
 				92DABF2C28E6B10C00F07715 /* AppHelpers.swift in Sources */,
 				92DABF3728E6B10C00F07715 /* LogForm.swift in Sources */,
-				92DABF3B28E6B10C00F07715 /* ShowMaintStatus.swift in Sources */,
 				92DABF2628E6B10C00F07715 /* LogbookApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

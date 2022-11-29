@@ -23,6 +23,9 @@ struct Car: Identifiable, Codable, Comparable {
     var notes: String = ""
     var services: [Service] = []
     var logs: [Log] = []
+    var reminders: [Reminder] = []
+    var overdueRemindersCount: Int = 0
+    var upcomingRemindersCount: Int = 0
     
     static func new() -> Car {
         var newCar = Car()
@@ -32,8 +35,8 @@ struct Car: Identifiable, Codable, Comparable {
     
     private static func setupServicesRec (car: inout Car) {
         for t in ServiceType.allCases {
-            let m = Service(serviceType: t, maintEnabled: ServiceType.maintEnabledDefault(t)(), maintMonths: ServiceType.maintDateDefault(t)(), maintMiles: ServiceType.maintMilesDefault(t)())
-            car.services.append(m)
+            let s = Service(serviceType: t, maintEnabled: ServiceType.maintEnabledDefault(t)(), maintMonths: ServiceType.maintDateDefault(t)(), maintMiles: ServiceType.maintMilesDefault(t)())
+            car.services.append(s)
         }
     }
     
@@ -46,13 +49,19 @@ struct Car: Identifiable, Codable, Comparable {
         cars.remove(atOffsets: carIndex)
     }
 
+    static func resetReminders(car: inout Car) {
+        car.overdueRemindersCount = 0
+        car.upcomingRemindersCount = 0
+        car.reminders = []
+    }
+    
     static func loadSampleData() -> [Car]{
         var  cars = Car.sampleCars
         cars = self.sortCars(cars: cars)
         for i in 0..<cars.count {
             self.setupServicesRec(car: &cars[i])
         }
-        
+
         return cars
     }
     
@@ -69,7 +78,7 @@ struct Car: Identifiable, Codable, Comparable {
 
 extension Car {
     var data: Car {
-        Car(year: year, make: make, model: model, unique: unique, license: license, vin: vin, services: services, logs: logs)
+        Car(year: year, make: make, model: model, unique: unique, license: license, vin: vin, services: services, logs: logs, reminders: reminders, overdueRemindersCount: overdueRemindersCount, upcomingRemindersCount: upcomingRemindersCount)
     }
     
     mutating func update(from data: Car) {
@@ -81,6 +90,9 @@ extension Car {
         vin = data.vin
         services = data.services
         logs = data.logs
+        reminders = data.reminders
+        overdueRemindersCount = data.overdueRemindersCount
+        upcomingRemindersCount = data.upcomingRemindersCount
         for t in ServiceType.allCases {
             let s = Service(serviceType: t, maintEnabled: ServiceType.maintEnabledDefault(t)(), maintMonths: ServiceType.maintDateDefault(t)(), maintMiles: ServiceType.maintMilesDefault(t)())
             services.append(s)

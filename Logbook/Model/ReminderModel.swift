@@ -2,18 +2,17 @@
 //  ReminderModel.swift
 //  Logbook
 //
-//  Created by bugs on 8/1/22.
+//  Created by bugs on 11/27/22.
 //
 
 import Foundation
 
-struct Reminder: Identifiable, Comparable {
+struct Reminder: Identifiable, Codable, Comparable {
     static func < (lhs: Reminder, rhs: Reminder) -> Bool {
         return lhs.dateDue < rhs.dateDue
     }
 
     var id: UUID = UUID()
-    var carIdx: Int = 0
     var serviceType: ServiceType = .other
     var dateStatus: ServiceStatus = .notScheduled
     var milesStatus: ServiceStatus = .notScheduled
@@ -23,47 +22,48 @@ struct Reminder: Identifiable, Comparable {
     var milesUntilDue : Int = 0
     
     static func new() -> Reminder {
-        let newRec = Reminder()
-        return newRec
+        return Reminder()
     }
 
-    static func add(reminders: inout [Reminder], statusRec: Reminder) {
-        reminders.append(statusRec)
+    static func add(reminders: inout [Reminder], reminder: Reminder) {
+        reminders.append(reminder)
     }
 
-    static func updateRemindersArray (cars: [Car], state: AppState) {
-        AppState.resetState(state: state)
+    static func updateReminders (car: inout Car, state: AppState) {
+        Car.resetReminders(car: &car)
+        
+        for s in car.services {
+            var reminder = Reminder.new()
+            self.checkServiceStatus(car: car, service: s, reminder: &reminder)
+            
+            if (reminder.dateStatus == .isDue || reminder.milesStatus == .isDue) {
+                state.overdueCount += 1
+                car.overdueRemindersCount += 1
 
-        for i in cars.indices {
-            for s in cars[i].services {
-                var reminder = Reminder.new()
-                self.checkMaintStatus(car: cars[i], service: s, reminder: &reminder)
-                reminder.carIdx = i
                 reminder.serviceType = s.serviceType
-                
-                if (reminder.dateStatus == .isDue || reminder.milesStatus == .isDue) {
-                    state.overdueCount += 1
-                    state.reminders.append(reminder)
-                }
+                car.reminders.append(reminder)
+            }
+            
+            if (reminder.dateStatus == .isUpcoming && reminder.milesStatus == .isUpcoming) {
+                state.upcomingCount += 1
+                car.upcomingRemindersCount += 1
 
-                if (reminder.dateStatus == .isUpcoming && reminder.milesStatus == .isUpcoming) {
-                    state.upcomingCount += 1
-                    state.reminders.append(reminder)
-                }
+                reminder.serviceType = s.serviceType
+                car.reminders.append(reminder)
             }
         }
         
-        state.reminders = state.reminders.sorted()
+        car.reminders = car.reminders.sorted()
     }
 
-    static func checkMaintStatus (car: Car, service: Service, reminder: inout Reminder) {
-        // Need to get the last time the service (serviceType) was performed or if it is the first
-        // time for that service then get the date and odometer of the last maintenance. App should
-        // prompt the user to add an odometer log with date and milages (in case of a used car)
-        
+    static func checkServiceStatus (car: Car, service: Service, reminder: inout Reminder) {
         if !service.maintEnabled {
             return
         }
+        
+        // Need to get the last time the service (serviceType) was performed or if it is the first
+        // time for that service then get the date and odometer of the last maintenance. App should
+        // prompt the user to add an odometer log with date and milages (in case of a used car)
         
         var lastLog = Log.getLastLogByType(logs: car.logs, serviceType: service.serviceType)
         if lastLog == nil {  // no log for LogType was found
@@ -75,7 +75,7 @@ struct Reminder: Identifiable, Comparable {
         let carLastLog = car.logs.max { $0.odometer < $1.odometer }
         let lastMilages = carLastLog?.odometer ?? 0
         
-        if service.maintMonths > 0 && service.maintEnabled {
+        if service.maintMonths > 0 {
             let dateSchedInSeconds = service.maintMonths * Int(60 * 60 * 24 * 30.4369)
             reminder.dateDue = lastLog!.date.timeIntervalSince1970 + TimeInterval(dateSchedInSeconds)
             
@@ -88,7 +88,7 @@ struct Reminder: Identifiable, Comparable {
             reminder.dateStatus = (reminder.dateStatus == .isDue || reminder.milesStatus == .isDue) ? .isDue : reminder.dateStatus
         }
         
-        if service.maintMiles > 0  && service.maintEnabled {
+        if service.maintMiles > 0 {
             reminder.milesDue = lastLog!.odometer + service.maintMiles * 1000
             reminder.milesUntilDue = reminder.milesDue - lastMilages
             if reminder.milesUntilDue < 0 && reminder.milesDue > 0 {
@@ -98,5 +98,21 @@ struct Reminder: Identifiable, Comparable {
             }
             reminder.milesStatus = (reminder.milesStatus == .isDue || reminder.milesStatus == .isDue) ? .isDue : reminder.milesStatus
         }
+    }
+}
+
+extension Reminder {
+    var data: Reminder {
+        Reminder(serviceType: serviceType, dateStatus: dateStatus, milesStatus: milesStatus, dateDue: dateDue, daysUntilDue: daysUntilDue, milesDue: milesDue, milesUntilDue: milesUntilDue)
+    }
+    
+    mutating func update(from data: Reminder) {
+        serviceType = data.serviceType
+        dateStatus = data.dateStatus
+        milesStatus = data.milesStatus
+        dateDue = data.dateDue
+        daysUntilDue = data.daysUntilDue
+        milesDue = data.milesDue
+        milesUntilDue = data.milesUntilDue
     }
 }

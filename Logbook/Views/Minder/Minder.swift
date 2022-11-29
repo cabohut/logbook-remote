@@ -20,24 +20,22 @@ struct Minder: View {
         } else {
             VStack {
                 List {
-                    Section (header: Text("Overdue (\(_state.overdueCount))").bold()) {
-                        ForEach (_state.reminders) { r in
-                            if (r.dateStatus == .isDue || r.milesStatus == .isDue) {
-                                ShowMaintStatus(showOverdue: true, car: appData.cars[r.carIdx], reminder: r)
+                    ForEach (appData.cars) { c in
+                        Section (header: Text(c.make + " " + c.model).bold()) {
+                            ForEach (c.reminders) { r in
+                                if (r.dateStatus == .isDue || r.milesStatus == .isDue) {
+                                    ShowReminder(showOverdue: true, reminder: r)
+                                }
+                                if (r.dateStatus == .isUpcoming && r.milesStatus == .isUpcoming) {
+                                    ShowReminder(showOverdue: false, reminder: r)
+                                }
                             }
                         }
-                    }
-                    
-                    Section (header: Text("Upcoming(\(_state.upcomingCount))").bold()) {
-                        ForEach (_state.reminders) { r in
-                            if (r.dateStatus == .isUpcoming && r.milesStatus == .isUpcoming) {
-                                ShowMaintStatus(showOverdue: false, car: appData.cars[r.carIdx], reminder: r)
-                            }
-                        }
-                    }
-                } .navigationTitle("Service Reminders")
-            }
-        }
+                    } // ForEach
+
+                } .navigationTitle("Service Reminders")                
+            } // VStack
+        } // else
     }
 }
 

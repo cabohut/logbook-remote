@@ -53,7 +53,7 @@ struct LogForm: View {
             }
         } .onChange(of: isPresented) { newValue in
             if !newValue {
-                Reminder.updateRemindersArray(cars: appData.cars, state: _state)
+                Reminder.updateReminders(car: &appData.cars[_state.c_car_idx], state: _state)
             }
         }
     }

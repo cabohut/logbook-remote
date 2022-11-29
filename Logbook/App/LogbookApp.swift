@@ -24,7 +24,9 @@ struct LogbookApp: App {
                     if fileDataLoaded == false {
                         do {
                             appData.cars = try await LogbookModel.load()
-                            Reminder.updateRemindersArray(cars: appData.cars, state: _state)
+                            for i in appData.cars.indices {
+                                Reminder.updateReminders(car: &appData.cars[i], state: _state)
+                            }
                             fileDataLoaded = true
                         } catch {
                             appData.cars = []
@@ -33,7 +35,9 @@ struct LogbookApp: App {
                 }
                 .sheet(item: $err, onDismiss: { // encountered an error (err != nil), load the sample data
                     appData.cars = Car.loadSampleData()
-                    Reminder.updateRemindersArray(cars: appData.cars, state: _state)
+                    for i in 0..<appData.cars.count {
+                        Reminder.updateReminders(car: &appData.cars[i], state: _state)
+                    }
                 }) { wrapper in
                     ErrorView(errorWrapper: wrapper)
                 }

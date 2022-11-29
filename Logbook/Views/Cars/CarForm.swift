@@ -26,7 +26,7 @@ struct CheckboxStyle: ToggleStyle {
 }
 
 struct CarForm: View {
-    @Binding var rec: Car
+    @Binding var car: Car
     
     @Environment(\.isPresented) var isPresented
     @EnvironmentObject var appData : LogbookModel
@@ -37,15 +37,15 @@ struct CarForm: View {
     
     var body: some View {
         List {
-            Section (header: Text(rec.make + " " + rec.model).bold()) {
-                TextField("Year", text: $rec.year)
+            Section (header: Text(car.make + " " + car.model).bold()) {
+                TextField("Year", text: $car.year)
                     .keyboardType(.numberPad)
-                TextField("Make", text: $rec.make)
-                TextField("Model", text: $rec.model)
-                TextField("License Plate Number", text: $rec.license)
-                TextField("VIN", text: $rec.vin)
-                DatePicker("Purchase Date", selection: $rec.purchaseDate,displayedComponents: [.date])
-                TextField("Notes", text: $rec.notes)
+                TextField("Make", text: $car.make)
+                TextField("Model", text: $car.model)
+                TextField("License Plate Number", text: $car.license)
+                TextField("VIN", text: $car.vin)
+                DatePicker("Purchase Date", selection: $car.purchaseDate,displayedComponents: [.date])
+                TextField("Notes", text: $car.notes)
             }
 
             Section (header: Text("Maintenance Schedule Cadence").bold()) {
@@ -67,7 +67,7 @@ struct CarForm: View {
                 } .foregroundColor(.orange)
                     .font(.subheadline)
                 
-                ForEach ($rec.services) { $s in
+                ForEach ($car.services) { $s in
                     if (s.serviceType != .odometer && s.serviceType != .gas) {
                         HStack {
                             Toggle(isOn: $s.maintEnabled, label: {Text(s.serviceType.rawValue.capitalized)})
@@ -92,8 +92,7 @@ struct CarForm: View {
         } .navigationBarTitleDisplayMode(.inline)
         .onChange(of: isPresented) { newValue in
             if !newValue {
-                Reminder.updateRemindersArray(cars: appData.cars, state: _state)
-                print("value changed")
+                Reminder.updateReminders(car: &car, state: _state)
             }
         }
     }
@@ -102,7 +101,7 @@ struct CarForm: View {
 struct CarForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CarForm(rec: .constant(Car()))
+            CarForm(car: .constant(Car()))
         }
     }
 }
