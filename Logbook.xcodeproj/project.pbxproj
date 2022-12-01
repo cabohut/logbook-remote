@@ -167,9 +167,9 @@
 		92DABF1E28E6B10C00F07715 /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				92DABF2128E6B10C00F07715 /* LogbookHistory.swift */,
 				92DABF1F28E6B10C00F07715 /* LogForm.swift */,
 				92DABF2028E6B10C00F07715 /* LogRow.swift */,
-				92DABF2128E6B10C00F07715 /* LogbookHistory.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";

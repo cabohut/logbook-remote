@@ -11,19 +11,21 @@ struct LogForm: View {
     @Binding var rec: Log
     var carModel : String
     var addNewLog : Bool
+    @State private var car_selection : Int = 0
     
     @Environment(\.isPresented) var isPresented
     @EnvironmentObject var appData : LogbookModel
-    @EnvironmentObject var _state : AppState
     
     var body: some View {
         List {
             if addNewLog {
                 Section {
-                    Picker("Car", selection: $_state.c_car_idx) {
+                    Picker("Car", selection: $car_selection) {
                         ForEach(0..<appData.cars.count, id: \.self) { i in
                             Text(appData.cars[i].make + " " + appData.cars[i].model)
                         }
+                    } .onChange(of: car_selection) { newValue in
+                        _g.shared.set_c_car_idx(idx: newValue)
                     }
                 }
             }
@@ -53,7 +55,8 @@ struct LogForm: View {
             }
         } .onChange(of: isPresented) { newValue in
             if !newValue {
-                Reminder.updateReminders(car: &appData.cars[_state.c_car_idx], state: _state)
+                print("in LogForm onChange of: isPresented")
+                Reminder.updateReminders(car: &appData.cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
             }
         }
     }

@@ -12,15 +12,33 @@ private let FILE_NAME = "Logbook.data"
 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let archiveURL = documentsDirectory.appendingPathComponent("Logbook").appendingPathExtension("plist")
 
-class AppState : ObservableObject {
-    var c_car_idx = 0
-    @Published var overdueCount = 0
-    @Published var upcomingCount = 0
+// Singleton class to hold global values
+class _g {
+    static let shared = _g()
     
-    static func resetState(state: AppState) {
-        state.c_car_idx = 0
-        state.overdueCount = 0
-        state.upcomingCount = 0
+    var c_car_idx = 0
+    var remindersCounts: [Int] = []
+    @Published var overdueCount = 0
+    
+    //Initializer access level change now
+    private init(){
+        
+    }
+
+    func set_c_car_idx(idx: Int) {
+        c_car_idx = idx
+    }
+    
+    func resetState() {
+        c_car_idx = 0
+        overdueCount = 0
+    }
+    
+    func updateDueRemindersCount() {
+        overdueCount = 0
+        for r in remindersCounts {
+            overdueCount += r
+        }
     }
 }
 

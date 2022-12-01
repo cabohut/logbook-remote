@@ -44,9 +44,10 @@ struct ShowReminder: View {
                             Text("\(abs(reminder.daysUntilDue)) days")
                                 .foregroundColor((reminder.dateStatus == .isDue) ? .red : .orange)
                             Image(systemName: (reminder.dateStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
-                                .foregroundColor((reminder.dateStatus == .isDue) ? .red : .orange)
+                                .foregroundColor((reminder.dateStatus == .isDue) ? .red : .green)
                         } else {
                             Text(Date(timeIntervalSince1970: reminder.dateDue).formatted(date: .abbreviated, time: .omitted))
+                                .foregroundColor(.green)
                         }
                     } else {
                         Text ("date: n/a")
@@ -61,11 +62,12 @@ struct ShowReminder: View {
                     if reminder.milesStatus != .notScheduled {
                         if showOverdue {
                             Text("\(abs(reminder.milesUntilDue)) miles")
-                                .foregroundColor((reminder.milesStatus == .isDue) ? .red : .orange)
+                                .foregroundColor((reminder.milesStatus == .isDue) ? .red : .green)
                             Image(systemName: (reminder.milesStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
-                                .foregroundColor((reminder.milesStatus == .isDue) ? .red : .orange)
+                                .foregroundColor((reminder.milesStatus == .isDue) ? .red : .green)
                         } else {
                             Text("\(reminder.milesDue)")
+                                .foregroundColor(.green)
                         }
                     } else {
                         Text ("milage: n/a")

@@ -49,7 +49,7 @@ struct Car: Identifiable, Codable, Comparable {
         cars.remove(atOffsets: carIndex)
     }
 
-    static func resetReminders(car: inout Car) {
+    static func clearReminders(car: inout Car) {
         car.overdueRemindersCount = 0
         car.upcomingRemindersCount = 0
         car.reminders = []
@@ -60,6 +60,7 @@ struct Car: Identifiable, Codable, Comparable {
         cars = self.sortCars(cars: cars)
         for i in 0..<cars.count {
             self.setupServicesRec(car: &cars[i])
+            Reminder.updateReminders(car: &cars[i], carIndex: i)
         }
 
         return cars

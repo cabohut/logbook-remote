@@ -11,7 +11,6 @@ struct LogbookHistory: View {
     let saveAction: ()->Void
     
     @EnvironmentObject var appData : LogbookModel
-    @EnvironmentObject var _state : AppState
     
     @Environment(\.scenePhase) private var scenePhase
     
@@ -60,7 +59,7 @@ struct LogbookHistory: View {
                                     }
                                 } .onDelete { indices in
                                     Log.remove(logs: &c.logs, logIndex: indices)
-                                    Reminder.updateReminders(car: &c, state: _state)
+                                    Reminder.updateReminders(car: &c, carIndex: _g.shared.c_car_idx)
                                 }
                             } else {
                                 Text("No logs recorded.")
@@ -87,16 +86,17 @@ struct LogbookHistory: View {
                                     }
                                     ToolbarItem(placement: .confirmationAction) {
                                         Button("Add") {
-                                            Log.add(logs: &appData.cars[_state.c_car_idx].logs, newLog: newLogRecord)
-                                            Reminder.updateReminders(car: &appData.cars[_state.c_car_idx], state: _state)
+                                            Log.add(logs: &appData.cars[_g.shared.c_car_idx].logs, newLog: newLogRecord)
+                                            Reminder.updateReminders(car: &appData.cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
                                             isPresentingHistoryForm = false
                                         }
                                     }
                                 }
                         }
                     } .onChange(of: scenePhase) { phase in
-                        if phase == .inactive { saveAction() }
-                        Reminder.updateReminders(car: &appData.cars[_state.c_car_idx], state: _state)
+                        if phase == .inactive {
+                            saveAction()
+                        }
                     }
             }
         }
@@ -108,7 +108,6 @@ struct Logbook_Previews: PreviewProvider {
         NavigationView {
             LogbookHistory(saveAction: {})
                 .environmentObject(LogbookModel())
-                .environmentObject(AppState())
         }
     }
 }

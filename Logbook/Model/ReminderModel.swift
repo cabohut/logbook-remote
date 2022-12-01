@@ -29,31 +29,37 @@ struct Reminder: Identifiable, Codable, Comparable {
         reminders.append(reminder)
     }
 
-    static func updateReminders (car: inout Car, state: AppState) {
-        Car.resetReminders(car: &car)
+    static func updateReminders (car: inout Car, carIndex: Int) {
+        // clear reminders for this car
+        Car.clearReminders(car: &car)
         
         for s in car.services {
             var reminder = Reminder.new()
             self.checkServiceStatus(car: car, service: s, reminder: &reminder)
             
             if (reminder.dateStatus == .isDue || reminder.milesStatus == .isDue) {
-                state.overdueCount += 1
                 car.overdueRemindersCount += 1
 
                 reminder.serviceType = s.serviceType
-                car.reminders.append(reminder)
+                Reminder.add(reminders: &car.reminders, reminder: reminder)
             }
             
             if (reminder.dateStatus == .isUpcoming && reminder.milesStatus == .isUpcoming) {
-                state.upcomingCount += 1
                 car.upcomingRemindersCount += 1
 
                 reminder.serviceType = s.serviceType
-                car.reminders.append(reminder)
+                Reminder.add(reminders: &car.reminders, reminder: reminder)
             }
         }
         
         car.reminders = car.reminders.sorted()
+        if carIndex < _g.shared.remindersCounts.count {
+            print(carIndex, car.reminders.count)
+            _g.shared.remindersCounts[carIndex] = car.reminders.count
+        } else {
+            _g.shared.remindersCounts.append(car.reminders.count)
+        }
+        _g.shared.updateDueRemindersCount()
     }
 
     static func checkServiceStatus (car: Car, service: Service, reminder: inout Reminder) {

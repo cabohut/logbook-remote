@@ -31,6 +31,8 @@ struct CarsList: View {
                         }
                     } .onDelete { indices in
                         Car.remove(cars: &appData.cars, carIndex: indices)
+                        _g.shared.remindersCounts.remove(atOffsets: indices)
+                        _g.shared.updateDueRemindersCount()
                     }
                 }
             }
@@ -62,7 +64,9 @@ struct CarsList: View {
                 } .navigationViewStyle(.stack)
             } // .sheet
             .onChange(of: scenePhase) { phase in
-                if phase == .inactive { saveAction() }
+                if phase == .inactive {
+                    saveAction()
+                }
             }
     }
 }
@@ -71,6 +75,5 @@ struct Cars_Previews: PreviewProvider {
     static var previews: some View {
         CarsList(saveAction: {})
             .environmentObject(LogbookModel())
-            .environmentObject(AppState())
     }
 }

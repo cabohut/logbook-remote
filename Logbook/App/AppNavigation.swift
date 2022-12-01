@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AppNavigation: View {
     @EnvironmentObject var appData : LogbookModel
-    @EnvironmentObject var _state : AppState
 
     @State private var err: ErrorWrapper?
     
@@ -39,14 +38,14 @@ struct AppNavigation: View {
                 .tabItem {
                     Label ("Logbook", systemImage: "text.book.closed")
                 }
-            
+
             // MARK: - Minder
             NavigationView {
                 Minder()
             } .navigationViewStyle(.stack)
                 .tabItem {
                     Label ("Minder", systemImage: "alarm")
-                } .badge(_state.overdueCount)
+                } .badge(_g.shared.overdueCount)
 
             // MARK: - Settings
             NavigationView {

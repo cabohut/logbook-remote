@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Minder: View {
     @EnvironmentObject var appData : LogbookModel
-    @EnvironmentObject var _state : AppState
     
     var body: some View {
         if (appData.cars.count == 0) {
@@ -43,6 +42,5 @@ struct Minder_Previews: PreviewProvider {
     static var previews: some View {
         Minder()
             .environmentObject(LogbookModel())
-            .environmentObject(AppState())
     }
 }

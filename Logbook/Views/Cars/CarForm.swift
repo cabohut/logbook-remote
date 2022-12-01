@@ -30,7 +30,6 @@ struct CarForm: View {
     
     @Environment(\.isPresented) var isPresented
     @EnvironmentObject var appData : LogbookModel
-    @EnvironmentObject var _state : AppState
     
     @State private var maintenanceMode = 0
     @State var maintMode = true
@@ -72,6 +71,10 @@ struct CarForm: View {
                         HStack {
                             Toggle(isOn: $s.maintEnabled, label: {Text(s.serviceType.rawValue.capitalized)})
                                 .toggleStyle(CheckboxStyle())
+                                .onChange(of: s.maintEnabled) { value in
+                                    Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
+                                }
+                            
                             Spacer()
                             
                             TextField("", value: $s.maintMonths, formatter: NumberFormatter())
@@ -90,11 +93,6 @@ struct CarForm: View {
             }
             
         } .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: isPresented) { newValue in
-            if !newValue {
-                Reminder.updateReminders(car: &car, state: _state)
-            }
-        }
     }
 }
 

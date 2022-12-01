@@ -9,13 +9,8 @@ import SwiftUI
 
 struct Settings: View {
     @EnvironmentObject var appData : LogbookModel
-    @EnvironmentObject var _state : AppState
     
     @State private var showingHelp = false
-    
-    @State private var nontificationEnabled = false
-    @State private var number = 0.0
-    @State private var number2 = 0.0
     
     var body: some View {
         Form {
@@ -31,15 +26,12 @@ struct Settings: View {
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
                         appData.cars = Car.loadSampleData()
-                        for i in 0..<appData.cars.count {
-                            Reminder.updateReminders(car: &appData.cars[i], state: _state)
-                        }
                     }
                 }
                 Button ("Clear All Data") {
                     DispatchQueue.main.async {
                         appData.cars = []
-                        AppState.resetState(state: _state)
+                        _g.shared.resetState()
                     }
                 }
             }
@@ -51,6 +43,5 @@ struct Settings_Previews: PreviewProvider {
     static var previews: some View {
         Settings()
             .environmentObject(LogbookModel())
-            .environmentObject(AppState())
     }
 }
