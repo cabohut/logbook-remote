@@ -22,7 +22,8 @@ struct Test: View {
     
     @State private var dateFilter = 0
     @State private var val = 0
-    
+    @State private var str = ""
+
     var body: some View {
         VStack {
             Section {
@@ -40,21 +41,24 @@ struct Test: View {
                     .padding(.top, 10)
             }
             
+            TextField("number", text: Binding(
+                get: { String(val) },
+                set: { val = Int($0) ?? 0 }
+            ))
+            .padding(.horizontal, 6)
+            .modifier(_TextFieldModifier())
+            .frame(width: 80)
+            .keyboardType(.numberPad)
+
             TextField("value", value: $val, formatter: numFormatter)
                 .padding(.horizontal, 6)
                 .modifier(_TextFieldModifier2())
                 
                 .frame(width: 80)
                 .keyboardType(.numberPad)
-            TextField("value", value: $val, formatter: numFormatter)
-                .padding(.horizontal, 6)
-                .modifier(_TextFieldModifier())
-                .frame(width: 80)
-                .keyboardType(.numberPad)
             
-            TextField("value", value: $val, formatter: numFormatter)
+            TextField("value", value: $str, formatter: NumberFormatter())
                 .padding(.trailing, 10)
-                .modifier(_TextFieldModifier())
                 .frame(width: 80)
                 .keyboardType(.numberPad)
             

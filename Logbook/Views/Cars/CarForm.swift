@@ -7,10 +7,24 @@
 
 import SwiftUI
 
+// custom modifier
+struct _TextFieldModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(3)
+            .padding(.horizontal, 5)
+            .frame(width: 60)
+            .multilineTextAlignment(.trailing)
+            .overlay(RoundedRectangle(cornerRadius: 5.0).strokeBorder(Color.primary, style: StrokeStyle(lineWidth: 0.1)))
+            //.background(Color(0xF2F2F7, alpha: 0.3))
+    }
+}
+
+
 struct CheckboxStyle: ToggleStyle {
     // https://www.appcoda.com/swiftui-toggle-style/
     func makeBody(configuration: Self.Configuration) -> some View {
- 
+        
         return HStack {
             Image(systemName: "clock")
                 .resizable()
@@ -19,7 +33,7 @@ struct CheckboxStyle: ToggleStyle {
                 .onTapGesture {
                     configuration.isOn.toggle()
                 }
-
+            
             configuration.label
         }
     }
@@ -43,15 +57,14 @@ struct CarForm: View {
                 TextField("Model", text: $car.model)
                 TextField("License Plate Number", text: $car.license)
                 TextField("VIN", text: $car.vin)
-                DatePicker("Purchase Date", selection: $car.purchaseDate,displayedComponents: [.date])
-                TextField("Notes", text: $car.notes)
+                DatePicker("Purchase Date", selection: $car.purchaseDate, displayedComponents: .date)
             }
-
+            
             Section (header: Text("Maintenance Schedule Cadence").bold()) {
                 Text("Enter the recommended maintenance schedule for each service. Use the reminder icon to enable (orang) or disable (gray) reminders for each service.")
                     .foregroundColor(.gray)
                     .font(.subheadline)
-                
+ 
                 HStack {
                     Text("Service")
                         .bold()
@@ -73,20 +86,33 @@ struct CarForm: View {
                                 .toggleStyle(CheckboxStyle())
                                 .onChange(of: s.maintEnabled) { value in
                                     Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
+                                    if !s.maintEnabled {
+                                        s.maintMonths = 0
+                                        s.maintMiles = 0
+                                    }
                                 }
                             
                             Spacer()
                             
-                            TextField("", value: $s.maintMonths, formatter: NumberFormatter())
-                                .padding(.horizontal, 5)
-                                .modifier(_TextFieldModifier())
-                                .frame(width: 60)
-                                .keyboardType(.numberPad)
-                            TextField("", value: $s.maintMiles, formatter: numFormatter)
-                                .padding(.horizontal, 5)
-                                .modifier(_TextFieldModifier())
-                                .frame(width: 60)
-                                .keyboardType(.numberPad)
+                            // maint months
+                            TextField("", text: Binding (
+                                get: { String(s.maintMonths) },
+                                set: { s.maintMonths = Int($0) ?? 0 }
+                            ))
+                            .modifier(_TextFieldModifier())
+                            .foregroundColor(s.maintEnabled ? .white : .gray)
+                            .disabled(!s.maintEnabled)
+                            .keyboardType(.numberPad)
+
+                            // maint miles
+                            TextField("", text: Binding(
+                                get: { String(s.maintMiles) },
+                                set: { s.maintMiles = Int($0) ?? 0 }
+                            ))
+                            .modifier(_TextFieldModifier())
+                            .foregroundColor(s.maintEnabled ? Color.primary : .gray)
+                            .disabled(!s.maintEnabled)
+                            .keyboardType(.numberPad)
                         } .frame(maxWidth: .infinity)
                     }
                 }

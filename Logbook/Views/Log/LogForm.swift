@@ -25,7 +25,7 @@ struct LogForm: View {
                             Text(appData.cars[i].make + " " + appData.cars[i].model)
                         }
                     } .onChange(of: car_selection) { newValue in
-                        _g.shared.set_c_car_idx(idx: newValue)
+                        _g.shared.c_car_idx = newValue
                     }
                 }
             }
@@ -33,7 +33,7 @@ struct LogForm: View {
             Section (header: Text(carModel)){
                 HStack {
                     Text("Date")
-                    DatePicker("", selection: $rec.date,displayedComponents: [.date])
+                    DatePicker("", selection: $rec.date,displayedComponents: .date)
                 } 
 
                 Picker("Service Type", selection: $rec.type) {
@@ -41,11 +41,14 @@ struct LogForm: View {
                         Text(t.rawValue.capitalized).tag(t)
                     }
                 }
-                
-                TextField("Odometer", value: $rec.odometer, formatter: numFormatter)
+
+                TextField("Odometer", text: Binding(
+                    get: { String(rec.odometer) },
+                    set: { rec.odometer = Int($0) ?? 0 }
+                ))
                     .keyboardType(.numberPad)
                 
-                TextField("Total Cost", value: $rec.cost, formatter: currencyFormatter)
+                TextField("Total Cost", value: $rec.cost, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                     .keyboardType(.decimalPad)
             }
             
@@ -55,7 +58,6 @@ struct LogForm: View {
             }
         } .onChange(of: isPresented) { newValue in
             if !newValue {
-                print("in LogForm onChange of: isPresented")
                 Reminder.updateReminders(car: &appData.cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
             }
         }

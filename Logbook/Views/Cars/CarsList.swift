@@ -30,8 +30,12 @@ struct CarsList: View {
                             CarRow(rec: rec)
                         }
                     } .onDelete { indices in
+                        if indices.first != nil {
+                            let idx = _g.shared.remindersCounts.firstIndex(where: { $0.carID == appData.cars[indices.first!].id }) ?? -1
+                            _g.shared.remindersCounts.remove(at: idx)
+                        }
                         Car.remove(cars: &appData.cars, carIndex: indices)
-                        _g.shared.remindersCounts.remove(atOffsets: indices)
+
                         _g.shared.updateDueRemindersCount()
                     }
                 }

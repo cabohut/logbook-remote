@@ -11,7 +11,7 @@ struct Settings: View {
     @EnvironmentObject var appData : LogbookModel
     
     @State private var showingHelp = false
-    
+
     var body: some View {
         Form {
             Section(header: Text("About Logbook")) {
@@ -21,7 +21,7 @@ struct Settings: View {
             } .sheet(isPresented: $showingHelp) {
                 Help()
             }
-            
+
             Section (header: Text("Sample Data")){
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
@@ -37,6 +37,7 @@ struct Settings: View {
             }
         } .navigationTitle("Settings")
     }
+    
 }
 
 struct Settings_Previews: PreviewProvider {

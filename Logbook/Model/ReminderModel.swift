@@ -53,12 +53,15 @@ struct Reminder: Identifiable, Codable, Comparable {
         }
         
         car.reminders = car.reminders.sorted()
-        if carIndex < _g.shared.remindersCounts.count {
-            print(carIndex, car.reminders.count)
-            _g.shared.remindersCounts[carIndex] = car.reminders.count
+        
+        let idx = _g.shared.remindersCounts.firstIndex(where: { $0.carID == car.id }) ?? -1
+        if idx >= 0 {
+            _g.shared.remindersCounts[idx].count = car.reminders.count
         } else {
-            _g.shared.remindersCounts.append(car.reminders.count)
+            let c = CarRemindersCount.init(carID: car.id, count: car.reminders.count)
+            _g.shared.remindersCounts.append(c)
         }
+
         _g.shared.updateDueRemindersCount()
     }
 

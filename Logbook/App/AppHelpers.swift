@@ -10,7 +10,7 @@ import SwiftUI
 
 let numFormatter: NumberFormatter = {
     let f = NumberFormatter()
-    f.zeroSymbol = ""
+    //f.zeroSymbol = ""
     f.numberStyle = .decimal
     return f
 } ()
@@ -36,17 +36,6 @@ extension Color {
             blue: components.B,
             opacity: alpha
         )
-    }
-}
-
-// custom modifier
-struct _TextFieldModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding(3)
-            .multilineTextAlignment(.trailing)
-            .overlay(RoundedRectangle(cornerRadius: 5.0).strokeBorder(Color.primary, style: StrokeStyle(lineWidth: 0.1)))
-            //.background(Color(0xF2F2F7, alpha: 0.3))
     }
 }
 

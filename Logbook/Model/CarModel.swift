@@ -104,7 +104,7 @@ extension Car {
 extension Car {
     // MARK: return sample data
     static let sampleCars: [Car] = [
-        Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus",
+        Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus", license: "", purchaseDate: convertDate(date: "2016-05-01"),
             logs: [
                 Log(date: convertDate(date: "2022-10-30"), type: ServiceType.odometer, odometer: 107545, details: "", vendor: "", cost: 0),
                 Log(date: convertDate(date: "2022-03-31"), type: ServiceType.brakes, odometer: 105185, details: "", vendor: "Roo", cost: 600.00),
@@ -123,7 +123,7 @@ extension Car {
                 Log(date: convertDate(date: "2018-12-17"), type: ServiceType.oil, odometer: 76547, details: "", vendor: "Valvoline Scripps Ranch", cost: 82.82),
                 Log(date: convertDate(date: "2021-09-19"), type: ServiceType.oil, odometer: 99420, details: "", vendor: "Valvoline Scripps Ranch", cost: 55.48),
             ]),
-        Car(year: "2018", make: "Nissan", model: "Pathfinder", unique: "2018 Nissan",
+        Car(year: "2018", make: "Nissan", model: "Pathfinder", unique: "2018 Nissan", license: "8CJE574", purchaseDate: convertDate(date: "2018-01-30"),
             logs: [
                 Log(date: convertDate(date: "2022-08-12"), type: ServiceType.oil, odometer: 88553, details: "", vendor: "Valvoline", cost: 59.20),
                 Log(date: convertDate(date: "2022-04-08"), type: ServiceType.brakes, odometer: 82963, details: "Both front/back", vendor: "Roo Automotive", cost: 690),
@@ -144,7 +144,7 @@ extension Car {
                 Log(date: convertDate(date: "2019-12-24"), type: ServiceType.rotate, odometer: 38239, details: "", vendor: "Discount Tire", cost: 0),
                 Log(date: convertDate(date: "2021-12-16"), type: ServiceType.odometer, odometer: 77220, details: "ABS recall", vendor: "Mossy Nissan", cost: 0),
             ]),
-        Car(year: "2006", make: "Porsche", model: "Cayman", unique: "2006 Porsche",
+        Car(year: "2006", make: "Porsche", model: "Cayman", unique: "2006 Porsche", license: "", vin: "WPOAB298116U785424", purchaseDate: convertDate(date: "2017-02-21"),
             logs: [
                 Log(date: convertDate(date: "2022-06-11"), type: ServiceType.smog, odometer: 81066, details: "", vendor: "Antonio's", cost: 59.99),
                 Log(date: convertDate(date: "2021-08-05"), type: ServiceType.oil, odometer: 78497, details: "", vendor: "Performance", cost: 159.24),

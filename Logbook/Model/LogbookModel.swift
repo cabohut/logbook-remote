@@ -12,23 +12,29 @@ private let FILE_NAME = "Logbook.data"
 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let archiveURL = documentsDirectory.appendingPathComponent("Logbook").appendingPathExtension("plist")
 
+class CarRemindersCount {
+  var carID : UUID
+  var count : Int
+  
+  init(carID : UUID, count: Int) {
+      self.carID = carID
+      self.count = count
+  }
+}
+
 // Singleton class to hold global values
 class _g {
     static let shared = _g()
     
     var c_car_idx = 0
-    var remindersCounts: [Int] = []
+    var remindersCounts: [CarRemindersCount] = []
+    //var remindersCounts: [Int] = []
     @Published var overdueCount = 0
     
     //Initializer access level change now
-    private init(){
-        
+    private init(){        
     }
 
-    func set_c_car_idx(idx: Int) {
-        c_car_idx = idx
-    }
-    
     func resetState() {
         c_car_idx = 0
         overdueCount = 0
@@ -37,7 +43,7 @@ class _g {
     func updateDueRemindersCount() {
         overdueCount = 0
         for r in remindersCounts {
-            overdueCount += r
+            overdueCount += r.count
         }
     }
 }
