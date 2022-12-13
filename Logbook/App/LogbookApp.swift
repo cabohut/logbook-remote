@@ -32,6 +32,7 @@ struct LogbookApp: App {
                     }
                 }
                 .sheet(item: $err, onDismiss: { // encountered an error (err != nil), load the sample data
+                    print("error, loading sample data")
                     appData.cars = Car.loadSampleData()
                 }) { wrapper in
                     ErrorView(errorWrapper: wrapper)

@@ -56,6 +56,7 @@ struct Car: Identifiable, Codable, Comparable {
     }
     
     static func loadSampleData() -> [Car]{
+        
         var  cars = Car.sampleCars
         cars = self.sortCars(cars: cars)
         for i in 0..<cars.count {
@@ -104,7 +105,7 @@ extension Car {
 extension Car {
     // MARK: return sample data
     static let sampleCars: [Car] = [
-        Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus", license: "", purchaseDate: convertDate(date: "2016-05-01"),
+        Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus", license: "", vin: "JTHBF5C28B5154168", purchaseDate: convertDate(date: "2016-05-01"),
             logs: [
                 Log(date: convertDate(date: "2022-10-30"), type: ServiceType.odometer, odometer: 107545, details: "", vendor: "", cost: 0),
                 Log(date: convertDate(date: "2022-03-31"), type: ServiceType.brakes, odometer: 105185, details: "", vendor: "Roo", cost: 600.00),
@@ -123,7 +124,7 @@ extension Car {
                 Log(date: convertDate(date: "2018-12-17"), type: ServiceType.oil, odometer: 76547, details: "", vendor: "Valvoline Scripps Ranch", cost: 82.82),
                 Log(date: convertDate(date: "2021-09-19"), type: ServiceType.oil, odometer: 99420, details: "", vendor: "Valvoline Scripps Ranch", cost: 55.48),
             ]),
-        Car(year: "2018", make: "Nissan", model: "Pathfinder", unique: "2018 Nissan", license: "8CJE574", purchaseDate: convertDate(date: "2018-01-30"),
+        Car(year: "2018", make: "Nissan", model: "Pathfinder", unique: "2018 Nissan", license: "8CJE574", vin: "5N1DR2MN7JC610823", purchaseDate: convertDate(date: "2018-01-30"),
             logs: [
                 Log(date: convertDate(date: "2022-08-12"), type: ServiceType.oil, odometer: 88553, details: "", vendor: "Valvoline", cost: 59.20),
                 Log(date: convertDate(date: "2022-04-08"), type: ServiceType.brakes, odometer: 82963, details: "Both front/back", vendor: "Roo Automotive", cost: 690),

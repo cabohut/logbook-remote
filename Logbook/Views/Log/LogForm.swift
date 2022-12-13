@@ -43,11 +43,11 @@ struct LogForm: View {
                 }
 
                 TextField("Odometer", text: Binding(
-                    get: { String(rec.odometer) },
+                    get: { rec.odometer != 0 ? String(rec.odometer) : "" },
                     set: { rec.odometer = Int($0) ?? 0 }
                 ))
                     .keyboardType(.numberPad)
-                
+
                 TextField("Total Cost", value: $rec.cost, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                     .keyboardType(.decimalPad)
             }

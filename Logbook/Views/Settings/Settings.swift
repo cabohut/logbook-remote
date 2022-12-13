@@ -25,6 +25,7 @@ struct Settings: View {
             Section (header: Text("Sample Data")){
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
+                        _g.shared.resetState()
                         appData.cars = Car.loadSampleData()
                     }
                 }

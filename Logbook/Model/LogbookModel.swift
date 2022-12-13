@@ -27,10 +27,9 @@ class _g {
     static let shared = _g()
     
     var c_car_idx = 0
-    var remindersCounts: [CarRemindersCount] = []
-    //var remindersCounts: [Int] = []
     @Published var overdueCount = 0
-    
+    var remindersCounts: [CarRemindersCount] = []
+
     //Initializer access level change now
     private init(){        
     }
@@ -38,6 +37,7 @@ class _g {
     func resetState() {
         c_car_idx = 0
         overdueCount = 0
+        remindersCounts = []
     }
     
     func updateDueRemindersCount() {
