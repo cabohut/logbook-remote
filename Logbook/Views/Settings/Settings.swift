@@ -11,7 +11,7 @@ struct Settings: View {
     @EnvironmentObject var appData : LogbookModel
     
     @State private var showingHelp = false
-
+    
     var body: some View {
         Form {
             Section(header: Text("About Logbook")) {

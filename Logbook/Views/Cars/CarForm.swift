@@ -131,7 +131,7 @@ struct CarForm: View {
                         } .frame(maxWidth: .infinity)
                     }
                 } // ForEach
-            }
+            } // Section
         } .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {

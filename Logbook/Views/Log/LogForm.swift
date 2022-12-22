@@ -33,7 +33,7 @@ struct LogForm: View {
             Section (header: Text(carModel)){
                 HStack {
                     Text("Date")
-                    DatePicker("", selection: $rec.date,displayedComponents: .date)
+                    DatePicker("", selection: $rec.date, displayedComponents: .date)
                 } 
 
                 Picker("Service Type", selection: $rec.type) {

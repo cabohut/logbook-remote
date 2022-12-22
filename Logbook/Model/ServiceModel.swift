@@ -106,9 +106,9 @@ enum ServiceType: String, Identifiable, CaseIterable, Codable {
         case .rotate:
             return false
         case .battery:
-            return true
+            return false
         case .tuneup:
-            return true
+            return false
         case .brakes:
             return true
         case .smog:
@@ -158,7 +158,7 @@ enum ServiceType: String, Identifiable, CaseIterable, Codable {
         case .oil:
             return 5
         case .tires:
-            return 40
+            return 48
         case .rotate:
             return 0
         case .battery:
