@@ -27,6 +27,7 @@ struct Car: Identifiable, Codable, Comparable {
     var overdueRemindersCount: Int = 0
     var upcomingRemindersCount: Int = 0
     
+    // MARK: - Model Management
     static func new() -> Car {
         var newCar = Car()
         self.setupServicesRec(car: &newCar)
@@ -48,23 +49,11 @@ struct Car: Identifiable, Codable, Comparable {
     static func remove(cars: inout [Car], carIndex: IndexSet) {
         cars.remove(atOffsets: carIndex)
     }
-
+    
     static func clearReminders(car: inout Car) {
         car.overdueRemindersCount = 0
         car.upcomingRemindersCount = 0
         car.reminders = []
-    }
-    
-    static func loadSampleData() -> [Car]{
-        
-        var  cars = Car.sampleCars
-        cars = self.sortCars(cars: cars)
-        for i in 0..<cars.count {
-            self.setupServicesRec(car: &cars[i])
-            Reminder.updateReminders(car: &cars[i], carIndex: i)
-        }
-
-        return cars
     }
     
     static func sortCars(cars: [Car]) -> [Car] {
@@ -76,6 +65,160 @@ struct Car: Identifiable, Codable, Comparable {
         
         return cars
     }
+    
+    // MARK: - Data File Management
+    // Scrumdinger methods below
+    private static func dataFileURL() throws -> URL {
+        try FileManager.default.url(for: .documentDirectory,
+                                    in: .userDomainMask,
+                                    appropriateFor: nil,
+                                    create: false)
+        .appendingPathComponent(DATA_FILE)
+    }
+    
+    static func loadSampleData() -> [Car]{
+        
+        var  cars = Car.sampleCars
+        cars = self.sortCars(cars: cars)
+        for i in 0..<cars.count {
+            self.setupServicesRec(car: &cars[i])
+            Reminder.updateReminders(car: &cars[i], carIndex: i)
+        }
+        
+        return cars
+    }
+    
+    static func loadData() async throws -> [Car] {
+        try await withCheckedThrowingContinuation { continuation in
+            loadData { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let cars):
+                    continuation.resume(returning: cars)
+                }
+            }
+        }
+    }
+    
+    static func loadData(completion: @escaping (Result<[Car], Error>)->Void) {
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let fileURL = try dataFileURL()
+                guard let file = try? FileHandle(forReadingFrom: fileURL) else {
+                    DispatchQueue.main.async {
+                        completion(.success([]))
+                    }
+                    return
+                }
+                var cars = try JSONDecoder().decode([Car].self, from: file.availableData)
+                DispatchQueue.main.async {
+                    cars = cars.sorted { $0.make < $1.make }
+                    for var c in cars {
+                        c.logs = c.logs.sorted {  $0.date > $1.date }
+                    }
+                    completion(.success(cars))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    @discardableResult
+    static func saveData(cars: [Car]) async throws -> Int {
+        try await withCheckedThrowingContinuation { continuation in
+            saveData(cars: cars) { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let carsSaved):
+                    continuation.resume(returning: carsSaved)
+                }
+            }
+        }
+    }
+    
+    static func saveData(cars: [Car], completion: @escaping (Result<Int, Error>)->Void) {
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let data = try JSONEncoder().encode(cars)
+                let outfile = try dataFileURL()
+                print(outfile)
+                try data.write(to: outfile)
+                DispatchQueue.main.async {
+                    completion(.success(cars.count))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    // MARK: - CSV File Management
+    private static func textFileURL(fn: String) throws -> URL {
+        try FileManager.default.url(for: .documentDirectory,
+                                    in: .userDomainMask,
+                                    appropriateFor: nil,
+                                    create: false)
+        .appendingPathComponent(fn)
+    }
+    
+    static func saveTextData(cars: [Car]) {
+        var textData: String = ""
+        print(documentsDirectory)
+        do {
+            // cars
+            for (i, c) in cars.enumerated() {
+                textData = textData.appending("\(i)\t\(c.year)\t\(c.make)\t\(c.model)\t\(c.unique)\t\(c.license)\t\(c.vin)\t\(c.purchaseDate)\t\(c.notes)\n")
+            }
+            try textData.write(to: textFileURL(fn: CARS_TEXT_FILE), atomically: true, encoding: .utf8)
+            
+            // service records
+            textData = ""
+            for (i, c) in cars.enumerated() {
+                for s in c.services {
+                    textData = textData.appending("\(i)\t\(s.serviceType)\t\(s.maintEnabled)\t\(s.maintMonths)\t\(s.maintMiles)\n")                    //try line.write(to: csvFileURL(), atomically: false, encoding: .utf8)
+                }
+            }
+            try textData.write(to: textFileURL(fn: SERVICES_TEXT_FILE), atomically: true, encoding: .utf8)
+
+            // logs
+            textData = ""
+            for (i, c) in cars.enumerated() {
+                for log in c.logs {
+                    textData = textData.appending("\(i)\t\(log.date)\t\(log.type)\t\(log.odometer)\t\(log.details)\t\(log.vendor)\t\(log.cost)\n")
+                }
+            }
+            try textData.write(to: textFileURL(fn: LOGS_TEXT_FILE), atomically: true, encoding: .utf8)
+
+            textData = ""
+            // reminders
+            for (i, c) in cars.enumerated() {
+                for r in c.reminders {
+                    textData = textData.appending("\(i)\t\(r.serviceType)\t\(r.dateStatus)\t\(r.milesStatus)\t\(r.dateDue)\t\(r.daysUntilDue)\t\(r.milesDue)\t\(r.milesUntilDue)\n")
+                }
+            }
+            try textData.write(to: textFileURL(fn: REMINDERS_TEXT_FILE), atomically: true, encoding: .utf8)
+
+        } catch {
+            print("Error saving CSV file.")
+            _ = ErrorWrapper(error: Error.self as! Error, guidance: "Error saving CSV file, try again later.")
+        }
+    }
+    
+    static func importTextFile() -> [Car] {
+        var cars : [Car] = []
+        
+        cars = []
+        
+        return cars
+    }
+    
 }
 
 extension Car {
@@ -148,9 +291,10 @@ extension Car {
             ]),
         Car(year: "2006", make: "Porsche", model: "Cayman", unique: "2006 Porsche", license: "", vin: "WPOAB298116U785424", purchaseDate: convertDate(date: "2017-02-21"),
             logs: [
+                Log(date: convertDate(date: "2022-05-22"), type: ServiceType.odometer, odometer: 82411, details: "", vendor: "Break pads warning light", cost: 0),
                 Log(date: convertDate(date: "2022-06-11"), type: ServiceType.smog, odometer: 81066, details: "", vendor: "Antonio's", cost: 59.99),
                 Log(date: convertDate(date: "2021-08-05"), type: ServiceType.oil, odometer: 78497, details: "", vendor: "Performance", cost: 159.24),
-                Log(date: convertDate(date: "2020-12-31"), type: ServiceType.battery, odometer: 76000, details: "Milage estimated", vendor: "Costco", cost: 160.54),
+                Log(date: convertDate(date: "2020-12-31"), type: ServiceType.battery, odometer: 76000, details: "Mileage estimated", vendor: "Costco", cost: 160.54),
                 Log(date: convertDate(date: "2019-04-04"), type: ServiceType.other, odometer: 72944, details: "Balance new wheels", vendor: "Discount Tire", cost: 76),
                 Log(date: convertDate(date: "2019-04-04"), type: ServiceType.other, odometer: 72944, details: "New wheels w/tires 8/32", vendor: "Hank (OfferUp) - DOT 21st/28th weeks of 2015", cost: 1200),
                 Log(date: convertDate(date: "2018-12-19"), type: ServiceType.oil, odometer: 72292, details: "", vendor: "Performance", cost: 129.74),

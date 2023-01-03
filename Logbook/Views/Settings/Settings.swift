@@ -22,6 +22,15 @@ struct Settings: View {
                 Help()
             }
 
+            Section (header: Text("Import/Export")){
+                Button ("Save to CSV") {
+                    DispatchQueue.main.async {
+                        _g.shared.resetState()
+                        Car.saveTextData(cars: appData.cars)
+                    }
+                }
+            }
+            
             Section (header: Text("Sample Data")){
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {

@@ -21,7 +21,7 @@ struct LogbookApp: App {
                 .task {
                     if fileDataLoaded == false {
                         do {
-                            appData.cars = try await LogbookModel.load()
+                            appData.cars = try await Car.loadData()
                             for i in appData.cars.indices {
                                 Reminder.updateReminders(car: &appData.cars[i], carIndex: i)
                             }

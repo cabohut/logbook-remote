@@ -19,7 +19,7 @@ struct AppNavigation: View {
                 CarsList() {
                     Task {   // saveAction()
                         do {
-                            try await LogbookModel.save(cars: appData.cars)
+                            try await Car.saveData(cars: appData.cars)
                         } catch {
                             err = ErrorWrapper(error: Error.self as! Error, guidance: "Error saving file, try again later.")
                         }
