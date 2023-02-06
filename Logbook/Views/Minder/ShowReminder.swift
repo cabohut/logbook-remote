@@ -50,7 +50,7 @@ struct ShowReminder: View {
                                 .foregroundColor(.green)
                         }
                     } else {
-                        Text ("date: n/a")
+                        Text ("-----")
                             .font(.caption)
                             .italic()
                             .padding(.horizontal, (showOverdue) ? 24 : 0)
@@ -70,7 +70,7 @@ struct ShowReminder: View {
                                 .foregroundColor(.green)
                         }
                     } else {
-                        Text ("milage: n/a")
+                        Text ("-----")
                             .font(.caption)
                             .italic()
                             .padding(.horizontal, (showOverdue) ? 24 : 0)

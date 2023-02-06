@@ -112,9 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				92DABF0928E6B10B00F07715 /* LogbookApp.swift */,
-				92DABF0A28E6B10B00F07715 /* IntroScreenHelpers.swift */,
 				92DABF0B28E6B10B00F07715 /* AppNavigation.swift */,
 				92DABF0C28E6B10B00F07715 /* IntroScreen.swift */,
+				92DABF0A28E6B10B00F07715 /* IntroScreenHelpers.swift */,
 				92DABF1028E6B10C00F07715 /* AppHelpers.swift */,
 				92DABF0D28E6B10B00F07715 /* ErrorView.swift */,
 			);

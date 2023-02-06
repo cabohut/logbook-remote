@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct Settings: View {
     @EnvironmentObject var appData : LogbookModel
-    
+
     @State private var showingHelp = false
-    
+
+    private static func dataFileURL() throws -> URL {
+        try FileManager.default.url(for: .documentDirectory,
+                                    in: .userDomainMask,
+                                    appropriateFor: nil,
+                                    create: false)
+        .appendingPathComponent(DATA_FILE)
+    }
+
     var body: some View {
         Form {
             Section(header: Text("About Logbook")) {
@@ -23,10 +32,10 @@ struct Settings: View {
             }
 
             Section (header: Text("Import/Export")){
-                Button ("Save to CSV") {
+                Button ("Export data to text file") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        Car.saveTextData(cars: appData.cars)
+                        Car.exportTextData(cars: appData.cars)
                     }
                 }
             }
@@ -38,6 +47,7 @@ struct Settings: View {
                         appData.cars = Car.loadSampleData()
                     }
                 }
+                
                 Button ("Clear All Data") {
                     DispatchQueue.main.async {
                         appData.cars = []
@@ -47,7 +57,6 @@ struct Settings: View {
             }
         } .navigationTitle("Settings")
     }
-    
 }
 
 struct Settings_Previews: PreviewProvider {

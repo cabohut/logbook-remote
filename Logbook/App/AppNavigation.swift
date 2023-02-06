@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import os.log
 
 struct AppNavigation: View {
     @EnvironmentObject var appData : LogbookModel
@@ -21,6 +22,7 @@ struct AppNavigation: View {
                         do {
                             try await Car.saveData(cars: appData.cars)
                         } catch {
+                            os_log("Error saving data file.", log: appLog, type: .error)
                             err = ErrorWrapper(error: Error.self as! Error, guidance: "Error saving file, try again later.")
                         }
                     }

@@ -7,6 +7,7 @@
 //  https://developer.apple.com/tutorials/app-dev-training/persisting-data
 
 import Foundation
+import os.log
 
 let DATA_FILE = "Logbook.data"
 let OSLOG_FILE = "Logbook.log"
@@ -18,6 +19,8 @@ let REMINDERS_TEXT_FILE = "reminders.csv"
 
 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let archiveURL = documentsDirectory.appendingPathComponent("Logbook").appendingPathExtension("plist")
+
+let appLog = OSLog(subsystem: "com.cabohut.Logbook4cars", category: "Logbook")
 
 class CarRemindersCount {
   var carID : UUID

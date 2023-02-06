@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os.log
 
 struct Car: Identifiable, Codable, Comparable {
     static func < (lhs: Car, rhs: Car) -> Bool {
@@ -76,8 +77,7 @@ struct Car: Identifiable, Codable, Comparable {
         .appendingPathComponent(DATA_FILE)
     }
     
-    static func loadSampleData() -> [Car]{
-        
+    static func loadSampleData() -> [Car] {
         var  cars = Car.sampleCars
         cars = self.sortCars(cars: cars)
         for i in 0..<cars.count {
@@ -114,9 +114,12 @@ struct Car: Identifiable, Codable, Comparable {
                 var cars = try JSONDecoder().decode([Car].self, from: file.availableData)
                 DispatchQueue.main.async {
                     cars = cars.sorted { $0.make < $1.make }
+                    os_log("Loaded data file: %d cars", log: appLog, type: .info, cars.count)
                     for var c in cars {
                         c.logs = c.logs.sorted {  $0.date > $1.date }
+                        os_log("%d logs for %{public}@", log: appLog, type: .info, c.logs.count, c.model)
                     }
+                    
                     completion(.success(cars))
                 }
             } catch {
@@ -146,7 +149,8 @@ struct Car: Identifiable, Codable, Comparable {
             do {
                 let data = try JSONEncoder().encode(cars)
                 let outfile = try dataFileURL()
-                print(outfile)
+                os_log("saveData: Data file directory: %{public}@", log: appLog, type: .info, documentsDirectory as CVarArg)
+
                 try data.write(to: outfile)
                 DispatchQueue.main.async {
                     completion(.success(cars.count))
@@ -159,7 +163,7 @@ struct Car: Identifiable, Codable, Comparable {
         }
     }
     
-    // MARK: - CSV File Management
+    // MARK: - Text File Management
     private static func textFileURL(fn: String) throws -> URL {
         try FileManager.default.url(for: .documentDirectory,
                                     in: .userDomainMask,
@@ -168,9 +172,9 @@ struct Car: Identifiable, Codable, Comparable {
         .appendingPathComponent(fn)
     }
     
-    static func saveTextData(cars: [Car]) {
+    static func exportTextData(cars: [Car]) {
         var textData: String = ""
-        print(documentsDirectory)
+        os_log("Text file directory: %{public}@", log: appLog, type: .info, documentsDirectory as CVarArg)
         do {
             // cars
             for (i, c) in cars.enumerated() {
@@ -182,7 +186,7 @@ struct Car: Identifiable, Codable, Comparable {
             textData = ""
             for (i, c) in cars.enumerated() {
                 for s in c.services {
-                    textData = textData.appending("\(i)\t\(s.serviceType)\t\(s.maintEnabled)\t\(s.maintMonths)\t\(s.maintMiles)\n")                    //try line.write(to: csvFileURL(), atomically: false, encoding: .utf8)
+                    textData = textData.appending("\(i)\t\(s.serviceType)\t\(s.maintEnabled)\t\(s.maintMonths)\t\(s.maintMiles)\n")
                 }
             }
             try textData.write(to: textFileURL(fn: SERVICES_TEXT_FILE), atomically: true, encoding: .utf8)
@@ -196,8 +200,8 @@ struct Car: Identifiable, Codable, Comparable {
             }
             try textData.write(to: textFileURL(fn: LOGS_TEXT_FILE), atomically: true, encoding: .utf8)
 
-            textData = ""
             // reminders
+            textData = ""
             for (i, c) in cars.enumerated() {
                 for r in c.reminders {
                     textData = textData.appending("\(i)\t\(r.serviceType)\t\(r.dateStatus)\t\(r.milesStatus)\t\(r.dateDue)\t\(r.daysUntilDue)\t\(r.milesDue)\t\(r.milesUntilDue)\n")
@@ -206,19 +210,10 @@ struct Car: Identifiable, Codable, Comparable {
             try textData.write(to: textFileURL(fn: REMINDERS_TEXT_FILE), atomically: true, encoding: .utf8)
 
         } catch {
-            print("Error saving CSV file.")
-            _ = ErrorWrapper(error: Error.self as! Error, guidance: "Error saving CSV file, try again later.")
+            os_log("Error saving CSV file.", log: appLog, type: .error)
+            _ = ErrorWrapper(error: Error.self as! Error, guidance: "Error exporting text file, try again later.")
         }
     }
-    
-    static func importTextFile() -> [Car] {
-        var cars : [Car] = []
-        
-        cars = []
-        
-        return cars
-    }
-    
 }
 
 extension Car {
@@ -250,7 +245,8 @@ extension Car {
     static let sampleCars: [Car] = [
         Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus", license: "", vin: "JTHBF5C28B5154168", purchaseDate: convertDate(date: "2016-05-01"),
             logs: [
-                Log(date: convertDate(date: "2022-10-30"), type: ServiceType.odometer, odometer: 107545, details: "", vendor: "", cost: 0),
+                Log(date: convertDate(date: "2023-01-13"), type: ServiceType.odometer, odometer: 110631, details: "+ 2 Q of oil", vendor: "", cost: 0),
+                Log(date: convertDate(date: "2022-10-30"), type: ServiceType.odometer, odometer: 107545, details: "+ 1 Q of oil", vendor: "", cost: 0),
                 Log(date: convertDate(date: "2022-03-31"), type: ServiceType.brakes, odometer: 105185, details: "", vendor: "Roo", cost: 600.00),
                 Log(date: convertDate(date: "2022-03-30"), type: ServiceType.oil, odometer: 105150, details: "", vendor: "Evans", cost: 78.00),
                 Log(date: convertDate(date: "2021-07-21"), type: ServiceType.tires, odometer: 97965, details: "", vendor: "Costco", cost: 671.27),
@@ -269,6 +265,7 @@ extension Car {
             ]),
         Car(year: "2018", make: "Nissan", model: "Pathfinder", unique: "2018 Nissan", license: "8CJE574", vin: "5N1DR2MN7JC610823", purchaseDate: convertDate(date: "2018-01-30"),
             logs: [
+                Log(date: convertDate(date: "2023-01-13"), type: ServiceType.other, odometer: 95112, details: "Replace PCV valve, mass airflow sensor, and air filter", vendor: "Roo", cost: 546.44),
                 Log(date: convertDate(date: "2022-12-20"), type: ServiceType.oil, odometer: 94473, details: "", vendor: "Valvoline", cost: 53.58),
                 Log(date: convertDate(date: "2022-08-12"), type: ServiceType.oil, odometer: 88553, details: "", vendor: "Valvoline", cost: 59.20),
                 Log(date: convertDate(date: "2022-04-08"), type: ServiceType.brakes, odometer: 82963, details: "Both front/back", vendor: "Roo Automotive", cost: 690),
@@ -291,7 +288,8 @@ extension Car {
             ]),
         Car(year: "2006", make: "Porsche", model: "Cayman", unique: "2006 Porsche", license: "", vin: "WPOAB298116U785424", purchaseDate: convertDate(date: "2017-02-21"),
             logs: [
-                Log(date: convertDate(date: "2022-05-22"), type: ServiceType.odometer, odometer: 82411, details: "", vendor: "Break pads warning light", cost: 0),
+                Log(date: convertDate(date: "2023-01-20"), type: ServiceType.odometer, odometer: 82450, details: "", vendor: "Break pads can go +1000 miles", cost: 0),
+                Log(date: convertDate(date: "2023-01-13"), type: ServiceType.odometer, odometer: 82411, details: "", vendor: "Break pads warning light", cost: 0),
                 Log(date: convertDate(date: "2022-06-11"), type: ServiceType.smog, odometer: 81066, details: "", vendor: "Antonio's", cost: 59.99),
                 Log(date: convertDate(date: "2021-08-05"), type: ServiceType.oil, odometer: 78497, details: "", vendor: "Performance", cost: 159.24),
                 Log(date: convertDate(date: "2020-12-31"), type: ServiceType.battery, odometer: 76000, details: "Mileage estimated", vendor: "Costco", cost: 160.54),

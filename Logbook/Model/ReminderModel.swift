@@ -98,7 +98,7 @@ struct Reminder: Identifiable, Codable, Comparable {
         }
         
         if service.maintMiles > 0 {
-            reminder.milesDue = lastLog!.odometer + service.maintMiles * 1000
+            reminder.milesDue = lastLog!.odometer + service.maintMiles
             reminder.milesUntilDue = reminder.milesDue - lastMilages
             if reminder.milesUntilDue < 0 && reminder.milesDue > 0 {
                 reminder.milesStatus = .isDue

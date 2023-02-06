@@ -156,17 +156,17 @@ enum ServiceType: String, Identifiable, CaseIterable, Codable {
         case .odometer:
             return 0
         case .oil:
-            return 5
+            return 5000
         case .tires:
-            return 48
+            return 48000
         case .rotate:
             return 0
         case .battery:
             return 0
         case .tuneup:
-            return 36
+            return 36000
         case .brakes:
-            return 36
+            return 36000
         case .smog:
             return 0
         case .alignment:

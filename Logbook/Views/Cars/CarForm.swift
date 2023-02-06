@@ -16,7 +16,7 @@ struct NumField: ViewModifier {
         content
             .padding(3)
             .padding(.horizontal, 5)
-            .frame(width: 60)
+            .frame(width: 70)
             .multilineTextAlignment(.trailing)
             .overlay(RoundedRectangle(cornerRadius: 4.0)
                 .strokeBorder(enabled ? .orange : Color.primary, style: StrokeStyle(lineWidth: enabled ? 0.2 : 0.05)))
@@ -85,10 +85,10 @@ struct CarForm: View {
                     Spacer()
                     Text("Months")
                         .bold()
-                        .frame(width: 60)
-                    Text("Miles (K)")
+                        .frame(width: 70)
+                    Text("Miles")
                         .bold()
-                        .frame(width: 60)
+                        .frame(width: 70)
                 } .foregroundColor(.orange)
                     .font(.subheadline)
                 

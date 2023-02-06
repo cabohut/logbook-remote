@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import os.log
 
 @main
 struct LogbookApp: App {
@@ -32,7 +33,7 @@ struct LogbookApp: App {
                     }
                 }
                 .sheet(item: $err, onDismiss: { // encountered an error (err != nil), load the sample data
-                    print("error, loading sample data")
+                    os_log("Error loading sample data.", log: appLog, type: .error)
                     appData.cars = Car.loadSampleData()
                 }) { wrapper in
                     ErrorView(errorWrapper: wrapper)
