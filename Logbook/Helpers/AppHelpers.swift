@@ -53,8 +53,9 @@ extension Color {
 }
 
 func convertDate(date: String) -> Date {
+    let dt = date.components(separatedBy: " ")
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     
-    return dateFormatter.date(from: date) ?? Date()
+    return dateFormatter.date(from: dt[0]) ?? Date()
 }
