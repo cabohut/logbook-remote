@@ -1,0 +1,68 @@
+car_id  date    service odometer    details vendor  cost
+0	2023-01-13 08:00:00 +0000	Odometer	110631	+ 2 Q of oil		0.0
+0	2022-10-30 07:00:00 +0000	Odometer	107545	+ 1 Q of oil		0.0
+0	2022-03-31 07:00:00 +0000	Brakes	105185		Roo	600.0
+0	2022-03-30 07:00:00 +0000	Oil Change	105150		Evans	78.0
+0	2021-09-19 07:00:00 +0000	Oil Change	99420		Valvoline Scripps Ranch	55.48
+0	2021-08-10 07:00:00 +0000	Smog Check	98207		Akon Auto Center	48.2
+0	2021-08-10 07:00:00 +0000	Alignment	98196		EDZ Tires	59.0
+0	2021-07-21 07:00:00 +0000	New Tires	97965		Costco	671.27
+0	2020-12-27 08:00:00 +0000	Oil Change	92633		Valvoline Scripps Ranch	72.82
+0	2019-08-13 07:00:00 +0000	Smog Check	82676		Antonio	40.0
+0	2018-12-17 08:00:00 +0000	Oil Change	76547		Valvoline Scripps Ranch	82.82
+0	2018-11-18 08:00:00 +0000	New Tires	75627		Costco	900.0
+0	2018-07-18 07:00:00 +0000	Other	72947	Service	Roo Automotive	135.0
+0	2018-07-17 07:00:00 +0000	New Battery	72940		Costco	105.59
+0	2018-03-17 07:00:00 +0000	Oil Change	71258		Valvoline Scripps Ranch	75.01
+0	2016-11-18 08:00:00 +0000	Oil Change	55089		RB Automotive	99.89
+0	2016-07-01 07:00:00 +0000	Oil Change	50155		RB Automotive	99.89
+1	2023-01-13 08:00:00 +0000	Other	95112	Replace PCV valve, mass airflow sensor, and air filter	Roo	546.44
+1	2022-12-20 08:00:00 +0000	Oil Change	94473		Valvoline	53.58
+1	2022-08-12 07:00:00 +0000	Oil Change	88553		Valvoline	59.2
+1	2022-04-08 07:00:00 +0000	Brakes	82963	Both front/back	Roo Automotive	690.0
+1	2022-04-08 07:00:00 +0000	Oil Change	82963		Roo Automotive	70.0
+1	2021-12-18 08:00:00 +0000	New Tires	77327	(2) Michelin Defender 235/65R18, 70K warranty	Discount Tire	406.23
+1	2021-12-16 08:00:00 +0000	Odometer	77220	ABS recall	Mossy Nissan	0.0
+1	2021-06-28 07:00:00 +0000	Oil Change	69612		Valvoline	41.71
+1	2021-02-22 08:00:00 +0000	Oil Change	61568		Valvoline	47.09
+1	2020-10-30 07:00:00 +0000	New Battery	55000		Costco	87.27
+1	2020-07-10 07:00:00 +0000	Oil Change	47524		Valvoline	70.53
+1	2020-01-24 08:00:00 +0000	Brakes	40086	Both front/back	Roo Automotive	593.0
+1	2019-12-31 08:00:00 +0000	Oil Change	38753		Valvoline	67.03
+1	2019-12-24 08:00:00 +0000	Rotate Tires	38239		Discount Tire	0.0
+1	2019-07-06 07:00:00 +0000	New Tires	30000	(2) Michelin Defender 235/65R18	Discount Tire	457.42
+1	2019-05-27 07:00:00 +0000	Oil Change	27811		Valvoline	65.9
+1	2019-02-13 08:00:00 +0000	New Tires	22233	(2) Michelin Defender 235/65R18	Discount Tire	464.66
+1	2019-02-09 08:00:00 +0000	Oil Change	22071		Valvoline	65.91
+1	2018-10-05 07:00:00 +0000	Oil Change	14315		Mossy Nissan	65.29
+1	2018-06-25 07:00:00 +0000	Oil Change	8500		Antonio's	92.26
+2	2023-01-20 08:00:00 +0000	Odometer	82450		Break pads can go +1000 miles	0.0
+2	2023-01-13 08:00:00 +0000	Odometer	82411		Break pads warning light	0.0
+2	2022-06-11 07:00:00 +0000	Smog Check	81066		Antonio's	59.99
+2	2021-08-05 07:00:00 +0000	Oil Change	78497		Performance	159.24
+2	2020-12-31 08:00:00 +0000	New Battery	76000	Mileage estimated	Costco	160.54
+2	2019-04-04 07:00:00 +0000	Other	72944	Balance new wheels	Discount Tire	76.0
+2	2019-04-04 07:00:00 +0000	Other	72944	New wheels w/tires 8/32	Hank (OfferUp) - DOT 21st/28th weeks of 2015	1200.0
+2	2018-12-19 08:00:00 +0000	Oil Change	72292		Performance	129.74
+2	2018-01-12 08:00:00 +0000	Oil Change	67314		Performance	131.89
+2	2017-09-01 07:00:00 +0000	New Tires	65000	Estimated age/date for tires inclued with the wheels purchased on 4/4/19	Michelin	0.0
+2	2017-04-20 07:00:00 +0000	Other	63075	Window Regulator	Performance	482.31
+2	2017-02-21 08:00:00 +0000	Other	62553	Purchased from Rob Chong	Performance	22700.0
+2	2015-04-09 07:00:00 +0000	Other	57791	New lug bot	Wheel Enhancement	91.3
+2	2014-11-22 08:00:00 +0000	Oil Change	55996		Pacific Porsche	209.75
+2	2014-03-06 08:00:00 +0000	New Battery	52519		AAA	185.61
+2	2013-09-07 07:00:00 +0000	Rotate Tires	50048		American Tire	60.0
+2	2013-09-04 07:00:00 +0000	Other	50024	Replacde Air Mass Sensor	Auto Werkstat	817.19
+2	2013-08-28 07:00:00 +0000	Oil Change	49962		Auto Werkstat	0.0
+2	2013-08-28 07:00:00 +0000	Other	49962	Maintenance service	Auto Werkstat	165.0
+2	2012-02-06 08:00:00 +0000	Oil Change	44937		Auto Werkstat	0.0
+2	2012-02-06 08:00:00 +0000	Other	44937	Clutch Kit + Service	Auto Werkstat	3530.0
+2	2011-05-11 07:00:00 +0000	Oil Change	39425		Pacific Porsche	148.99
+2	2011-05-11 07:00:00 +0000	Brakes	39425	Replaced front and rear barke pads	Pacific Porsche	1360.09
+2	2010-11-06 07:00:00 +0000	Oil Change	35119		Pacific Porsche	176.21
+2	2010-06-18 07:00:00 +0000	Other	32182	Pre purchase inspection	Pacific Porsche	310.0
+2	2011-05-03 07:00:00 +0000	Odometer	31814	Auction		0.0
+2	2008-09-22 07:00:00 +0000	Odometer	18378	DMV		0.0
+2	2008-05-21 07:00:00 +0000	Odometer	18357	Auction as dealer car		0.0
+2	2007-04-27 07:00:00 +0000	Odometer	7946		DMV	0.0
+2	2006-08-23 07:00:00 +0000	Odometer	21		DMV	0.0

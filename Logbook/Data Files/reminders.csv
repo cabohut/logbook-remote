@@ -1,0 +1,5 @@
+car_id  service dateStatus  milesStatus dateDue
+0	oil	isDue	isDue	1664402088.0	-147	110150	-481
+1	oil	isUpcoming	isUpcoming	1687301688.0	117	99473	4361
+2	brakes	notScheduled	isDue	0.0	0	75425	-7025
+2	oil	isDue	isUpcoming	1643925288.0	-384	83497	1047

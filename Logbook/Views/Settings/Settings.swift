@@ -35,7 +35,13 @@ struct Settings: View {
                 Button ("Export data to text file") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        Car.exportTextData(cars: appData.cars)
+                        exportTextData(cars: appData.cars)
+                    }
+                }
+                Button ("Import data from text file") {
+                    DispatchQueue.main.async {
+                        _g.shared.resetState()
+                        appData.cars = importTextData()
                     }
                 }
             }
@@ -44,7 +50,7 @@ struct Settings: View {
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        appData.cars = Car.loadSampleData()
+                        appData.cars = loadSampleData()
                     }
                 }
                 

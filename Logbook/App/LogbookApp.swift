@@ -22,7 +22,7 @@ struct LogbookApp: App {
                 .task {
                     if fileDataLoaded == false {
                         do {
-                            appData.cars = try await Car.loadData()
+                            appData.cars = try await loadData()
                             for i in appData.cars.indices {
                                 Reminder.updateReminders(car: &appData.cars[i], carIndex: i)
                             }
@@ -34,7 +34,7 @@ struct LogbookApp: App {
                 }
                 .sheet(item: $err, onDismiss: { // encountered an error (err != nil), load the sample data
                     os_log("Error loading sample data.", log: appLog, type: .error)
-                    appData.cars = Car.loadSampleData()
+                    appData.cars = loadSampleData()
                 }) { wrapper in
                     ErrorView(errorWrapper: wrapper)
                 }
