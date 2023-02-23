@@ -41,7 +41,7 @@ struct Settings: View {
                 Button ("Import data from text file") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        appData.cars = importTextData()
+                        appData.cars = loadTextData()
                     }
                 }
             }
