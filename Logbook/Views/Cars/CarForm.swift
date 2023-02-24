@@ -55,7 +55,6 @@ struct CarForm: View {
     @Binding var car: Car
     
     @Environment(\.isPresented) var isPresented
-    @EnvironmentObject var appData : LogbookModel
     
     @State private var maintenanceMode = 0
     @State var maintMode = true

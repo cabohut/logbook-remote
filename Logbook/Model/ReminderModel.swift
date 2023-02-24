@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Reminder: Identifiable, Codable, Comparable {
+struct Reminder99: Identifiable, Codable, Comparable {
     static func < (lhs: Reminder, rhs: Reminder) -> Bool {
         return lhs.dateDue < rhs.dateDue
     }

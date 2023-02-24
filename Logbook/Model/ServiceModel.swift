@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Service: Identifiable, Codable, Comparable {
+struct Service99: Identifiable, Codable, Comparable {
     static func < (lhs: Service, rhs: Service) -> Bool {
         return lhs.maintMonths > rhs.maintMonths
     }

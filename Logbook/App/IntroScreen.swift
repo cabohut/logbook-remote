@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct IntroScreen: View {
-    @EnvironmentObject var appData : LogbookModel
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
+                  animation: .default)
+    private var cars: FetchedResults<Car>
 
     @State var isActive : Bool = false
     
     var body: some View {
-        if isActive || appData.cars.count > 0 {
+        if isActive || cars.count > 0 {
             AppNavigation()
         } else {
             ScrollView {

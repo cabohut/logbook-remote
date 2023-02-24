@@ -10,8 +10,11 @@ import SwiftUI
 struct LogbookHistory: View {
     let saveAction: ()->Void
     
-    @EnvironmentObject var appData : LogbookModel
-    
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
+                  animation: .default)
+    private var cars: FetchedResults<Car>
+
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var isPresentingHistoryForm = false
@@ -23,7 +26,7 @@ struct LogbookHistory: View {
     }
     
     var body: some View {
-        if (appData.cars.count == 0) {
+        if (cars.count == 0) {
             Text("You have not added any cars in your Logbook.\nAdd a car in the [Cars] tab.")
                 .foregroundColor(.gray)
                 .font(.subheadline)
@@ -46,7 +49,7 @@ struct LogbookHistory: View {
                 }
                 
                 List {
-                    ForEach ($appData.cars) { $c in
+                    ForEach ($cars) { $c in
                         Section (header: Text(c.make + " " + c.model).bold()) {
                             if (c.logs.count>0) {
                                 ForEach($c.logs) { $rec in
@@ -86,17 +89,15 @@ struct LogbookHistory: View {
                                     }
                                     ToolbarItem(placement: .confirmationAction) {
                                         Button("Add") {
-                                            Log.add(logs: &appData.cars[_g.shared.c_car_idx].logs, newLog: newLogRecord)
-                                            Reminder.updateReminders(car: &appData.cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
+                                            Log.add(logs: &cars[_g.shared.c_car_idx].logs, newLog: newLogRecord)
+                                            Reminder.updateReminders(car: &cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
                                             isPresentingHistoryForm = false
                                         }
                                     }
                                 }
                         }
-                    } .onChange(of: scenePhase) { phase in
-                        if phase == .inactive {
-                            saveAction()
-                        }
+                    } .onChange(of: scenePhase) { _ in
+                        moc.saveContext()
                     }
             }
         }

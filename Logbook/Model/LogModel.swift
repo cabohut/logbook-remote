@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Log: Identifiable, Codable, Comparable {
+struct Log99: Identifiable, Codable, Comparable {
     static func < (lhs: Log, rhs: Log) -> Bool {
         return lhs.date > rhs.date
     }

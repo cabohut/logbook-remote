@@ -8,7 +8,7 @@
 import Foundation
 import os.log
 
-struct Car: Identifiable, Codable, Comparable {
+struct Car99: Identifiable, Codable, Comparable {
     static func < (lhs: Car, rhs: Car) -> Bool {
         return lhs.make > rhs.make
     }

@@ -9,23 +9,11 @@ import SwiftUI
 import os.log
 
 struct AppNavigation: View {
-    @EnvironmentObject var appData : LogbookModel
-
-    @State private var err: ErrorWrapper?
-    
     var body: some View {
         TabView() {
             // MARK: - CarsList
             NavigationView {
                 CarsList() {
-                    Task {   // saveAction()
-                        do {
-                            try await saveData(cars: appData.cars)
-                        } catch {
-                            os_log("Error saving data file.", log: appLog, type: .error)
-                            err = ErrorWrapper(error: Error.self as! Error, guidance: "Error saving file, try again later.")
-                        }
-                    }
                 }
             } .navigationViewStyle(.stack)
                 .tabItem {

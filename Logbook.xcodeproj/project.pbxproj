@@ -37,6 +37,15 @@
 		92DABF3A28E6B10C00F07715 /* Minder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2328E6B10C00F07715 /* Minder.swift */; };
 		92F122FE29A882FF0010BE38 /* LogbookModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 92F122FC29A882FF0010BE38 /* LogbookModel.xcdatamodeld */; };
 		92F1230329A885770010BE38 /* logs.csv in Resources */ = {isa = PBXBuildFile; fileRef = 92F1230229A885770010BE38 /* logs.csv */; };
+		92F1230529A886060010BE38 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230429A886060010BE38 /* PersistenceController.swift */; };
+		92F1230E29A888920010BE38 /* Log+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230629A888920010BE38 /* Log+CoreDataClass.swift */; };
+		92F1230F29A888920010BE38 /* Log+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230729A888920010BE38 /* Log+CoreDataProperties.swift */; };
+		92F1231029A888920010BE38 /* Reminder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230829A888920010BE38 /* Reminder+CoreDataClass.swift */; };
+		92F1231129A888920010BE38 /* Reminder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230929A888920010BE38 /* Reminder+CoreDataProperties.swift */; };
+		92F1231229A888920010BE38 /* Service+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230A29A888920010BE38 /* Service+CoreDataClass.swift */; };
+		92F1231329A888920010BE38 /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230B29A888920010BE38 /* Service+CoreDataProperties.swift */; };
+		92F1231429A888920010BE38 /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230C29A888920010BE38 /* Car+CoreDataClass.swift */; };
+		92F1231529A888920010BE38 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230D29A888920010BE38 /* Car+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +81,15 @@
 		92DABF2328E6B10C00F07715 /* Minder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Minder.swift; sourceTree = "<group>"; };
 		92F122FD29A882FF0010BE38 /* LogbookModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LogbookModel.xcdatamodel; sourceTree = "<group>"; };
 		92F1230229A885770010BE38 /* logs.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logs.csv; sourceTree = "<group>"; };
+		92F1230429A886060010BE38 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		92F1230629A888920010BE38 /* Log+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		92F1230729A888920010BE38 /* Log+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		92F1230829A888920010BE38 /* Reminder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		92F1230929A888920010BE38 /* Reminder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		92F1230A29A888920010BE38 /* Service+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		92F1230B29A888920010BE38 /* Service+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		92F1230C29A888920010BE38 /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		92F1230D29A888920010BE38 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +241,15 @@
 			isa = PBXGroup;
 			children = (
 				92F122FC29A882FF0010BE38 /* LogbookModel.xcdatamodeld */,
+				92F1230629A888920010BE38 /* Log+CoreDataClass.swift */,
+				92F1230729A888920010BE38 /* Log+CoreDataProperties.swift */,
+				92F1230829A888920010BE38 /* Reminder+CoreDataClass.swift */,
+				92F1230929A888920010BE38 /* Reminder+CoreDataProperties.swift */,
+				92F1230A29A888920010BE38 /* Service+CoreDataClass.swift */,
+				92F1230B29A888920010BE38 /* Service+CoreDataProperties.swift */,
+				92F1230C29A888920010BE38 /* Car+CoreDataClass.swift */,
+				92F1230D29A888920010BE38 /* Car+CoreDataProperties.swift */,
+				92F1230429A886060010BE38 /* PersistenceController.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -307,24 +334,33 @@
 				92DABF2E28E6B10C00F07715 /* ServiceModel.swift in Sources */,
 				9215012E29A6EB1F00D23696 /* FileManagement.swift in Sources */,
 				92DABF3828E6B10C00F07715 /* LogRow.swift in Sources */,
+				92F1230F29A888920010BE38 /* Log+CoreDataProperties.swift in Sources */,
+				92F1231129A888920010BE38 /* Reminder+CoreDataProperties.swift in Sources */,
 				92DABF3128E6B10C00F07715 /* Test.swift in Sources */,
 				92DABF3428E6B10C00F07715 /* CarsList.swift in Sources */,
 				92DABF3228E6B10C00F07715 /* Help.swift in Sources */,
 				92DABF3628E6B10C00F07715 /* CarRow.swift in Sources */,
+				92F1231429A888920010BE38 /* Car+CoreDataClass.swift in Sources */,
 				92DABF2F28E6B10C00F07715 /* LogModel.swift in Sources */,
 				92DABF2828E6B10C00F07715 /* AppNavigation.swift in Sources */,
 				92D2061C29348CA400A333A5 /* ShowReminder.swift in Sources */,
 				92DABF2728E6B10C00F07715 /* IntroScreenHelpers.swift in Sources */,
 				92DABF3328E6B10C00F07715 /* Settings.swift in Sources */,
 				92F122FE29A882FF0010BE38 /* LogbookModel.xcdatamodeld in Sources */,
+				92F1231329A888920010BE38 /* Service+CoreDataProperties.swift in Sources */,
 				92DABF2A28E6B10C00F07715 /* ErrorView.swift in Sources */,
 				92DABF2928E6B10C00F07715 /* IntroScreen.swift in Sources */,
+				92F1231529A888920010BE38 /* Car+CoreDataProperties.swift in Sources */,
 				92DABF3528E6B10C00F07715 /* CarForm.swift in Sources */,
 				9247A77929336437008D0490 /* ReminderModel.swift in Sources */,
+				92F1230E29A888920010BE38 /* Log+CoreDataClass.swift in Sources */,
 				92DABF3028E6B10C00F07715 /* LogbookModel.swift in Sources */,
 				92DABF2C28E6B10C00F07715 /* AppHelpers.swift in Sources */,
 				92DABF3728E6B10C00F07715 /* LogForm.swift in Sources */,
+				92F1231029A888920010BE38 /* Reminder+CoreDataClass.swift in Sources */,
+				92F1231229A888920010BE38 /* Service+CoreDataClass.swift in Sources */,
 				92DABF2628E6B10C00F07715 /* LogbookApp.swift in Sources */,
+				92F1230529A886060010BE38 /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

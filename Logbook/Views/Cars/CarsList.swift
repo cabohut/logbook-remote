@@ -9,8 +9,11 @@ import SwiftUI
 
 struct CarsList: View {
     let saveAction: ()->Void
-    
-    @EnvironmentObject var appData : LogbookModel
+
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
+                  animation: .default)
+    private var cars: FetchedResults<Car>
 
     @Environment(\.scenePhase) private var scenePhase
     
@@ -19,22 +22,22 @@ struct CarsList: View {
     
     var body: some View {
         VStack {
-            if (appData.cars.count == 0) {
+            if (cars.count == 0) {
                 Text("You have not added any cars in your Logbook")
                     .foregroundColor(.gray)
                     .font(.subheadline)
             } else {
                 List {
-                    ForEach($appData.cars) { $rec in
+                    ForEach($cars) { $rec in
                         NavigationLink(destination:CarForm(car: $rec)) {
                             CarRow(rec: rec)
                         }
                     } .onDelete { indices in
                         if indices.first != nil {
-                            let idx = _g.shared.remindersCounts.firstIndex(where: { $0.carID == appData.cars[indices.first!].id }) ?? -1
+                            let idx = _g.shared.remindersCounts.firstIndex(where: { $0.carID == cars[indices.first!].id }) ?? -1
                             _g.shared.remindersCounts.remove(at: idx)
                         }
-                        Car.remove(cars: &appData.cars, carIndex: indices)
+                        Car.remove(cars: &cars, carIndex: indices)    // ***** <- remove car
 
                         _g.shared.updateDueRemindersCount()
                     }
@@ -60,17 +63,15 @@ struct CarsList: View {
                             }
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Add") {
-                                    Car.add(cars: &appData.cars, newCar: newCarRecord)
+                                    Car.add(cars: &cars, newCar: newCarRecord)    // ***** <- add car
                                     isPresentingCarForm = false
                                 } .disabled(newCarRecord.make.isEmpty && newCarRecord.model.isEmpty)
                             }
                         }
                 } .navigationViewStyle(.stack)
             } // .sheet
-            .onChange(of: scenePhase) { phase in
-                if phase == .inactive {
-                    saveAction()
-                }
+            .onChange(of: scenePhase) { _ in
+                moc.saveContext()
             }
     }
 }

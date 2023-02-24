@@ -14,7 +14,7 @@ struct LogForm: View {
     @State private var car_selection : Int = 0
     
     @Environment(\.isPresented) var isPresented
-    @EnvironmentObject var appData : LogbookModel
+    //@EnvironmentObject var appData : LogbookModel
     
     var body: some View {
         List {
