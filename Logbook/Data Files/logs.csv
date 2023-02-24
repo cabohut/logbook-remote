@@ -16,6 +16,7 @@ car_id  date    service odometer    details vendor  cost
 0	2018-03-17 07:00:00 +0000	Oil Change	71258		Valvoline Scripps Ranch	75.01
 0	2016-11-18 08:00:00 +0000	Oil Change	55089		RB Automotive	99.89
 0	2016-07-01 07:00:00 +0000	Oil Change	50155		RB Automotive	99.89
+1	2023-02-19 08:00:00 +0000	Other	96733	Wiper blades		20.0
 1	2023-01-13 08:00:00 +0000	Other	95112	Replace PCV valve, mass airflow sensor, and air filter	Roo	546.44
 1	2022-12-20 08:00:00 +0000	Oil Change	94473		Valvoline	53.58
 1	2022-08-12 07:00:00 +0000	Oil Change	88553		Valvoline	59.2

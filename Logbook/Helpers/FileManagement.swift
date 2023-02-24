@@ -117,6 +117,7 @@ private func getFileRows(fn: String, type: String, header: Bool) -> [String] {
 
     //locate the services file
     guard let filepath = Bundle.main.path(forResource: fn, ofType: type) else {
+        os_log("Error reading %@.%@ file.", log: appLog, type: .error, fn, type)
         return []
     }
 

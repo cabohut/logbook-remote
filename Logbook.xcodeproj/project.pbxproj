@@ -10,7 +10,6 @@
 		9215012E29A6EB1F00D23696 /* FileManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9215012D29A6EB1F00D23696 /* FileManagement.swift */; };
 		9215013329A7289000D23696 /* reminders.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9215012F29A7289000D23696 /* reminders.csv */; };
 		9215013429A7289000D23696 /* cars.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9215013029A7289000D23696 /* cars.csv */; };
-		9215013529A7289000D23696 /* logs.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9215013129A7289000D23696 /* logs.csv */; };
 		9215013629A7289000D23696 /* services.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9215013229A7289000D23696 /* services.csv */; };
 		9247A77929336437008D0490 /* ReminderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9247A77829336437008D0490 /* ReminderModel.swift */; };
 		92D2061C29348CA400A333A5 /* ShowReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2061B29348CA400A333A5 /* ShowReminder.swift */; };
@@ -36,13 +35,14 @@
 		92DABF3828E6B10C00F07715 /* LogRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2028E6B10C00F07715 /* LogRow.swift */; };
 		92DABF3928E6B10C00F07715 /* LogbookHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2128E6B10C00F07715 /* LogbookHistory.swift */; };
 		92DABF3A28E6B10C00F07715 /* Minder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DABF2328E6B10C00F07715 /* Minder.swift */; };
+		92F122FE29A882FF0010BE38 /* LogbookModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 92F122FC29A882FF0010BE38 /* LogbookModel.xcdatamodeld */; };
+		92F1230329A885770010BE38 /* logs.csv in Resources */ = {isa = PBXBuildFile; fileRef = 92F1230229A885770010BE38 /* logs.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9215012D29A6EB1F00D23696 /* FileManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagement.swift; sourceTree = "<group>"; };
 		9215012F29A7289000D23696 /* reminders.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reminders.csv; sourceTree = "<group>"; };
 		9215013029A7289000D23696 /* cars.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cars.csv; sourceTree = "<group>"; };
-		9215013129A7289000D23696 /* logs.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logs.csv; sourceTree = "<group>"; };
 		9215013229A7289000D23696 /* services.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = services.csv; sourceTree = "<group>"; };
 		921D681229931C8E00AA3EFE /* Logbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Logbook.entitlements; sourceTree = "<group>"; };
 		9247A77829336437008D0490 /* ReminderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderModel.swift; sourceTree = "<group>"; };
@@ -70,6 +70,8 @@
 		92DABF2028E6B10C00F07715 /* LogRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRow.swift; sourceTree = "<group>"; };
 		92DABF2128E6B10C00F07715 /* LogbookHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogbookHistory.swift; sourceTree = "<group>"; };
 		92DABF2328E6B10C00F07715 /* Minder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Minder.swift; sourceTree = "<group>"; };
+		92F122FD29A882FF0010BE38 /* LogbookModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LogbookModel.xcdatamodel; sourceTree = "<group>"; };
+		92F1230229A885770010BE38 /* logs.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logs.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +89,9 @@
 			isa = PBXGroup;
 			children = (
 				9215013029A7289000D23696 /* cars.csv */,
-				9215013129A7289000D23696 /* logs.csv */,
-				9215012F29A7289000D23696 /* reminders.csv */,
 				9215013229A7289000D23696 /* services.csv */,
+				92F1230229A885770010BE38 /* logs.csv */,
+				9215012F29A7289000D23696 /* reminders.csv */,
 			);
 			path = "Data Files";
 			sourceTree = "<group>";
@@ -126,6 +128,7 @@
 			children = (
 				921D681229931C8E00AA3EFE /* Logbook.entitlements */,
 				92DABF0728E6B10B00F07715 /* Assets.xcassets */,
+				92F122FF29A8830D0010BE38 /* CoreData */,
 				9215013729A7289B00D23696 /* Data Files */,
 				92DABF0E28E6B10C00F07715 /* Model */,
 				92DABF0828E6B10B00F07715 /* App */,
@@ -216,6 +219,14 @@
 			path = Minder;
 			sourceTree = "<group>";
 		};
+		92F122FF29A8830D0010BE38 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				92F122FC29A882FF0010BE38 /* LogbookModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -277,9 +288,9 @@
 				92DABF0128E6B03000F07715 /* Preview Assets.xcassets in Resources */,
 				9215013329A7289000D23696 /* reminders.csv in Resources */,
 				9215013629A7289000D23696 /* services.csv in Resources */,
-				9215013529A7289000D23696 /* logs.csv in Resources */,
 				92DABF2528E6B10C00F07715 /* Assets.xcassets in Resources */,
 				9215013429A7289000D23696 /* cars.csv in Resources */,
+				92F1230329A885770010BE38 /* logs.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +316,7 @@
 				92D2061C29348CA400A333A5 /* ShowReminder.swift in Sources */,
 				92DABF2728E6B10C00F07715 /* IntroScreenHelpers.swift in Sources */,
 				92DABF3328E6B10C00F07715 /* Settings.swift in Sources */,
+				92F122FE29A882FF0010BE38 /* LogbookModel.xcdatamodeld in Sources */,
 				92DABF2A28E6B10C00F07715 /* ErrorView.swift in Sources */,
 				92DABF2928E6B10C00F07715 /* IntroScreen.swift in Sources */,
 				92DABF3528E6B10C00F07715 /* CarForm.swift in Sources */,
@@ -525,6 +537,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		92F122FC29A882FF0010BE38 /* LogbookModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				92F122FD29A882FF0010BE38 /* LogbookModel.xcdatamodel */,
+			);
+			currentVersion = 92F122FD29A882FF0010BE38 /* LogbookModel.xcdatamodel */;
+			path = LogbookModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 92DABEEE28E6B02F00F07715 /* Project object */;
 }
