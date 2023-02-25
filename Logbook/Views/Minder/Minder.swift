@@ -11,7 +11,8 @@ struct Minder: View {
     @EnvironmentObject var appData : LogbookModel
     
     var body: some View {
-        if (appData.cars.count == 0) {
+        //if (appData.cars.count == 0) {
+        if (true) {
             Text("You have not added any cars in your Logbook")
                 .foregroundColor(.gray)
                 .font(.subheadline)
@@ -19,6 +20,8 @@ struct Minder: View {
         } else {
             VStack {
                 List {
+                    Text("Reminders go here")
+                    /*
                     ForEach (appData.cars) { c in
                         Section (header: Text(c.make + " " + c.model).bold()) {
                             ForEach (c.reminders) { r in
@@ -31,7 +34,7 @@ struct Minder: View {
                             }
                         }
                     } // ForEach
-
+                     */
                 } .navigationTitle("Service Reminders")                
             } // VStack
         } // else

@@ -18,7 +18,7 @@ struct LogbookHistory: View {
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var isPresentingHistoryForm = false
-    @State private var newLogRecord = Log99()
+    @State private var newLogRecord = Log()
     @State private var dateFilter = 0
     
     func notFiltered(dt: Date, filter: Int) -> Bool {
@@ -79,11 +79,11 @@ struct LogbookHistory: View {
                     .toolbar {
                         Button(action: {
                             isPresentingHistoryForm = true
-                            newLogRecord = Log99.new()
+                            newLogRecord = Log()
                         }) { Image(systemName: "plus") }
                     } .sheet(isPresented: $isPresentingHistoryForm) {
                         NavigationView {
-                            LogForm(rec: $newLogRecord, carModel: "", addNewLog: true)
+                            LogForm(rec: newLogRecord, carModel: "", addNewLog: true)
                                 .navigationTitle("Logbook")
                                 .toolbar {
                                     ToolbarItem(placement: .cancellationAction) {

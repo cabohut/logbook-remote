@@ -9,6 +9,7 @@ import Foundation
 import os.log
 
 // MARK: - Export/Import
+/*
 private func textFileURL(fn: String) throws -> URL {
     try FileManager.default.url(for: .documentDirectory,
                                 in: .userDomainMask,
@@ -16,7 +17,7 @@ private func textFileURL(fn: String) throws -> URL {
                                 create: false)
     .appendingPathComponent(fn)
 }
-
+ 
 func exportTextData(cars: [Car99]) {
     var textData: String
     os_log("Text file directory: %{public}@", log: appLog, type: .info, documentsDirectory as CVarArg)
@@ -61,26 +62,29 @@ func exportTextData(cars: [Car99]) {
         _ = ErrorWrapper(error: Error.self as! Error, guidance: "Error exporting text file, try again later.")
     }
 }
+*/
 
-func loadTextData() -> [Car99] {
-    var  cars = importTextData()
-    cars = Car99.sortCars(cars: cars)
-    for i in 0..<cars.count {
-        Reminder99.updateReminders(car: &cars[i], carIndex: i)
-    }
-
-    return cars
+/*
+func loadTextData() {
+     importTextData()
+    /*
+     for i in 0..<cars.count {
+         print(i)
+         //Reminder99.updateReminders(car: &cars[i], carIndex: i)
+     }
+     */
 }
 
-func importTextData() -> [Car99] {
-    var importCars : [Car99] = []
+func importTextData() {
+    var importCars : [String]
     var rows: [String]
-
+    
     // cars file
     rows = getFileRows(fn: "cars", type: "csv", header: true)
     for row in rows {
         let c = row.components(separatedBy: "\t")
         if c.count == 9 {
+            newCar = Car(context: )
             let newCar = Car99(id: UUID(), year: c[1], make: c[2], model: c[3], unique: c[4], license: c[5], vin: c[6], purchaseDate: convertDate(date: c[7]), notes: c[8])
             importCars.append(newCar)
         }
@@ -103,12 +107,12 @@ func importTextData() -> [Car99] {
         let c = row.components(separatedBy: "\t")
         if c.count == 7 {
             let newLog = Log99(id: UUID(), date: convertDate(date: c[1]), type: ServiceType(rawValue: c[2]) ?? .other, odometer: Int(c[3]) ?? 0, details: c[4], vendor: c[5], cost: Float(c[6])!)
-
+            
             importCars[Int(c[0])!].logs.append(newLog)
         }
     }
     
-    return importCars
+    return []
 }
 
 // code borrowed from here https://stackoverflow.com/questions/32313938/parsing-csv-file-in-swift
@@ -138,9 +142,11 @@ private func getFileRows(fn: String, type: String, header: Bool) -> [String] {
 
     return rows
 }
+*/
 
 // MARK: - Data File Management
 // Scrumdinger methods below
+/*
 private  func dataFileURL() throws -> URL {
     try FileManager.default.url(for: .documentDirectory,
                                 in: .userDomainMask,
@@ -237,7 +243,6 @@ func loadSampleData() -> [Car99] {
 }
 
 let sampleCars: [Car99] = [
-    /*
     Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus", license: "", vin: "JTHBF5C28B5154168", purchaseDate: convertDate(date: "2016-05-01"),
         logs: [
             Log(date: convertDate(date: "2023-01-13"), type: ServiceType.odometer, odometer: 110631, details: "+ 2 Q of oil", vendor: "", cost: 0),
@@ -315,5 +320,5 @@ let sampleCars: [Car99] = [
             Log(date: convertDate(date: "2007-04-27"), type: ServiceType.odometer, odometer: 7946, details: "", vendor: "DMV", cost: 0),
             Log(date: convertDate(date: "2006-08-23"), type: ServiceType.odometer, odometer: 21, details: "", vendor: "DMV", cost: 0),
         ]),
-     */
 ]
+*/

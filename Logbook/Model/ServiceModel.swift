@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/*
 struct Service99: Identifiable, Codable, Comparable {
     static func < (lhs: Service99, rhs: Service99) -> Bool {
         return lhs.maintMonths > rhs.maintMonths
@@ -29,7 +30,7 @@ struct Service99: Identifiable, Codable, Comparable {
     
     static func remove(cars: inout [Car99], carIndex: IndexSet) {
         cars.remove(atOffsets: carIndex)
-    }    
+    }
 }
 
 extension Service99 {
@@ -176,3 +177,4 @@ enum ServiceType: String, Identifiable, CaseIterable, Codable {
         }
     }
 }
+*/

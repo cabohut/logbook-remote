@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct LogForm: View {
-    @Binding var rec: Log99
-    
+    //@Binding var rec: Log99
+    @StateObject var rec: Log
+
     var carModel : String
     var addNewLog : Bool
     @State private var car_selection : Int = 0
     
     @Environment(\.isPresented) var isPresented
-    //@EnvironmentObject var appData : LogbookModel
     
     var body: some View {
         List {
@@ -72,7 +72,7 @@ struct LogForm: View {
 struct LogForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LogForm(rec: .constant(Log99()), carModel: "", addNewLog: false)
+            //LogForm(rec: .constant(Log()), carModel: "", addNewLog: false)
         }
     }
 }

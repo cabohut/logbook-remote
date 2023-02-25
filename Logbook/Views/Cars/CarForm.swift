@@ -61,17 +61,21 @@ struct CarForm: View {
     @State private var maintenanceMode = 0
     @State var maintMode = true
     @FocusState var isInputActive: Bool
-    
+
+    @State private var make: String = ""
+
     var body: some View {
         List {
-            Section (header: Text(car.make + " " + car.model).bold()) {
-                TextField("Year", text: $car.year)
-                    .keyboardType(.numberPad)
-                TextField("Make", text: $car.make)
-                TextField("Model", text: $car.model)
-                TextField("License Plate Number", text: $car.license)
-                TextField("VIN", text: $car.vin)
-                DatePicker("Purchase Date", selection: $car.purchaseDate, displayedComponents: .date)
+            Section (header: Text(car.make_ + " " + car.model_).bold()) {
+                //TextField("Year", text: car.year_)
+                    //.keyboardType(.numberPad)
+                TextField("Make", text: $make)
+                /*
+                TextField("Model", text: car.model_)
+                TextField("License Plate Number", text: car.license_)
+                TextField("VIN", text: car.vin_)
+                DatePicker("Purchase Date", selection: car.purchaseDate_, displayedComponents: .date)
+                 */
             }
             
             Section (header: Text("Maintenance Schedule Cadence").bold()) {
@@ -93,6 +97,8 @@ struct CarForm: View {
                 } .foregroundColor(.orange)
                     .font(.subheadline)
                 
+                Text("Services go here")
+                /*
                 ForEach ($car.services) { $s in
                     if (s.serviceType != .odometer && s.serviceType != .gas) {
                         HStack {
@@ -132,6 +138,7 @@ struct CarForm: View {
                         } .frame(maxWidth: .infinity)
                     }
                 } // ForEach
+                */
             } // Section
         } .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -147,7 +154,6 @@ struct CarForm: View {
     
     private func updateCar() {   // ***** add logic to update car details
         withAnimation {
-            // $car.make = ""
             let newCar = Car(context: moc)
             newCar.make = "zzzz"
             PersistenceController.shared.saveContext()

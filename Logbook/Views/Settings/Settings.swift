@@ -13,14 +13,6 @@ struct Settings: View {
 
     @State private var showingHelp = false
 
-    private static func dataFileURL() throws -> URL {
-        try FileManager.default.url(for: .documentDirectory,
-                                    in: .userDomainMask,
-                                    appropriateFor: nil,
-                                    create: false)
-        .appendingPathComponent(DATA_FILE)
-    }
-
     var body: some View {
         Form {
             Section(header: Text("About Logbook")) {
@@ -35,28 +27,30 @@ struct Settings: View {
                 Button ("Export data to text file") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        exportTextData(cars: appData.cars)
+                        //exportTextData(cars: appData.cars)
                     }
                 }
+                /*
                 Button ("Import data from text file") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        appData.cars = loadTextData()
+                        PersistenceController.shared.loadSampleData()
                     }
                 }
+                 */
             }
             
             Section (header: Text("Sample Data")){
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        appData.cars = loadSampleData()
+                        PersistenceController.shared.loadSampleData()
                     }
                 }
                 
                 Button ("Clear All Data") {
                     DispatchQueue.main.async {
-                        appData.cars = []
+                        PersistenceController.shared.deleteAll()
                         _g.shared.resetState()
                     }
                 }

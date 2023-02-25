@@ -7,6 +7,7 @@
 
 import Foundation
 
+/*
 struct Reminder99: Identifiable, Codable, Comparable {
     static func < (lhs: Reminder99, rhs: Reminder99) -> Bool {
         return lhs.dateDue < rhs.dateDue
@@ -125,3 +126,5 @@ extension Reminder99 {
         milesUntilDue = data.milesUntilDue
     }
 }
+
+*/

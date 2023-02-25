@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+/*
 struct Log99: Identifiable, Codable, Comparable {
     static func < (lhs: Log99, rhs: Log99) -> Bool {
         return lhs.date > rhs.date
@@ -64,3 +64,4 @@ extension Log99 {
         cost = data.cost
     }
 }
+*/

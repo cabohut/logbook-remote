@@ -8,6 +8,7 @@
 import Foundation
 import os.log
 
+/*
 struct Car99: Identifiable, Codable, Comparable {
     static func < (lhs: Car99, rhs: Car99) -> Bool {
         return lhs.make > rhs.make
@@ -91,3 +92,5 @@ extension Car99 {
         }
     }
 }
+
+*/

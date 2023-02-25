@@ -18,11 +18,13 @@ import SwiftUI
 
 struct ShowReminder: View {
     let showOverdue: Bool
-    var reminder: Reminder99
-    
+    // var reminder: Reminder99
+
     var body: some View {
         
         HStack{
+            Text("Reminders go here")
+            /*
             reminder.serviceType.img()
                 .foregroundColor(.orange)
                 .frame(width: 30, alignment: .center)
@@ -79,6 +81,7 @@ struct ShowReminder: View {
                 }
             } .font(.footnote)
                 .padding(.leading, 2)
+            */
         }
     }
 }
