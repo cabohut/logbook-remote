@@ -18,7 +18,7 @@ import SwiftUI
 
 struct ShowReminder: View {
     let showOverdue: Bool
-    var reminder: Reminder
+    var reminder: Reminder99
     
     var body: some View {
         

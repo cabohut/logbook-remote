@@ -28,17 +28,18 @@ struct CarsList: View {
                     .font(.subheadline)
             } else {
                 List {
-                    ForEach($cars) { $rec in
-                        NavigationLink(destination:CarForm(car: $rec)) {
-                            CarRow(rec: rec)
+                    ForEach(cars) { car in
+                        NavigationLink(destination:CarForm(car: car)) {
+                            CarRow(car: car)
                         }
                     } .onDelete { indices in
                         if indices.first != nil {
                             let idx = _g.shared.remindersCounts.firstIndex(where: { $0.carID == cars[indices.first!].id }) ?? -1
                             _g.shared.remindersCounts.remove(at: idx)
                         }
-                        Car.remove(cars: &cars, carIndex: indices)    // ***** <- remove car
-
+                        //Car.remove(cars: &cars, carIndex: indices) 
+                        deleteCar(offsets: indices)
+                        
                         _g.shared.updateDueRemindersCount()
                     }
                 }
@@ -47,13 +48,13 @@ struct CarsList: View {
             .toolbar {
                 Button(action: {
                     isPresentingCarForm = true
-                    newCarRecord = Car.new()
+                    newCarRecord = Car(context: moc)
                 }) {
                     Image(systemName: "plus")
                 }
             } .sheet(isPresented: $isPresentingCarForm) {
                 NavigationView {
-                    CarForm(car: $newCarRecord)
+                    CarForm(car: newCarRecord)
                         .navigationTitle("Car Details")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
@@ -63,17 +64,34 @@ struct CarsList: View {
                             }
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Add") {
-                                    Car.add(cars: &cars, newCar: newCarRecord)    // ***** <- add car
+                                    // Car.add(cars: &cars, newCar: newCarRecord)    // ***** <- add car
+                                    addCar()
                                     isPresentingCarForm = false
-                                } .disabled(newCarRecord.make.isEmpty && newCarRecord.model.isEmpty)
+                                } // .disabled(newCarRecord.make.isEmpty && newCarRecord.model.isEmpty)
                             }
                         }
                 } .navigationViewStyle(.stack)
             } // .sheet
             .onChange(of: scenePhase) { _ in
-                moc.saveContext()
+                PersistenceController.shared.saveContext()
             }
     }
+    
+    private func addCar() {    // ***** add logic to add all the car's details
+        withAnimation {
+            let newCar = Car(context: moc)
+            newCar.make = ""
+            PersistenceController.shared.saveContext()
+        }
+    }
+
+    private func deleteCar(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { cars[$0] }.forEach(moc.delete)
+            PersistenceController.shared.saveContext()
+        }
+    }
+
 }
 
 struct Cars_Previews: PreviewProvider {

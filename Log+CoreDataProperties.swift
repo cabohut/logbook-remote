@@ -25,6 +25,10 @@ extension Log {
     @NSManaged public var vendor: String?
     @NSManaged public var car: Car?
 
+    public var serviceType_: String {
+        serviceType ?? ""
+    }
+
 }
 
 extension Log : Identifiable {

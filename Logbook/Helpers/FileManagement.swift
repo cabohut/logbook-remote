@@ -17,7 +17,7 @@ private func textFileURL(fn: String) throws -> URL {
     .appendingPathComponent(fn)
 }
 
-func exportTextData(cars: [Car]) {
+func exportTextData(cars: [Car99]) {
     var textData: String
     os_log("Text file directory: %{public}@", log: appLog, type: .info, documentsDirectory as CVarArg)
     
@@ -62,18 +62,18 @@ func exportTextData(cars: [Car]) {
     }
 }
 
-func loadTextData() -> [Car] {
+func loadTextData() -> [Car99] {
     var  cars = importTextData()
-    cars = Car.sortCars(cars: cars)
+    cars = Car99.sortCars(cars: cars)
     for i in 0..<cars.count {
-        Reminder.updateReminders(car: &cars[i], carIndex: i)
+        Reminder99.updateReminders(car: &cars[i], carIndex: i)
     }
 
     return cars
 }
 
-func importTextData() -> [Car] {
-    var importCars : [Car] = []
+func importTextData() -> [Car99] {
+    var importCars : [Car99] = []
     var rows: [String]
 
     // cars file
@@ -81,7 +81,7 @@ func importTextData() -> [Car] {
     for row in rows {
         let c = row.components(separatedBy: "\t")
         if c.count == 9 {
-            let newCar = Car(id: UUID(), year: c[1], make: c[2], model: c[3], unique: c[4], license: c[5], vin: c[6], purchaseDate: convertDate(date: c[7]), notes: c[8])
+            let newCar = Car99(id: UUID(), year: c[1], make: c[2], model: c[3], unique: c[4], license: c[5], vin: c[6], purchaseDate: convertDate(date: c[7]), notes: c[8])
             importCars.append(newCar)
         }
     }
@@ -91,7 +91,7 @@ func importTextData() -> [Car] {
     for row in rows {
         let c = row.components(separatedBy: "\t")
         if c.count == 5 {
-            let newService = Service(id: UUID(), serviceType: ServiceType(rawValue: c[1]) ?? .other, maintEnabled: Bool(c[2]) ?? false, maintMonths: Int(c[3]) ?? 0, maintMiles: Int(c[4]) ?? 0)
+            let newService = Service99(id: UUID(), serviceType: ServiceType(rawValue: c[1]) ?? .other, maintEnabled: Bool(c[2]) ?? false, maintMonths: Int(c[3]) ?? 0, maintMiles: Int(c[4]) ?? 0)
             
             importCars[Int(c[0])!].services.append(newService)
         }
@@ -102,7 +102,7 @@ func importTextData() -> [Car] {
     for row in rows {
         let c = row.components(separatedBy: "\t")
         if c.count == 7 {
-            let newLog = Log(id: UUID(), date: convertDate(date: c[1]), type: ServiceType(rawValue: c[2]) ?? .other, odometer: Int(c[3]) ?? 0, details: c[4], vendor: c[5], cost: Float(c[6])!)
+            let newLog = Log99(id: UUID(), date: convertDate(date: c[1]), type: ServiceType(rawValue: c[2]) ?? .other, odometer: Int(c[3]) ?? 0, details: c[4], vendor: c[5], cost: Float(c[6])!)
 
             importCars[Int(c[0])!].logs.append(newLog)
         }
@@ -149,7 +149,7 @@ private  func dataFileURL() throws -> URL {
     .appendingPathComponent(DATA_FILE)
 }
 
-func loadData() async throws -> [Car] {
+func loadData() async throws -> [Car99] {
     try await withCheckedThrowingContinuation { continuation in
         loadData { result in
             switch result {
@@ -162,7 +162,7 @@ func loadData() async throws -> [Car] {
     }
 }
 
-func loadData(completion: @escaping (Result<[Car], Error>)->Void) {
+func loadData(completion: @escaping (Result<[Car99], Error>)->Void) {
     DispatchQueue.global(qos: .background).async {
         do {
             let fileURL = try dataFileURL()
@@ -172,7 +172,7 @@ func loadData(completion: @escaping (Result<[Car], Error>)->Void) {
                 }
                 return
             }
-            var cars = try JSONDecoder().decode([Car].self, from: file.availableData)
+            var cars = try JSONDecoder().decode([Car99].self, from: file.availableData)
             DispatchQueue.main.async {
                 cars = cars.sorted { $0.make < $1.make }
                 os_log("Loaded data file: %d cars", log: appLog, type: .info, cars.count)
@@ -192,7 +192,7 @@ func loadData(completion: @escaping (Result<[Car], Error>)->Void) {
 }
 
 @discardableResult
-func saveData(cars: [Car]) async throws -> Int {
+func saveData(cars: [Car99]) async throws -> Int {
     try await withCheckedThrowingContinuation { continuation in
         saveData(cars: cars) { result in
             switch result {
@@ -205,7 +205,7 @@ func saveData(cars: [Car]) async throws -> Int {
     }
 }
 
-func saveData(cars: [Car], completion: @escaping (Result<Int, Error>)->Void) {
+func saveData(cars: [Car99], completion: @escaping (Result<Int, Error>)->Void) {
     DispatchQueue.global(qos: .background).async {
         do {
             let data = try JSONEncoder().encode(cars)
@@ -225,18 +225,19 @@ func saveData(cars: [Car], completion: @escaping (Result<Int, Error>)->Void) {
 }
 
 // MARK: - Sample Data
-func loadSampleData() -> [Car] {
+func loadSampleData() -> [Car99] {
     var  cars = sampleCars
-    cars = Car.sortCars(cars: cars)
+    cars = Car99.sortCars(cars: cars)
     for i in 0..<cars.count {
-        Car.setupServicesRec(car: &cars[i])
-        Reminder.updateReminders(car: &cars[i], carIndex: i)
+        Car99.setupServicesRec(car: &cars[i])
+        Reminder99.updateReminders(car: &cars[i], carIndex: i)
     }
     
     return cars
 }
 
-let sampleCars: [Car] = [
+let sampleCars: [Car99] = [
+    /*
     Car(year: "2012", make: "Lexus", model: "IS250", unique: "2012 Lexus", license: "", vin: "JTHBF5C28B5154168", purchaseDate: convertDate(date: "2016-05-01"),
         logs: [
             Log(date: convertDate(date: "2023-01-13"), type: ServiceType.odometer, odometer: 110631, details: "+ 2 Q of oil", vendor: "", cost: 0),
@@ -314,4 +315,5 @@ let sampleCars: [Car] = [
             Log(date: convertDate(date: "2007-04-27"), type: ServiceType.odometer, odometer: 7946, details: "", vendor: "DMV", cost: 0),
             Log(date: convertDate(date: "2006-08-23"), type: ServiceType.odometer, odometer: 21, details: "", vendor: "DMV", cost: 0),
         ]),
+     */
 ]

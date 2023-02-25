@@ -52,14 +52,16 @@ struct CheckboxStyle: ToggleStyle {
 }
 
 struct CarForm: View {
-    @Binding var car: Car
+    //@Binding var car: Car
+    @StateObject var car: Car
     
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.isPresented) var isPresented
     
     @State private var maintenanceMode = 0
     @State var maintMode = true
     @FocusState var isInputActive: Bool
-
+    
     var body: some View {
         List {
             Section (header: Text(car.make + " " + car.model).bold()) {
@@ -142,12 +144,22 @@ struct CarForm: View {
                 }
             }
     }
+    
+    private func updateCar() {   // ***** add logic to update car details
+        withAnimation {
+            // $car.make = ""
+            let newCar = Car(context: moc)
+            newCar.make = "zzzz"
+            PersistenceController.shared.saveContext()
+        }
+    }
+
 }
 
 struct CarForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CarForm(car: .constant(Car()))
+            //CarForm(car: .constant(Car()))
         }
     }
 }

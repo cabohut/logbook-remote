@@ -14,11 +14,11 @@ struct LogbookHistory: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
                   animation: .default)
     private var cars: FetchedResults<Car>
-
+    
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var isPresentingHistoryForm = false
-    @State private var newLogRecord = Log()
+    @State private var newLogRecord = Log99()
     @State private var dateFilter = 0
     
     func notFiltered(dt: Date, filter: Int) -> Bool {
@@ -49,33 +49,37 @@ struct LogbookHistory: View {
                 }
                 
                 List {
-                    ForEach ($cars) { $c in
-                        Section (header: Text(c.make + " " + c.model).bold()) {
-                            if (c.logs.count>0) {
-                                ForEach($c.logs) { $rec in
-                                    if notFiltered(dt: rec.date, filter: dateFilter) {
-                                        NavigationLink(destination:LogForm(rec: $rec, carModel: c.model, addNewLog: false)) {
-                                            LogRow(rec: rec)
-                                        }
-                                    } else {
-                                        EmptyView()
-                                    }
-                                } .onDelete { indices in
-                                    Log.remove(logs: &c.logs, logIndex: indices)
-                                    Reminder.updateReminders(car: &c, carIndex: _g.shared.c_car_idx)
-                                }
-                            } else {
-                                Text("No logs recorded.")
-                                    .foregroundColor(.gray)
-                                    .font(.subheadline)
-                            }
+                    ForEach (cars) { c in
+                        Section (header: Text(c.make_ + " " + c.model_).bold()) {
+                            Text("logs go here")
+                            /*
+                             if (c.logs.count>0) {
+                             ForEach(c.logs) { $rec in
+                             if notFiltered(dt: rec.date, filter: dateFilter) {
+                             NavigationLink(destination:LogForm(rec: $rec, carModel: c.model, addNewLog: false)) {
+                             LogRow(rec: rec)
+                             }
+                             } else {
+                             EmptyView()
+                             }
+                             } .onDelete { indices in
+                             deleteLog(offsets: indices)
+                             //Log99.remove(logs: c.logs, logIndex: indices)
+                             //Reminder.updateReminders(car: &c, carIndex: _g.shared.c_car_idx)
+                             }
+                             } else {
+                             Text("No logs recorded.")
+                             .foregroundColor(.gray)
+                             .font(.subheadline)
+                             }
+                             */
                         }
                     }
                 } .navigationTitle("Logbook History")
                     .toolbar {
                         Button(action: {
                             isPresentingHistoryForm = true
-                            newLogRecord = Log.new()
+                            newLogRecord = Log99.new()
                         }) { Image(systemName: "plus") }
                     } .sheet(isPresented: $isPresentingHistoryForm) {
                         NavigationView {
@@ -89,19 +93,36 @@ struct LogbookHistory: View {
                                     }
                                     ToolbarItem(placement: .confirmationAction) {
                                         Button("Add") {
-                                            Log.add(logs: &cars[_g.shared.c_car_idx].logs, newLog: newLogRecord)
-                                            Reminder.updateReminders(car: &cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
+                                            //Log99.add(logs: &cars[_g.shared.c_car_idx].logs, newLog: newLogRecord)
+                                            //Reminder.updateReminders(car: &cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
+                                           addLog()
                                             isPresentingHistoryForm = false
                                         }
                                     }
                                 }
                         }
                     } .onChange(of: scenePhase) { _ in
-                        moc.saveContext()
+                        PersistenceController.shared.saveContext()
                     }
             }
         }
     }
+    
+    private func addLog() {    // ***** add logic to add all the car's details
+        withAnimation {
+            let newLog = Log(context: moc)
+            newLog.odometer = 7777
+            PersistenceController.shared.saveContext()
+        }
+    }
+
+    private func deleteLog(offsets: IndexSet) {
+        withAnimation {
+            //offsets.map { logs[$0] }.forEach(moc.delete)
+            PersistenceController.shared.saveContext()
+        }
+    }
+
 }
 
 struct Logbook_Previews: PreviewProvider {

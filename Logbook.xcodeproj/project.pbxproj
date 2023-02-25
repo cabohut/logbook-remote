@@ -46,6 +46,7 @@
 		92F1231329A888920010BE38 /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230B29A888920010BE38 /* Service+CoreDataProperties.swift */; };
 		92F1231429A888920010BE38 /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230C29A888920010BE38 /* Car+CoreDataClass.swift */; };
 		92F1231529A888920010BE38 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1230D29A888920010BE38 /* Car+CoreDataProperties.swift */; };
+		92F1231729A980E10010BE38 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1231629A980E10010BE38 /* CoreDataHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		92F1230B29A888920010BE38 /* Service+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		92F1230C29A888920010BE38 /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		92F1230D29A888920010BE38 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		92F1231629A980E10010BE38 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				92DABF0A28E6B10B00F07715 /* IntroScreenHelpers.swift */,
 				92DABF0D28E6B10B00F07715 /* ErrorView.swift */,
 				9215012D29A6EB1F00D23696 /* FileManagement.swift */,
+				92F1231629A980E10010BE38 /* CoreDataHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -241,14 +244,14 @@
 			isa = PBXGroup;
 			children = (
 				92F122FC29A882FF0010BE38 /* LogbookModel.xcdatamodeld */,
+				92F1230C29A888920010BE38 /* Car+CoreDataClass.swift */,
+				92F1230D29A888920010BE38 /* Car+CoreDataProperties.swift */,
+				92F1230A29A888920010BE38 /* Service+CoreDataClass.swift */,
+				92F1230B29A888920010BE38 /* Service+CoreDataProperties.swift */,
 				92F1230629A888920010BE38 /* Log+CoreDataClass.swift */,
 				92F1230729A888920010BE38 /* Log+CoreDataProperties.swift */,
 				92F1230829A888920010BE38 /* Reminder+CoreDataClass.swift */,
 				92F1230929A888920010BE38 /* Reminder+CoreDataProperties.swift */,
-				92F1230A29A888920010BE38 /* Service+CoreDataClass.swift */,
-				92F1230B29A888920010BE38 /* Service+CoreDataProperties.swift */,
-				92F1230C29A888920010BE38 /* Car+CoreDataClass.swift */,
-				92F1230D29A888920010BE38 /* Car+CoreDataProperties.swift */,
 				92F1230429A886060010BE38 /* PersistenceController.swift */,
 			);
 			path = CoreData;
@@ -352,6 +355,7 @@
 				92DABF2928E6B10C00F07715 /* IntroScreen.swift in Sources */,
 				92F1231529A888920010BE38 /* Car+CoreDataProperties.swift in Sources */,
 				92DABF3528E6B10C00F07715 /* CarForm.swift in Sources */,
+				92F1231729A980E10010BE38 /* CoreDataHelpers.swift in Sources */,
 				9247A77929336437008D0490 /* ReminderModel.swift in Sources */,
 				92F1230E29A888920010BE38 /* Log+CoreDataClass.swift in Sources */,
 				92DABF3028E6B10C00F07715 /* LogbookModel.swift in Sources */,

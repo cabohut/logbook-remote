@@ -31,6 +31,20 @@ extension Car {
     @NSManaged public var reminders: NSSet?
     @NSManaged public var services: NSSet?
 
+    public var license_: String { license ?? "" }
+    public var make_: String { make ?? "" }
+    public var model_: String { model ?? "" }
+    public var notes_: String { notes ?? "" }
+    public var unique_: String { unique ?? "" }
+    public var vin_: String { vin ?? "" }
+    public var year_: String { year ?? "" }
+    public var purchaseDate_: Date { purchaseDate ?? Date() }
+
+    public var logsA: [Log] {
+        let logsSet = logs as? Set<Log> ?? []
+        return logsSet.sorted { $0.odometer < $1.odometer }
+    }
+
 }
 
 // MARK: Generated accessors for logs

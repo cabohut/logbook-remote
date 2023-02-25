@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LogForm: View {
-    @Binding var rec: Log
+    @Binding var rec: Log99
+    
     var carModel : String
     var addNewLog : Bool
     @State private var car_selection : Int = 0
@@ -18,6 +19,8 @@ struct LogForm: View {
     
     var body: some View {
         List {
+            Text("Testing")
+            /*
             if addNewLog {
                 Section {
                     Picker("Car", selection: $car_selection) {
@@ -33,7 +36,7 @@ struct LogForm: View {
             Section (header: Text(carModel)){
                 HStack {
                     Text("Date")
-                    DatePicker("", selection: $rec.date, displayedComponents: .date)
+                    DatePicker("", selection: rec.date, displayedComponents: .date)
                 } 
 
                 Picker("Service Type", selection: $rec.type) {
@@ -56,9 +59,11 @@ struct LogForm: View {
                 TextField("Vendor", text: $rec.vendor)
                 TextField("Details", text: $rec.details)
             }
+             */
+
         } .onChange(of: isPresented) { newValue in
             if !newValue {
-                Reminder.updateReminders(car: &appData.cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
+                // Reminder99.updateReminders(car: &appData.cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
             }
         }
     }
@@ -67,7 +72,7 @@ struct LogForm: View {
 struct LogForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LogForm(rec: .constant(Log()), carModel: "", addNewLog: false)
+            LogForm(rec: .constant(Log99()), carModel: "", addNewLog: false)
         }
     }
 }

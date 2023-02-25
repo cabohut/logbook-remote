@@ -12,6 +12,8 @@ struct LogRow: View {
     
     var body: some View {
         HStack {
+            Text("Test LogRow Value")
+            /*
             rec.type.img()
                 .foregroundColor(.orange)
                 .frame(width: 30, alignment: .center)
@@ -34,6 +36,7 @@ struct LogRow: View {
                     .foregroundColor(.gray)
                     .font(.caption)
             }.padding(.trailing, 5)
+             */
         }
     }
 }

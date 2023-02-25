@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct CarRow: View {
-    let rec: Car
-    
+    //let car: Car
+    @StateObject var car: Car
+
     var body: some View {
         VStack (alignment: .leading) {
-            Text("\(rec.year)")
+            Text("\(car.year_)")
                 .foregroundColor(.orange)
             HStack {
-                Text("\(rec.make)")
-                Text("\(rec.model)")
+                Text("\(car.make_)")
+                Text("\(car.model_)")
             } .font(.title2)
         }
     }
@@ -25,7 +26,7 @@ struct CarRow: View {
 struct CarRow_Preview: PreviewProvider {
     static var previews: some View {
         Group {
-            CarRow(rec: Car())
+            CarRow(car: Car())
         } .previewLayout(.fixed(width: 300, height: 70))
     }
 }

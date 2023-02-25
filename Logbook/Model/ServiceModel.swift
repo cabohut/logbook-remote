@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Service99: Identifiable, Codable, Comparable {
-    static func < (lhs: Service, rhs: Service) -> Bool {
+    static func < (lhs: Service99, rhs: Service99) -> Bool {
         return lhs.maintMonths > rhs.maintMonths
     }
     
@@ -19,25 +19,25 @@ struct Service99: Identifiable, Codable, Comparable {
     var maintMonths: Int
     var maintMiles: Int
 
-    static func new() -> Car {
-        return Car()
+    static func new() -> Car99 {
+        return Car99()
     }
     
-    static func add(sched: inout [Service], newCar: Service) {
+    static func add(sched: inout [Service99], newCar: Service99) {
         sched.append(newCar)
     }
     
-    static func remove(cars: inout [Car], carIndex: IndexSet) {
+    static func remove(cars: inout [Car99], carIndex: IndexSet) {
         cars.remove(atOffsets: carIndex)
     }    
 }
 
-extension Service {
-    var data: Service {
-        Service(serviceType: serviceType, maintEnabled: maintEnabled, maintMonths: maintMonths, maintMiles: maintMiles)
+extension Service99 {
+    var data: Service99 {
+        Service99(serviceType: serviceType, maintEnabled: maintEnabled, maintMonths: maintMonths, maintMiles: maintMiles)
     }
     
-    mutating func update(from data: Service) {
+    mutating func update(from data: Service99) {
         serviceType = data.serviceType
         maintEnabled = data.maintEnabled
         maintMonths = data.maintMonths

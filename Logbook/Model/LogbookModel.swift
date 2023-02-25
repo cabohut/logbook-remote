@@ -59,7 +59,7 @@ class _g {
 }
 
 class LogbookModel: ObservableObject {
-    @Published var cars: [Car] = []
+    @Published var cars: [Car99] = []
     
     private static func oslogFileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory,

@@ -19,7 +19,7 @@ struct LogbookApp: App {
             IntroScreen()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         } .onChange(of: scenePhase) { _ in
-            persistenceController.saveContext()
+            PersistenceController.shared.saveContext()
         }
     }
 }
