@@ -53,29 +53,49 @@ struct CheckboxStyle: ToggleStyle {
 
 struct CarForm: View {
     //@Binding var car: Car
-    @StateObject var car: Car
+    @ObservedObject var car: Car
     
     @Environment(\.managedObjectContext) var moc
     @Environment(\.isPresented) var isPresented
     
     @State private var maintenanceMode = 0
-    @State var maintMode = true
+    @State private var maintMode = true
     @FocusState var isInputActive: Bool
 
+    // car data
+    @State private var year: String = ""
     @State private var make: String = ""
+    @State private var model: String = ""
+    @State private var license: String = ""
+    @State private var vin: String = ""
+    @State private var purchaseDate: Date = Date()
+    @State private var notes: String = ""
+    
+    // service data
+    @State private var serviceType: String = ""
+    @State private var maintEnabled: Bool = true
+    @State private var maintMonths: Int = 0
+    @State private var maintMiles: Int = 0
 
     var body: some View {
         List {
             Section (header: Text(car.make_ + " " + car.model_).bold()) {
-                //TextField("Year", text: car.year_)
-                    //.keyboardType(.numberPad)
+                TextField("Year", text: $year)
+                    .keyboardType(.numberPad)
+                    .onAppear {
+                        year = car.year_
+                        make = car.make_
+                        model = car.model_
+                        license = car.license_
+                        vin = car.vin_
+                        purchaseDate = car.purchaseDate_
+                        notes = car.notes_
+                    }
                 TextField("Make", text: $make)
-                /*
-                TextField("Model", text: car.model_)
-                TextField("License Plate Number", text: car.license_)
-                TextField("VIN", text: car.vin_)
-                DatePicker("Purchase Date", selection: car.purchaseDate_, displayedComponents: .date)
-                 */
+                TextField("Model", text: $model)
+                TextField("License Plate Number", text: $license)
+                TextField("VIN", text: $vin)
+                DatePicker("Purchase Date", selection: $purchaseDate, displayedComponents: .date)
             }
             
             Section (header: Text("Maintenance Schedule Cadence").bold()) {
@@ -98,47 +118,54 @@ struct CarForm: View {
                     .font(.subheadline)
                 
                 Text("Services go here")
-                /*
-                ForEach ($car.services) { $s in
-                    if (s.serviceType != .odometer && s.serviceType != .gas) {
+                let _ = print(car.servicesA.count)
+                ForEach (car.servicesA) { s in
+                    if (s.serviceType_ != "odometer" && s.serviceType_ != "gas") {
                         HStack {
-                            Toggle(isOn: $s.maintEnabled, label: {Text(s.serviceType.rawValue.capitalized)})
+                            /*
+                            Toggle(isOn: $maintEnabled, label: {Text(s.serviceType_.rawValue.capitalized)})
                                 .toggleStyle(CheckboxStyle())
-                                .onChange(of: s.maintEnabled) { value in
-                                    Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
-                                    if !s.maintEnabled {
-                                        s.maintMonths = 0
-                                        s.maintMiles = 0
+                                .onAppear {
+                                    serviceType = s.serviceType_
+                                    maintEnabled = s.maintEnabled
+                                    maintMonths = s.maintMonths
+                                    maintMiles = s.maintMiles
+                                }
+                                .onChange(of: maintEnabled) { value in
+                                    //Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
+                                    if !maintEnabled {
+                                        maintMonths = 0
+                                        maintMiles = 0
                                     }
                                 }
+                            */
                             
                             Spacer()
                             
                             // maint months
                             TextField("", text: Binding (
-                                get: { s.maintMonths != 0 ? String(s.maintMonths) : "" },
-                                set: { s.maintMonths = Int($0) ?? 0 }
+                                get: { maintMonths != 0 ? String(maintMonths) : "" },
+                                set: { maintMonths = Int($0) ?? 0 }
                             ))
-                            .num_field(enabled: s.maintEnabled)
+                            .num_field(enabled: maintEnabled)
                             .focused($isInputActive)
-                            .onChange(of: s.maintMonths) { value in
-                                Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
+                            .onChange(of: maintMonths) { value in
+                                //Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
                             }
                             
                             // maint miles
                             TextField("", text: Binding(
-                                get: { s.maintMiles != 0 ? String(s.maintMiles) : "" },
-                                set: { s.maintMiles = Int($0) ?? 0 }
+                                get: { maintMiles != 0 ? String(maintMiles) : "" },
+                                set: { maintMiles = Int($0) ?? 0 }
                             ))
-                            .num_field(enabled: s.maintEnabled)
+                            .num_field(enabled: maintEnabled)
                             .focused($isInputActive)
-                            .onChange(of: s.maintMiles) { value in
-                                Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
+                            .onChange(of: maintMiles) { value in
+                                //Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
                             }
                         } .frame(maxWidth: .infinity)
                     }
                 } // ForEach
-                */
             } // Section
         } .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -159,7 +186,6 @@ struct CarForm: View {
             PersistenceController.shared.saveContext()
         }
     }
-
 }
 
 struct CarForm_Previews: PreviewProvider {

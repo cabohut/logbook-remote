@@ -12,6 +12,7 @@
 		9215013429A7289000D23696 /* cars.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9215013029A7289000D23696 /* cars.csv */; };
 		9215013629A7289000D23696 /* services.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9215013229A7289000D23696 /* services.csv */; };
 		9247A77929336437008D0490 /* ReminderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9247A77829336437008D0490 /* ReminderModel.swift */; };
+		92B47B0929AC7B2400BC2A95 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B47B0829AC7B2400BC2A95 /* AppData.swift */; };
 		92D2061C29348CA400A333A5 /* ShowReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2061B29348CA400A333A5 /* ShowReminder.swift */; };
 		92DABF0128E6B03000F07715 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DABF0028E6B03000F07715 /* Preview Assets.xcassets */; };
 		92DABF2528E6B10C00F07715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DABF0728E6B10B00F07715 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		9215013229A7289000D23696 /* services.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = services.csv; sourceTree = "<group>"; };
 		921D681229931C8E00AA3EFE /* Logbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Logbook.entitlements; sourceTree = "<group>"; };
 		9247A77829336437008D0490 /* ReminderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderModel.swift; sourceTree = "<group>"; };
+		92B47B0829AC7B2400BC2A95 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		92D2061B29348CA400A333A5 /* ShowReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowReminder.swift; sourceTree = "<group>"; };
 		92DABEF628E6B02F00F07715 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DABF0028E6B03000F07715 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		921D685B2994BBCF00AA3EFE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				92B47B0829AC7B2400BC2A95 /* AppData.swift */,
 				92DABF1028E6B10C00F07715 /* AppHelpers.swift */,
 				92DABF0A28E6B10B00F07715 /* IntroScreenHelpers.swift */,
 				92DABF0D28E6B10B00F07715 /* ErrorView.swift */,
@@ -365,6 +368,7 @@
 				92F1231229A888920010BE38 /* Service+CoreDataClass.swift in Sources */,
 				92DABF2628E6B10C00F07715 /* LogbookApp.swift in Sources */,
 				92F1230529A886060010BE38 /* PersistenceController.swift in Sources */,
+				92B47B0929AC7B2400BC2A95 /* AppData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

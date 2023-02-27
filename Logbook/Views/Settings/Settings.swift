@@ -44,7 +44,7 @@ struct Settings: View {
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        PersistenceController.shared.loadSampleData()
+                        loadSampleData()
                     }
                 }
                 

@@ -25,9 +25,10 @@ extension Log {
     @NSManaged public var vendor: String?
     @NSManaged public var car: Car?
 
-    public var serviceType_: String {
-        serviceType ?? ""
-    }
+    public var date_: Date { date ?? Date() }
+    public var serviceType_: String { serviceType ?? "" }
+    public var details_: String { details ?? "" }
+    public var vendor_: String { vendor ?? "" }
 
 }
 

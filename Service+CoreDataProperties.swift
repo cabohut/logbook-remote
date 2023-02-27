@@ -23,6 +23,8 @@ extension Service {
     @NSManaged public var serviceType: String?
     @NSManaged public var car: Car?
 
+    public var serviceType_: String { serviceType ?? "" }
+
 }
 
 extension Service : Identifiable {

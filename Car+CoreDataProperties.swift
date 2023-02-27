@@ -42,7 +42,12 @@ extension Car {
 
     public var logsA: [Log] {
         let logsSet = logs as? Set<Log> ?? []
-        return logsSet.sorted { $0.odometer < $1.odometer }
+        return logsSet.sorted { $0.date_ < $1.date_ }
+    }
+
+    public var servicesA: [Service] {
+        let servicesSet = services as? Set<Service> ?? []
+        return servicesSet.sorted { $0.serviceType_ < $1.serviceType_ }
     }
 
 }
