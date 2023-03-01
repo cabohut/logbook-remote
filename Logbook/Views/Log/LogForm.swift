@@ -8,24 +8,25 @@
 import SwiftUI
 
 struct LogForm: View {
-    //@Binding var rec: Log99
-    @StateObject var rec: Log
-
+    @ObservedObject var log: Log
     var carModel : String
     var addNewLog : Bool
+    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
+                  animation: .default
+    ) private var cars: FetchedResults<Car>
+
     @State private var car_selection : Int = 0
     
     @Environment(\.isPresented) var isPresented
     
     var body: some View {
         List {
-            Text("Testing")
-            /*
             if addNewLog {
                 Section {
                     Picker("Car", selection: $car_selection) {
-                        ForEach(0..<appData.cars.count, id: \.self) { i in
-                            Text(appData.cars[i].make + " " + appData.cars[i].model)
+                        ForEach(0..<cars.count, id: \.self) { i in
+                            Text(cars[i].make_ + " " + cars[i].model_)
                         }
                     } .onChange(of: car_selection) { newValue in
                         _g.shared.c_car_idx = newValue
@@ -36,30 +37,29 @@ struct LogForm: View {
             Section (header: Text(carModel)){
                 HStack {
                     Text("Date")
-                    DatePicker("", selection: rec.date, displayedComponents: .date)
+                    DatePicker("", selection: $log.date.unwrapped(d: Date()), displayedComponents: .date)
                 } 
 
-                Picker("Service Type", selection: $rec.type) {
+                Picker("Service Type", selection: $log.serviceType.unwrapped(d: "")) {
                     ForEach(ServiceType.allCases) { t in
                         Text(t.rawValue.capitalized).tag(t)
                     }
                 }
 
                 TextField("Odometer", text: Binding(
-                    get: { rec.odometer != 0 ? String(rec.odometer) : "" },
-                    set: { rec.odometer = Int($0) ?? 0 }
+                    get: { log.odometer != 0 ? String(log.odometer) : "" },
+                    set: { log.odometer = Int32($0) ?? 0 }
                 ))
                     .keyboardType(.numberPad)
 
-                TextField("Total Cost", value: $rec.cost, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                TextField("Total Cost", value: $log.cost, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                     .keyboardType(.decimalPad)
             }
             
             Section (header: Text("Vendor & Service Details")){
-                TextField("Vendor", text: $rec.vendor)
-                TextField("Details", text: $rec.details)
+                TextField("Vendor", text: $log.vendor.unwrapped(d: ""))
+                TextField("Details", text: $log.details.unwrapped(d: ""))
             }
-             */
 
         } .onChange(of: isPresented) { newValue in
             if !newValue {

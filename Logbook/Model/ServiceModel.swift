@@ -45,6 +45,7 @@ extension Service99 {
         maintMiles = data.maintMiles
     }
 }
+*/
 
 enum ServiceStatus: Codable {
     case isDue, isUpcoming, notScheduled
@@ -177,4 +178,3 @@ enum ServiceType: String, Identifiable, CaseIterable, Codable {
         }
     }
 }
-*/

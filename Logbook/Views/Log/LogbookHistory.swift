@@ -12,8 +12,8 @@ struct LogbookHistory: View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
-                  animation: .default)
-    private var cars: FetchedResults<Car>
+                  animation: .default
+    ) private var cars: FetchedResults<Car>
     
     @Environment(\.scenePhase) private var scenePhase
     
@@ -51,39 +51,35 @@ struct LogbookHistory: View {
                 List {
                     ForEach (cars) { c in
                         Section (header: Text(c.make_ + " " + c.model_).bold()) {
-                            Text("logs go here")
-                            /*
-                             if (c.logs.count>0) {
-                             ForEach(c.logs) { $rec in
-                             if notFiltered(dt: rec.date, filter: dateFilter) {
-                             NavigationLink(destination:LogForm(rec: $rec, carModel: c.model, addNewLog: false)) {
-                             LogRow(rec: rec)
-                             }
-                             } else {
-                             EmptyView()
-                             }
-                             } .onDelete { indices in
-                             deleteLog(offsets: indices)
-                             //Log99.remove(logs: c.logs, logIndex: indices)
-                             //Reminder.updateReminders(car: &c, carIndex: _g.shared.c_car_idx)
-                             }
-                             } else {
-                             Text("No logs recorded.")
-                             .foregroundColor(.gray)
-                             .font(.subheadline)
-                             }
-                             */
+                            if (c.logsA.count>0) {
+                                ForEach(c.logsA) { log in
+                                    if notFiltered(dt: log.date_, filter: dateFilter) {
+                                        NavigationLink(destination:LogForm(log: log, carModel: c.model_, addNewLog: false)) {
+                                            LogRow(log: log)
+                                        }
+                                    } else {
+                                        EmptyView()
+                                    }
+                                } .onDelete { indices in
+                                    deleteLog(offsets: indices)
+                                    //Reminder.updateReminders(car: &c, carIndex: _g.shared.c_car_idx)
+                                }
+                            } else {
+                                Text("No logs recorded.")
+                                    .foregroundColor(.gray)
+                                    .font(.subheadline)
+                            }
                         }
                     }
                 } .navigationTitle("Logbook History")
                     .toolbar {
                         Button(action: {
                             isPresentingHistoryForm = true
-                            newLogRecord = Log()
+                            newLogRecord = Log(context: moc)
                         }) { Image(systemName: "plus") }
                     } .sheet(isPresented: $isPresentingHistoryForm) {
                         NavigationView {
-                            LogForm(rec: newLogRecord, carModel: "", addNewLog: true)
+                            LogForm(log: newLogRecord, carModel: "", addNewLog: true)
                                 .navigationTitle("Logbook")
                                 .toolbar {
                                     ToolbarItem(placement: .cancellationAction) {

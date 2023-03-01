@@ -36,7 +36,6 @@ extension View {
 struct CheckboxStyle: ToggleStyle {
     // https://www.appcoda.com/swiftui-toggle-style/
     func makeBody(configuration: Self.Configuration) -> some View {
-        
         return HStack {
             Image(systemName: "clock")
                 .resizable()
@@ -52,7 +51,6 @@ struct CheckboxStyle: ToggleStyle {
 }
 
 struct CarForm: View {
-    //@Binding var car: Car
     @ObservedObject var car: Car
     
     @Environment(\.managedObjectContext) var moc
@@ -62,40 +60,22 @@ struct CarForm: View {
     @State private var maintMode = true
     @FocusState var isInputActive: Bool
 
-    // car data
-    @State private var year: String = ""
-    @State private var make: String = ""
-    @State private var model: String = ""
-    @State private var license: String = ""
-    @State private var vin: String = ""
-    @State private var purchaseDate: Date = Date()
-    @State private var notes: String = ""
-    
-    // service data
-    @State private var serviceType: String = ""
     @State private var maintEnabled: Bool = true
-    @State private var maintMonths: Int = 0
-    @State private var maintMiles: Int = 0
+
+    var svcs : [Service] {
+        car.services?.allObjects as? [Service] ?? []
+    }
 
     var body: some View {
         List {
             Section (header: Text(car.make_ + " " + car.model_).bold()) {
-                TextField("Year", text: $year)
+                TextField("Year", text: $car.year.unwrapped(d: ""))
                     .keyboardType(.numberPad)
-                    .onAppear {
-                        year = car.year_
-                        make = car.make_
-                        model = car.model_
-                        license = car.license_
-                        vin = car.vin_
-                        purchaseDate = car.purchaseDate_
-                        notes = car.notes_
-                    }
-                TextField("Make", text: $make)
-                TextField("Model", text: $model)
-                TextField("License Plate Number", text: $license)
-                TextField("VIN", text: $vin)
-                DatePicker("Purchase Date", selection: $purchaseDate, displayedComponents: .date)
+                TextField("Make", text: $car.make.unwrapped(d: ""))
+                TextField("Model", text: $car.model.unwrapped(d: ""))
+                TextField("License Plate Number", text: $car.license.unwrapped(d: ""))
+                TextField("VIN", text: $car.vin.unwrapped(d: ""))
+                DatePicker("Purchase Date", selection: $car.purchaseDate.unwrapped(d: Date()), displayedComponents: .date)
             }
             
             Section (header: Text("Maintenance Schedule Cadence").bold()) {
@@ -117,25 +97,29 @@ struct CarForm: View {
                 } .foregroundColor(.orange)
                     .font(.subheadline)
                 
-                Text("Services go here")
-                let _ = print(car.servicesA.count)
-                ForEach (car.servicesA) { s in
-                    if (s.serviceType_ != "odometer" && s.serviceType_ != "gas") {
+                ForEach (svcs) { s in
+                    if (s.serviceType_ != "Odometer" && s.serviceType_ != "Gas") {
                         HStack {
+                            //Toggle(isOn: maintEnabled, label: Text("toggle me"))
                             /*
-                            Toggle(isOn: $maintEnabled, label: {Text(s.serviceType_.rawValue.capitalized)})
+                            Toggle(isOn: maintEnabled (
+                                get: { s.maintEnabled },
+                                set: {
+                                    s.maintEnabled = $0
+                                    
+                                })) { Text("label99") }
+                             */
+                            /*
+                            // ***** fix enable, value for each service should be different
+                            Toggle(isOn: $maintEnabled, label: { Text(s.serviceType.toUnwrapped(defaultValue: "").capitalized) })
+                            //Toggle(isOn: s.maintEnabled.toUnwrapped(defaultValue: false), label: { Text(s.serviceType_.capitalized) })
+                            //Toggle(isOn: $maintEnabled, label: { Text(s.serviceType_.capitalized) })
                                 .toggleStyle(CheckboxStyle())
-                                .onAppear {
-                                    serviceType = s.serviceType_
-                                    maintEnabled = s.maintEnabled
-                                    maintMonths = s.maintMonths
-                                    maintMiles = s.maintMiles
-                                }
-                                .onChange(of: maintEnabled) { value in
+                               .onChange(of: maintEnabled) { value in
                                     //Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
-                                    if !maintEnabled {
-                                        maintMonths = 0
-                                        maintMiles = 0
+                                    if !s.maintEnabled {
+                                        s.maintMonths = 0
+                                        s.maintMiles = 0
                                     }
                                 }
                             */
@@ -144,28 +128,31 @@ struct CarForm: View {
                             
                             // maint months
                             TextField("", text: Binding (
-                                get: { maintMonths != 0 ? String(maintMonths) : "" },
-                                set: { maintMonths = Int($0) ?? 0 }
+                                get: { s.maintMonths != 0 ? String(s.maintMonths) : "" },
+                                set: { s.maintMonths = Int32($0) ?? 0 }
                             ))
-                            .num_field(enabled: maintEnabled)
+                            .num_field(enabled: s.maintEnabled)
                             .focused($isInputActive)
-                            .onChange(of: maintMonths) { value in
+                            .onChange(of: s.maintMonths) { value in
                                 //Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
-                            }
+                                }
                             
                             // maint miles
                             TextField("", text: Binding(
-                                get: { maintMiles != 0 ? String(maintMiles) : "" },
-                                set: { maintMiles = Int($0) ?? 0 }
+                                get: { s.maintMiles != 0 ? String(s.maintMiles) : "" },
+                                set: { s.maintMiles = Int32($0) ?? 0 }
                             ))
-                            .num_field(enabled: maintEnabled)
+                            .num_field(enabled: s.maintEnabled)
                             .focused($isInputActive)
-                            .onChange(of: maintMiles) { value in
+                            .onChange(of: s.maintMiles) { value in
                                 //Reminder.updateReminders(car: &car, carIndex: _g.shared.c_car_idx)
                             }
                         } .frame(maxWidth: .infinity)
+                    } else {
+                        EmptyView()
                     }
-                } // ForEach
+
+                     } // ForEach
             } // Section
         } .navigationBarTitleDisplayMode(.inline)
             .toolbar {

@@ -16,6 +16,10 @@ extension Service {
         return NSFetchRequest<Service>(entityName: "Service")
     }
 
+    enum typeE: String {
+        case gas = "Gas"
+    }
+    
     @NSManaged public var id: UUID?
     @NSManaged public var maintEnabled: Bool
     @NSManaged public var maintMiles: Int32
@@ -23,7 +27,7 @@ extension Service {
     @NSManaged public var serviceType: String?
     @NSManaged public var car: Car?
 
-    public var serviceType_: String { serviceType ?? "" }
+    public var serviceType_: String { serviceType ?? "other" }
 
 }
 

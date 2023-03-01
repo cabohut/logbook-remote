@@ -12,8 +12,8 @@ struct CarsList: View {
 
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
-                  animation: .default)
-    private var cars: FetchedResults<Car>
+                  animation: .default
+    ) private var cars: FetchedResults<Car>
 
     @Environment(\.scenePhase) private var scenePhase
     
