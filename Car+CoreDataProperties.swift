@@ -50,6 +50,11 @@ extension Car {
         return servicesSet.sorted { $0.serviceType_ < $1.serviceType_ }
     }
 
+    public var remindersA: [Reminder] {
+        let remindersSet = reminders as? Set<Reminder> ?? []
+        return remindersSet.sorted { $0.dateDue < $1.dateDue }
+    }
+
 }
 
 // MARK: Generated accessors for logs

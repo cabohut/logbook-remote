@@ -9,8 +9,8 @@ import SwiftUI
 
 struct IntroScreen: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
-                  animation: .default)
-    private var cars: FetchedResults<Car>
+                  animation: .default
+    ) private var cars: FetchedResults<Car>
 
     @State var isActive : Bool = false
     
@@ -40,6 +40,5 @@ struct IntroScreen: View {
 struct IntroScreen_Previews: PreviewProvider {
     static var previews: some View {
         IntroScreen()
-            .environmentObject(LogbookModel())
     }
 }

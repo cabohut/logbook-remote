@@ -8,6 +8,41 @@
 import Foundation
 import os.log
 
+struct vCar {
+    var year: String = ""
+    var make: String = ""
+    var model: String = ""
+    var unique: String = ""
+    var license: String = ""
+    var vin: String = ""
+    var purchaseDate: Date = Date()
+    var notes: String = ""
+    var services = [vService()]
+}
+
+struct vService {
+    var maintEnabled: Bool = false
+    var maintMiles: Int32 = 0
+    var maintMonths: Int32 = 0
+    var serviceType: String = "Other"
+}
+
+func setupDefaultServices () -> [vService] {
+    var defaultServices = [vService()]
+    
+    for t in ServiceType.allCases {
+        var newService = vService()
+        newService.serviceType = t.rawValue
+        newService.maintEnabled = ServiceType.maintEnabledDefault(t)()
+        newService.maintMonths = ServiceType.maintDateDefault(t)()
+        newService.maintMiles = ServiceType.maintMilesDefault(t)()
+        
+        defaultServices.append(newService)
+    }
+    return defaultServices
+}
+
+
 /*
 struct Car99: Identifiable, Codable, Comparable {
     static func < (lhs: Car99, rhs: Car99) -> Bool {

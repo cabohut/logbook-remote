@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct CarsList: View {
-    let saveAction: ()->Void
-
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
                   animation: .default
     ) private var cars: FetchedResults<Car>
-
+    
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var isPresentingCarForm = false
-    @State private var newCarRecord = Car()
+    @State private var carInfo = vCar()
+    @State private var carServices = [vService()]
     
     var body: some View {
         VStack {
@@ -29,17 +28,11 @@ struct CarsList: View {
             } else {
                 List {
                     ForEach(cars) { car in
-                        NavigationLink(destination:CarForm(car: car)) {
+                        NavigationLink(destination:CarForm(car: vCar())) { // ***** <---- need to pass 'car' here
                             CarRow(car: car)
                         }
                     } .onDelete { indices in
-                        if indices.first != nil {
-                            let idx = _g.shared.remindersCounts.firstIndex(where: { $0.carID == cars[indices.first!].id }) ?? -1
-                            _g.shared.remindersCounts.remove(at: idx)
-                        }
-                        //Car.remove(cars: &cars, carIndex: indices) 
                         deleteCar(offsets: indices)
-                        
                         _g.shared.updateDueRemindersCount()
                     }
                 }
@@ -48,13 +41,14 @@ struct CarsList: View {
             .toolbar {
                 Button(action: {
                     isPresentingCarForm = true
-                    newCarRecord = Car(context: moc)
+                    carInfo = vCar()
+                    carInfo.services = setupDefaultServices()
                 }) {
                     Image(systemName: "plus")
                 }
             } .sheet(isPresented: $isPresentingCarForm) {
                 NavigationView {
-                    CarForm(car: newCarRecord)
+                    CarForm(car: carInfo)
                         .navigationTitle("Car Details")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
@@ -64,10 +58,9 @@ struct CarsList: View {
                             }
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Add") {
-                                    // Car.add(cars: &cars, newCar: newCarRecord)    // ***** <- add car
                                     addCar()
                                     isPresentingCarForm = false
-                                } // .disabled(newCarRecord.make.isEmpty && newCarRecord.model.isEmpty)
+                                } .disabled(carInfo.make.isEmpty && carInfo.model.isEmpty)
                             }
                         }
                 } .navigationViewStyle(.stack)
@@ -77,26 +70,24 @@ struct CarsList: View {
             }
     }
     
-    private func addCar() {    // ***** add logic to add all the car's details
+    private func addCar() {
         withAnimation {
-            let newCar = Car(context: moc)
-            newCar.make = ""
-            PersistenceController.shared.saveContext()
+            PersistenceController.shared.addNewCar(carInfo: carInfo)
         }
     }
-
+    
     private func deleteCar(offsets: IndexSet) {
         withAnimation {
             offsets.map { cars[$0] }.forEach(moc.delete)
             PersistenceController.shared.saveContext()
         }
     }
-
+    
 }
 
 struct Cars_Previews: PreviewProvider {
     static var previews: some View {
-        CarsList(saveAction: {})
-            .environmentObject(LogbookModel())
+        NavigationView {
+        }
     }
 }

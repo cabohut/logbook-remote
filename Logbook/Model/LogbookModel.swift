@@ -10,17 +10,6 @@ import Foundation
 import os.log
 import SwiftUI
 
-let DATA_FILE = "Logbook.data"
-let OSLOG_FILE = "Logbook.log"
-let CSV_DATA_FILE = "Logbook.csv"
-let CARS_TEXT_FILE = "cars.csv"
-let SERVICES_TEXT_FILE = "services.csv"
-let LOGS_TEXT_FILE = "logs.csv"
-let REMINDERS_TEXT_FILE = "reminders.csv"
-
-let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-let archiveURL = documentsDirectory.appendingPathComponent("Logbook").appendingPathExtension("plist")
-
 let appLog = OSLog(subsystem: "com.cabohut.Logbook4cars", category: "Logbook")
 
 class CarRemindersCount {
@@ -58,17 +47,3 @@ class _g {
         }
     }
 }
-
-class LogbookModel: ObservableObject {
-//    @Published var cars: [Car99] = []
-    @Published var cars = []
-
-    private static func oslogFileURL() throws -> URL {
-        try FileManager.default.url(for: .documentDirectory,
-                                       in: .userDomainMask,
-                                       appropriateFor: nil,
-                                       create: false)
-            .appendingPathComponent(OSLOG_FILE)
-    }
-}
-

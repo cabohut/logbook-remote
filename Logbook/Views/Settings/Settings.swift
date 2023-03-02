@@ -6,11 +6,8 @@
 //
 
 import SwiftUI
-import UniformTypeIdentifiers
 
 struct Settings: View {
-    @EnvironmentObject var appData : LogbookModel
-
     @State private var showingHelp = false
 
     var body: some View {
@@ -30,21 +27,13 @@ struct Settings: View {
                         //exportTextData(cars: appData.cars)
                     }
                 }
-                /*
-                Button ("Import data from text file") {
-                    DispatchQueue.main.async {
-                        _g.shared.resetState()
-                        PersistenceController.shared.loadSampleData()
-                    }
-                }
-                 */
             }
             
             Section (header: Text("Sample Data")){
                 Button ("Load Sample Data") {
                     DispatchQueue.main.async {
                         _g.shared.resetState()
-                        loadSampleData()
+                        importData()
                     }
                 }
                 
@@ -62,6 +51,5 @@ struct Settings: View {
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
         Settings()
-            .environmentObject(LogbookModel())
     }
 }

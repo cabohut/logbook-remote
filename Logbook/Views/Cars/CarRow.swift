@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CarRow: View {
-    //let car: Car
     @StateObject var car: Car
 
     var body: some View {

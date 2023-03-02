@@ -28,3 +28,36 @@ extension Log {
         }
     }
 }
+
+extension Reminder {
+    var serviceTypeE: ServiceType {
+        get {
+            return ServiceType(rawValue: self.serviceType_)!
+        }
+        set {
+            self.serviceType = newValue.rawValue
+        }
+    }
+}
+
+extension Reminder {
+    var dateServiceStatusE: ServiceStatus {
+        get {
+            return ServiceStatus(rawValue: self.dateServiceStatus_)!
+        }
+        set {
+            self.dateServiceStatus = newValue.rawValue
+        }
+    }
+}
+
+extension Reminder {
+    var milesServiceStatusE: ServiceStatus {
+        get {
+            return ServiceStatus(rawValue: self.milesServiceStatus_)!
+        }
+        set {
+            self.milesServiceStatus = newValue.rawValue
+        }
+    }
+}

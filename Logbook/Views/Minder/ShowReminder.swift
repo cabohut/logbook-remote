@@ -18,20 +18,18 @@ import SwiftUI
 
 struct ShowReminder: View {
     let showOverdue: Bool
-    // var reminder: Reminder99
+    var reminder: Reminder
 
     var body: some View {
         
         HStack{
-            Text("Reminders go here")
-            /*
-            reminder.serviceType.img()
+            reminder.serviceTypeE.img()
                 .foregroundColor(.orange)
                 .frame(width: 30, alignment: .center)
                 .font(Font.system(size: 22, weight: .regular))
 
             VStack {
-                Text(reminder.serviceType.rawValue)
+                Text(reminder.serviceType_)
                     .frame(width: 80, alignment: .leading)
                     .foregroundColor(.gray)
                     .font(.caption)
@@ -41,12 +39,12 @@ struct ShowReminder: View {
             
             VStack (alignment: .trailing) {
                 HStack {
-                    if reminder.dateStatus != .notScheduled {
+                    if reminder.dateServiceStatusE != .notScheduled {
                         if showOverdue {
                             Text("\(abs(reminder.daysUntilDue)) days")
-                                .foregroundColor((reminder.dateStatus == .isDue) ? .red : .orange)
-                            Image(systemName: (reminder.dateStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
-                                .foregroundColor((reminder.dateStatus == .isDue) ? .red : .green)
+                                .foregroundColor((reminder.dateServiceStatusE == .isDue) ? .red : .orange)
+                            Image(systemName: (reminder.dateServiceStatusE == .isDue) ? "exclamationmark.triangle.fill" : "clock")
+                                .foregroundColor((reminder.dateServiceStatusE == .isDue) ? .red : .green)
                         } else {
                             Text(Date(timeIntervalSince1970: reminder.dateDue).formatted(date: .abbreviated, time: .omitted))
                                 .foregroundColor(.green)
@@ -61,12 +59,12 @@ struct ShowReminder: View {
                 }
                 
                 HStack {
-                    if reminder.milesStatus != .notScheduled {
+                    if reminder.milesServiceStatusE != .notScheduled {
                         if showOverdue {
                             Text("\(abs(reminder.milesUntilDue)) miles")
-                                .foregroundColor((reminder.milesStatus == .isDue) ? .red : .green)
-                            Image(systemName: (reminder.milesStatus == .isDue) ? "exclamationmark.triangle.fill" : "clock")
-                                .foregroundColor((reminder.milesStatus == .isDue) ? .red : .green)
+                                .foregroundColor((reminder.milesServiceStatusE == .isDue) ? .red : .green)
+                            Image(systemName: (reminder.milesServiceStatusE == .isDue) ? "exclamationmark.triangle.fill" : "clock")
+                                .foregroundColor((reminder.milesServiceStatusE == .isDue) ? .red : .green)
                         } else {
                             Text("\(reminder.milesDue)")
                                 .foregroundColor(.green)
@@ -81,7 +79,6 @@ struct ShowReminder: View {
                 }
             } .font(.footnote)
                 .padding(.leading, 2)
-            */
         }
     }
 }
@@ -90,7 +87,6 @@ struct ShowReminder_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             EmptyView()
-                .environmentObject(LogbookModel())
         }
     }
 }

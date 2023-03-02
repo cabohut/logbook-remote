@@ -13,8 +13,7 @@ struct AppNavigation: View {
         TabView() {
             // MARK: - CarsList
             NavigationView {
-                CarsList() {
-                }
+                CarsList()
             } .navigationViewStyle(.stack)
                 .tabItem {
                     Label ("Cars", systemImage: "car.2.fill")
@@ -22,8 +21,7 @@ struct AppNavigation: View {
 
             // MARK: - LogbookHistory
             NavigationView {
-                LogbookHistory() {
-                }
+                LogbookHistory() 
             } .navigationViewStyle(.stack)
                 .tabItem {
                     Label ("Logbook", systemImage: "text.book.closed")
@@ -60,6 +58,5 @@ struct AppNavigation: View {
 struct AppNavigation_Preview: PreviewProvider {
     static var previews: some View {
         AppNavigation()
-            .environmentObject(LogbookModel())
     }
 }

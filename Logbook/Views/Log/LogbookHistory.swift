@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct LogbookHistory: View {
-    let saveAction: ()->Void
-    
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
                   animation: .default
@@ -18,7 +16,6 @@ struct LogbookHistory: View {
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var isPresentingHistoryForm = false
-    @State private var newLogRecord = Log()
     @State private var dateFilter = 0
     
     func notFiltered(dt: Date, filter: Int) -> Bool {
@@ -75,11 +72,10 @@ struct LogbookHistory: View {
                     .toolbar {
                         Button(action: {
                             isPresentingHistoryForm = true
-                            newLogRecord = Log(context: moc)
                         }) { Image(systemName: "plus") }
                     } .sheet(isPresented: $isPresentingHistoryForm) {
                         NavigationView {
-                            LogForm(log: newLogRecord, carModel: "", addNewLog: true)
+                            LogForm(log: Log(context: moc), carModel: "", addNewLog: true)
                                 .navigationTitle("Logbook")
                                 .toolbar {
                                     ToolbarItem(placement: .cancellationAction) {
@@ -89,9 +85,8 @@ struct LogbookHistory: View {
                                     }
                                     ToolbarItem(placement: .confirmationAction) {
                                         Button("Add") {
-                                            //Log99.add(logs: &cars[_g.shared.c_car_idx].logs, newLog: newLogRecord)
+                                            addLog()
                                             //Reminder.updateReminders(car: &cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
-                                           addLog()
                                             isPresentingHistoryForm = false
                                         }
                                     }
@@ -106,26 +101,22 @@ struct LogbookHistory: View {
     
     private func addLog() {    // ***** add logic to add all the car's details
         withAnimation {
-            let newLog = Log(context: moc)
-            newLog.odometer = 7777
             PersistenceController.shared.saveContext()
         }
     }
-
+    
     private func deleteLog(offsets: IndexSet) {
         withAnimation {
             //offsets.map { logs[$0] }.forEach(moc.delete)
             PersistenceController.shared.saveContext()
         }
     }
-
+    
 }
 
 struct Logbook_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogbookHistory(saveAction: {})
-                .environmentObject(LogbookModel())
         }
     }
 }

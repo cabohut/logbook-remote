@@ -16,7 +16,7 @@ struct LogForm: View {
                   animation: .default
     ) private var cars: FetchedResults<Car>
 
-    @State private var car_selection : Int = 0
+    @State private var selectedCar = Car()
     
     @Environment(\.isPresented) var isPresented
     
@@ -24,12 +24,13 @@ struct LogForm: View {
         List {
             if addNewLog {
                 Section {
-                    Picker("Car", selection: $car_selection) {
-                        ForEach(0..<cars.count, id: \.self) { i in
-                            Text(cars[i].make_ + " " + cars[i].model_)
+                    Picker("Car", selection: $selectedCar) {
+                        ForEach(cars, id: \.id) { car in
+                            Text(car.make_ + " " + car.model_).tag(car)
                         }
-                    } .onChange(of: car_selection) { newValue in
-                        _g.shared.c_car_idx = newValue
+                    } .onChange(of: selectedCar) { newValue in
+                        let _ = print("car selection changed: newValue = \(newValue.make_)")
+                        //_g.shared.c_car_idx = newValue
                     }
                 }
             }
@@ -42,7 +43,7 @@ struct LogForm: View {
 
                 Picker("Service Type", selection: $log.serviceType.unwrapped(d: "")) {
                     ForEach(ServiceType.allCases) { t in
-                        Text(t.rawValue.capitalized).tag(t)
+                        Text(t.rawValue.capitalized).tag(t as ServiceType)
                     }
                 }
 
@@ -62,6 +63,7 @@ struct LogForm: View {
             }
 
         } .onChange(of: isPresented) { newValue in
+            let _ = print("log data changed: selectedCar = \(selectedCar)")
             if !newValue {
                 // Reminder99.updateReminders(car: &appData.cars[_g.shared.c_car_idx], carIndex: _g.shared.c_car_idx)
             }
@@ -72,7 +74,7 @@ struct LogForm: View {
 struct LogForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            //LogForm(rec: .constant(Log()), carModel: "", addNewLog: false)
+            LogForm(log: Log(), carModel: "", addNewLog: false)
         }
     }
 }

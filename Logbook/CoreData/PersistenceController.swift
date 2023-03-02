@@ -47,7 +47,7 @@ struct PersistenceController {
         return controller
     }()
     
-
+    
     func saveContext() {
         let context = container.viewContext
         
@@ -71,6 +71,31 @@ struct PersistenceController {
         self.saveContext()
         print("done deleting: number of cars")
     }
-
-
+    
+    func addNewCar(carInfo: vCar) {
+        
+        let newCar = Car(context: self.viewContext)
+        newCar.id = UUID()
+        newCar.year = carInfo.year
+        newCar.make = carInfo.make
+        newCar.model = carInfo.model
+        newCar.unique = carInfo.make + " " + carInfo.model
+        newCar.license = carInfo.license
+        newCar.vin = carInfo.vin
+        newCar.purchaseDate = carInfo.purchaseDate
+        newCar.notes = carInfo.notes
+        
+        // services file
+        for s in carInfo.services {
+            let newService = Service(context: self.viewContext)
+            newService.id = UUID()
+            newService.serviceType = s.serviceType
+            newService.maintEnabled = s.maintEnabled
+            newService.maintMonths = s.maintMonths
+            newService.maintMiles = s.maintMiles
+            newCar.addToServices(newService)
+        }
+        
+        self.saveContext()
+    }
 }

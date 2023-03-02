@@ -8,47 +8,10 @@
 import Foundation
 import SwiftUI
 
-/*
-struct Service99: Identifiable, Codable, Comparable {
-    static func < (lhs: Service99, rhs: Service99) -> Bool {
-        return lhs.maintMonths > rhs.maintMonths
-    }
-    
-    var id: UUID = UUID()
-    var serviceType: ServiceType
-    var maintEnabled: Bool
-    var maintMonths: Int
-    var maintMiles: Int
-
-    static func new() -> Car99 {
-        return Car99()
-    }
-    
-    static func add(sched: inout [Service99], newCar: Service99) {
-        sched.append(newCar)
-    }
-    
-    static func remove(cars: inout [Car99], carIndex: IndexSet) {
-        cars.remove(atOffsets: carIndex)
-    }
-}
-
-extension Service99 {
-    var data: Service99 {
-        Service99(serviceType: serviceType, maintEnabled: maintEnabled, maintMonths: maintMonths, maintMiles: maintMiles)
-    }
-    
-    mutating func update(from data: Service99) {
-        serviceType = data.serviceType
-        maintEnabled = data.maintEnabled
-        maintMonths = data.maintMonths
-        maintMiles = data.maintMiles
-    }
-}
-*/
-
-enum ServiceStatus: Codable {
-    case isDue, isUpcoming, notScheduled
+enum ServiceStatus: String, Codable {
+    case isDue = "Is Due"
+    case isUpcoming = "Is Upcoming"
+    case notScheduled = "Not Scheduled"
 }
 
 enum ServiceType: String, Identifiable, CaseIterable, Codable {
@@ -123,7 +86,7 @@ enum ServiceType: String, Identifiable, CaseIterable, Codable {
     }
     
     // MARK: - maintDateDefault returns the default number of months for each service (0 = n/a)
-    func maintDateDefault() -> Int {
+    func maintDateDefault() -> Int32 {
         switch self {
         case .gas:
             return 0
@@ -151,7 +114,7 @@ enum ServiceType: String, Identifiable, CaseIterable, Codable {
     }
     
     // MARK: - maintMilesDefault returns the default number of miles for each service (0 = n/a)
-    func maintMilesDefault() -> Int {
+    func maintMilesDefault() -> Int32 {
         switch self {
         case .gas:
             return 0

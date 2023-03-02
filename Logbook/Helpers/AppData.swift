@@ -8,17 +8,7 @@
 import CoreData
 import os.log
 
-func loadSampleData() {
-     importData()
-    /*
-     for i in 0..<cars.count {
-         print(i)
-         //Reminder99.updateReminders(car: &cars[i], carIndex: i)
-     }
-     */
-}
-
-private func importData() {
+func importData() {
     var cRows: [String]
     var sRows: [String]
     var lRows: [String]
@@ -78,6 +68,8 @@ private func importData() {
                 }
             }
         }
+        
+        // updateReminders(car: newCar, carIndex: i)
     }
 }
 
@@ -85,7 +77,6 @@ private func importData() {
 private func getFileRows(fn: String, type: String, header: Bool) -> [String] {
     var data = ""
 
-    //locate the services file
     guard let filepath = Bundle.main.path(forResource: fn, ofType: type) else {
         os_log("Error reading %@.%@ file.", log: appLog, type: .error, fn, type)
         return []

@@ -26,6 +26,10 @@ extension Reminder {
     @NSManaged public var serviceType: String?
     @NSManaged public var car: Car?
 
+    public var dateServiceStatus_: String { dateServiceStatus ?? "" }
+    public var milesServiceStatus_: String { milesServiceStatus ?? "" }
+    public var serviceType_: String { serviceType ?? "" }
+
 }
 
 extension Reminder : Identifiable {

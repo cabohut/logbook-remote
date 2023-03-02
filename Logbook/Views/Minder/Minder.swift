@@ -7,12 +7,16 @@
 
 import SwiftUI
 
+
 struct Minder: View {
-    @EnvironmentObject var appData : LogbookModel
-    
+
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Car.make, ascending: true)],
+                  animation: .default
+    ) private var cars: FetchedResults<Car>
+
     var body: some View {
-        //if (appData.cars.count == 0) {
-        if (true) {
+        if (cars.count == 0) {
             Text("You have not added any cars in your Logbook")
                 .foregroundColor(.gray)
                 .font(.subheadline)
@@ -20,22 +24,23 @@ struct Minder: View {
         } else {
             VStack {
                 List {
-                    Text("Reminders go here")
-                    /*
-                    ForEach (appData.cars) { c in
-                        Section (header: Text(c.make + " " + c.model).bold()) {
-                            ForEach (c.reminders) { r in
+                    ForEach (cars) { c in
+                        Section (header: Text(c.make_ + " " + c.model_).bold()) {
+                            Text("Reminders go here")
+                            ForEach (c.remindersA) { r in
+                                Text(r.serviceType_)
+                                /*********
                                 if (r.dateStatus == .isDue || r.milesStatus == .isDue) {
                                     ShowReminder(showOverdue: true, reminder: r)
                                 }
                                 if (r.dateStatus == .isUpcoming && r.milesStatus == .isUpcoming) {
                                     ShowReminder(showOverdue: false, reminder: r)
                                 }
+                                 */
                             }
                         }
                     } // ForEach
-                     */
-                } .navigationTitle("Service Reminders")                
+                } .navigationTitle("Service Reminders")
             } // VStack
         } // else
     }
@@ -44,6 +49,5 @@ struct Minder: View {
 struct Minder_Previews: PreviewProvider {
     static var previews: some View {
         Minder()
-            .environmentObject(LogbookModel())
     }
 }
